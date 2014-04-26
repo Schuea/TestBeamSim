@@ -1,0 +1,1 @@
+export MARLIN_DLL=$MARLIN_DLL:/nfs/dust/atlas/user/schuea/scratch/sid_complete/v01-17-02-sid/Marlin/v01-05/examples/mymarlin/lib/libSimProcessor.so

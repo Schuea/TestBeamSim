@@ -1,0 +1,24 @@
+<marlin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ilcsoft.desy.de/marlin/marlin.xsd">
+ <execute>
+   <processor name="Sim_Processor"/>  
+ </execute>
+
+ <global>
+  <parameter name="LCIOInputFiles"> /nfs/dust/atlas/user/schuea/scratch/sid_complete/v01-17-02-sid/Marlin/v01-05/examples/mymarlin/MacrosPhotonSource_50M/Fibre_at5cm_25mu_correct_dimensions_and_worldsize_200M.slcio </parameter>
+  <!-- limit the number of processed records (run+evt): -->  
+  <parameter name="MaxRecordNumber" value="200001" />  
+  <parameter name="SkipNEvents" value="0" />  
+  <parameter name="SupressCheck" value="false" />  
+  <parameter name="GearXMLFile"> </parameter>  
+  <parameter name="Verbosity" options="DEBUG0-4,MESSAGE0-4,WARNING0-4,ERROR0-4,SILENT"> DEBUG4 </parameter> 
+ </global>
+
+ <processor name="Sim_Processor" type="SimProcessor">
+  <parameter name="InputCollectionName" type="string" lcioInType="MCParticle"> MCParticle </parameter>
+  <parameter name="InputCollectionName2" type="string" lcioInType="SimCalorimeterHit"> CarbonFiberHits </parameter>
+  <parameter name="InputCollectionName3" type="string" lcioInType="LCGenericObject"> MCParticleEndPointEnergy </parameter>
+
+  <parameter name="OutputCollectionName" type="string" lcioOutType="MCParticle"> MCParticlePhotonSource </parameter>
+ </processor>
+
+</marlin>
