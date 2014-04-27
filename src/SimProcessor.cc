@@ -253,7 +253,7 @@ streamlog_out(DEBUG0) << "Line " << __LINE__ << endl;
 
 	Map_Canvas->Divide(1,2);
 	Map_Canvas->cd(1);
-	gPad->DrawFrame(-10,-10,10,10);
+	gPad->DrawFrame(-0.5,-0.5,0.5,0.5);
 	TExec *ex1 = new TExec("ex1","gStyle->SetPaintTextFormat(\".0f\");");
 	ex1->Draw();
 //	Tree->Draw("Reflectiony:Reflectionx >>+ rebinned_DeflFibre_Electron",(*ElectronID_cut)&&(*cut_on_Energy0), "colz,TEXT");
@@ -272,9 +272,10 @@ streamlog_out(DEBUG0) << "Line " << __LINE__ << endl;
 //	MakeEnergyHistogram(Tree,EnergyMap_Electron_Deflection_Fibre,11);
 
 	Map_Canvas->cd(2);
-	gPad->DrawFrame(-10,-10,10,10);
-	TExec *ex2 = new TExec("ex2","gStyle->SetPaintTextFormat(\".4f\");");
-	ex2->Draw();
+	gPad->SetTopMargin(0.15);
+//	gPad->DrawFrame(-0.5,-0.5,0.5,0.5);
+//	TExec *ex2 = new TExec("ex2","gStyle->SetPaintTextFormat(\".4f\");");
+//	ex2->Draw();
 	MakeEnergyHistogram(Tree,EnergyMap_Photon_Deflection_Fibre,22);
 
 	Map_Canvas->Write();
@@ -320,7 +321,6 @@ float * SimProcessor::Fill_RebinningArrays(const int nbins, const float min, con
 	if (dimensions == 2){	
 		for (int i=0; i<half_nbins;i++){
 			step_size_array[i]=float(float(range/2.0)/float(pow(2.0,i+1.0)));
-			cout << step_size_array[i] << endl;
 			step_size_array[nbins-(i+1)]=step_size_array[i];
 		}
 		for (int j=1; j<half_nbins;j++){
