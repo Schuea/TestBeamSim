@@ -79,8 +79,8 @@ void SimProcessor::init() {
 	//Rebinning the TH2F histograms:
 	float *binning_array_x;
 	float *binning_array_y;
-	binning_array_x=Fill_RebinningArrays(7,-0.5,0.5,2);
-	binning_array_y=Fill_RebinningArrays(7,-0.5,0.5,2);
+	binning_array_x=Fill_RebinningArrays(7,-0.2,0.2,2);
+	binning_array_y=Fill_RebinningArrays(7,-0.2,0.2,2);
 	
 	TH2F* rebinned_Electron_Deflection_Fibre = new TH2F("rebinned_DeflFibre_Electron","Deflection of electrons existing after fibre",7,binning_array_x,7,binning_array_y);
 	rebinned_Electron_Deflection_Fibre->SetOption("colz,TEXT");
@@ -253,7 +253,7 @@ streamlog_out(DEBUG0) << "Line " << __LINE__ << endl;
 
 	Map_Canvas->Divide(1,2);
 	Map_Canvas->cd(1);
-	gPad->DrawFrame(-0.5,-0.5,0.5,0.5);
+	gPad->DrawFrame(-0.2,-0.2,0.2,0.2);
 	TExec *ex1 = new TExec("ex1","gStyle->SetPaintTextFormat(\".0f\");");
 	ex1->Draw();
 //	Tree->Draw("Reflectiony:Reflectionx >>+ rebinned_DeflFibre_Electron",(*ElectronID_cut)&&(*cut_on_Energy0), "colz,TEXT");
@@ -434,7 +434,11 @@ void SimProcessor::GetBinEnergyDistribution(TTree* Tree, TH2F* histo, const int 
 	int totalbins = (histo->GetNbinsX()+2)*(histo->GetNbinsY()+2);//+2 overflowbins per axis
 	
 	int overflowbins[]={0,1,2,3,4,5,6,7,8,9,17,18,26,27,35,36,44,45,53,54,62,63,71,72,73,74,75,76,77,78,79,80};
-		
+	std:vec < int > overflowbins;
+	for (int i=0; i<totalbins; ++i){
+		if (i<=histo->GetNbinsX()+2) overflowbins.push_back(i);
+	}
+	
 	int normalbin_counter=1;
 	TH1F** BinEnergyDistri_ = new TH1F*[totalbins];	
 
