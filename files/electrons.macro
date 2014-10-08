@@ -1,0 +1,12 @@
+/lcio/PDGFlag true
+/lcio/filename FibreTarget_Target_at_80cm_12000000.slcio
+/lcdd/url FibreTarget_Target_at_80cm.lcdd
+/run/initialize
+/generator/select gun
+/gun/particle e-
+/gun/position 0 0 0
+/gun/direction 0. 0. 1
+/gun/energy 6.3 GeV
+/random/seed
+/run/beamOn 12000000
+

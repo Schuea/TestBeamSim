@@ -1,0 +1,11 @@
+/lcio/PDGFlag true
+/lcio/filename carbonfiber_6_3Gev_10000_compact.slcio
+/lcdd/url compact_converted.lcdd
+/run/initialize
+/generator/select gun
+/gun/particle e-
+/gun/position 0 0 0
+/gun/direction 0. 0. 1
+/gun/energy 6.3 GeV
+/run/beamOn 10000
+

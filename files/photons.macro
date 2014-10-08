@@ -1,0 +1,11 @@
+/lcio/PDGFlag true
+/lcio/filename carbonfiber_6_3Gev_10000.slcio
+/lcdd/url carbonfiber.lcdd
+/run/initialize
+/generator/select gun
+/gun/particle gamma
+/gun/position 0 0 0
+/gun/direction 0. 0. 1
+/gun/energy 6.3 GeV
+/run/beamOn 10000
+
