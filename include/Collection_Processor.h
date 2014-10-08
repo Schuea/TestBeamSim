@@ -197,11 +197,17 @@ streamlog_out(DEBUG0)<< "Line " << __LINE__  << " File " << __FILE__ << endl;
 		createdInContinuousProcess_status_ = p->vertexIsNotEndpointOfParent();
 		stopped_status_ = p->isStopped();
 		
+		charge_ = p->getCharge();
 		energy_ = p->getEnergy();
+		momentum_ = sqrt( (p->getMomentum()[0])*(p->getMomentum()[0]) + (p->getMomentum()[1])*(p->getMomentum()[1]) + (p->getMomentum()[2])*(p->getMomentum()[2]) );
 				
 		reflectionx_ = p->getEndpoint()[0];
 		reflectiony_ = p->getEndpoint()[1];
 		reflectionz_ = p->getEndpoint()[2];
+
+		vertexx_ = p->getVertex()[0];
+		vertexy_ = p->getVertex()[1];
+		vertexz_ = p->getVertex()[2];
 
 		if (numberOfParents_==0){ //First particle in simulation list: initial particle from generator
 			for (int d=0; d < 3; d++){
@@ -209,10 +215,22 @@ streamlog_out(DEBUG0)<< "Line " << __LINE__  << " File " << __FILE__ << endl;
 					initialparticle_course_[d] = p->getEndpoint()[d] - p->getVertex()[d];
 					streamlog_out(DEBUG0) << "initialparticle_course_[" <<d<< "] = " << initialparticle_course_[d] << endl;
 					angle_initialfinal_=0;
+				
+					theta_= 360.0/(2.0*M_PI) * acos(scalar_product(z_axis_,initialparticle_course_)/(norm(z_axis_)*norm(initialparticle_course_)));
+					eta_= -log(tan((theta_*2*M_PI/360)/2));
+	
+					streamlog_out(DEBUG0) << "theta_ = " << theta_ << endl;
+					streamlog_out(DEBUG0) << "eta_ = " << eta_ << endl;
 				}
 				else{
 					initialparticle_course_[d] = p->getDaughters().at(0)->getVertex()[d] - p->getVertex()[d];
 					streamlog_out(DEBUG0) << "initialparticle_course_[" <<d<< "] = " << initialparticle_course_[d] << endl;
+					
+					theta_= 360.0/(2.0*M_PI) * acos(scalar_product(z_axis_,initialparticle_course_)/(norm(z_axis_)*norm(initialparticle_course_)));
+					eta_= -log(tan((theta_*2*M_PI/360)/2));
+	
+					streamlog_out(DEBUG0) << "theta_ = " << theta_ << endl;
+					streamlog_out(DEBUG0) << "eta_ = " << eta_ << endl;
 				} 
 			}
 		}
@@ -230,12 +248,12 @@ streamlog_out(DEBUG0)<< "Line " << __LINE__  << " File " << __FILE__ << endl;
 				angle_initialfinal_=360/(2*M_PI) * acos(scalar_product(initialparticle_course_,finalparticle_course_)/(norm(initialparticle_course_)*norm(finalparticle_course_)));
 				streamlog_out(DEBUG0) << "angle_initialfinal_ = " << angle_initialfinal_ << endl;
 			
-				theta_= 360/(2*M_PI) * acos(scalar_product(z_axis_,finalparticle_course_)/(norm(z_axis_)*norm(finalparticle_course_)));
+				theta_= 360.0/(2.0*M_PI) * acos(scalar_product(z_axis_,finalparticle_course_)/(norm(z_axis_)*norm(finalparticle_course_)));
 				eta_= -log(tan((theta_*2*M_PI/360)/2));
 	
 				streamlog_out(DEBUG0) << "theta_ = " << theta_ << endl;
 				streamlog_out(DEBUG0) << "eta_ = " << eta_ << endl;
-		}
+			}
 			else{
 				angle_initialfinal_=0;
 			}
@@ -257,10 +275,15 @@ streamlog_out(DEBUG0)<< "Line " << __LINE__  << " File " << __FILE__ << endl;
  		createdInContinuousProcess_status_=-1;
 		stopped_status_=-1;
 
+		charge_=0;
 		energy_=0;
+		momentum_=0;
         	reflectionx_=0;
         	reflectiony_=0;
         	reflectionz_=0;
+	       	vertexx_=0;
+        	vertexy_=0;
+        	vertexz_=0;
 		angle_initialfinal_=0;
 		theta_=0;
 		eta_=0;
@@ -291,10 +314,15 @@ streamlog_out(DEBUG0)<< "Line " << __LINE__  << " File " << __FILE__ << endl;
 		tree_->Branch("createdInContinuousProcess_Status",&createdInContinuousProcess_status_,"createdInContinuousProcess_Status/O");	
 		tree_->Branch("Stopped_Status",&stopped_status_,"Stopped_Status/O");	
 
+		tree_->Branch("Charge",&charge_,"Charge/F");
 		tree_->Branch("Energy",&energy_,"Energy/F");
+		tree_->Branch("Momentum",&momentum_,"Momentum/F");
 		tree_->Branch("Reflectionx",&reflectionx_,"Reflectionx/F");
 		tree_->Branch("Reflectiony",&reflectiony_,"Reflectiony/F");
 		tree_->Branch("Reflectionz",&reflectionz_,"Reflectionz/F");
+		tree_->Branch("Vertexx",&vertexx_,"Vertexx/F");
+		tree_->Branch("Vertexy",&vertexy_,"Vertexy/F");
+		tree_->Branch("Vertexz",&vertexz_,"Vertexz/F");
 
 		tree_->Branch("Angle_initialfinal",&angle_initialfinal_,"Angle_initialfinal/F");	
 		tree_->Branch("Theta",&theta_,"Theta/F");	
@@ -321,10 +349,15 @@ cout << "Line " << __LINE__  << " File " << __FILE__ << endl;
 	bool createdInContinuousProcess_status_;
 	bool stopped_status_;
         
+	float charge_;
 	float energy_;
+	float momentum_;
 	float reflectionx_;
 	float reflectiony_;
 	float reflectionz_;
+	float vertexx_;
+	float vertexy_;
+	float vertexz_;
 
 	float angle_initialfinal_;
 	float theta_;

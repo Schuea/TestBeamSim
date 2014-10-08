@@ -1,0 +1,386 @@
+<lccdd xmlns:compact="http://www.lcsim.org/schemas/compact/1.0"
+       xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+       xs:noNamespaceSchemaLocation="http://www.lcsim.org/schemas/compact/1.0/compact.xsd">
+  
+  <info name="CopperTarget"
+	title="CopperTarget for TB Studies"
+	author="Marcel Stanitzki"
+	url="NONE"
+	status="development"
+	version="$Id: compact.xml,v 1.1 2007/09/17 22:10:42 lima Exp $">
+  </info>
+  
+  <define>
+    
+    <constant name="cm" value="10"/>
+    
+    <!-- world -->
+    <constant name="world_side" value="5070*cm" />
+    <constant name="world_x" value="world_side" />
+    <constant name="world_y" value="world_side" />
+    <constant name="world_z" value="world_side" />
+
+    <!-- tracking region -->
+    <constant name="tracking_region_radius" value="150*cm"/>
+    <constant name="tracking_region_zmax" value="2535*cm"/>
+
+  </define>
+  <materials>
+   <material name="Rhenium">
+      <D value="21.02" unit="g/cm3"/>      
+      <fraction n="1.0" ref="Re"/>
+    </material>
+    <material name="TungstenDens23">
+      <D value="17.7" unit="g/cm3"/>
+      <fraction n="0.925" ref="W"/>
+      <fraction n="0.066" ref="Ni"/>
+      <fraction n="0.009" ref="Fe"/>
+    </material>
+   <material name="TungstenDens24">
+      <D value="17.8" unit="g/cm3"/>
+      <fraction n="0.93" ref="W"/>
+      <fraction n="0.061" ref="Ni"/>
+      <fraction n="0.009" ref="Fe"/>
+    </material>    
+    <material name="TungstenDens25">
+      <D value="18.2" unit="g/cm3"/>
+      <fraction n="0.950" ref="W"/>
+      <fraction n="0.044" ref="Ni"/>
+      <fraction n="0.006" ref="Fe"/>
+    </material>    
+   <material name="CarbonFiber_25percent">
+      <D type="density" value="0.375" unit="g/cm3"/>
+      <fraction n="1.0" ref="CarbonFiber"/>
+    </material>
+   <material name="CarbonFiber_15percent">
+      <D type="density" value="0.225" unit="g/cm3"/>
+      <fraction n="1.0" ref="CarbonFiber"/>
+    </material>
+   <material name="Rohacell31_50percent">
+      <D type="density" value="0.016" unit="g/cm3"/>
+      <fraction n="1.0" ref="Rohacell31"/>
+    </material>
+   <material name="Rohacell31_15percent">
+      <D type="density" value="0.0048" unit="g/cm3"/>
+      <fraction n="1.0" ref="Rohacell31"/>
+    </material>
+
+    <material name="Aluminium">
+      <D type="density" value="2.702" unit="g/cm3"/>
+      <fraction n="1.0" ref="Al"/>
+    </material>
+
+
+    <material name="Air">
+      <D value="0.001214" unit="g/cm3"/>
+      <fraction n="0.7494" ref="N"/>
+      <fraction n="0.2369" ref="O"/>
+      <fraction n="0.0129" ref="Ar"/>
+      <fraction n="0.0008" ref="H"/>
+    </material>    
+     
+    <material name="CaO"> 
+       <D type="density" value="3.35" unit="g/cm3"/> 
+       <composite n="1" ref="C"/> 
+       <composite n="1" ref="O"/> 
+    </material>
+
+    <material name="SiO2"> 
+       <D type="density" value="2.65" unit="g/cm3"/> 
+       <composite n="1" ref="Si"/> 
+       <composite n="2" ref="O"/> 
+    </material>
+
+    <material name="Al2O3"> 
+       <D type="density" value="3.95" unit="g/cm3"/> 
+       <composite n="2" ref="Al"/> 
+       <composite n="3" ref="O"/> 
+    </material>
+
+    <material name="Fe2O3"> 
+       <D type="density" value="5.24" unit="g/cm3"/> 
+       <composite n="2" ref="Fe"/> 
+       <composite n="3" ref="O"/> 
+    </material>
+
+    <material name="heavyConcrete"> 
+       <D type="density" value="3.7" unit="g/cm3"/> 
+       <fraction n="0.65" ref="CaO"/>
+       <fraction n="0.20" ref="SiO2"/>
+       <fraction n="0.10" ref="Al2O3"/>
+       <fraction n="0.05" ref="Fe2O3"/>
+    </material>
+
+  </materials>
+
+  
+  
+
+  <detectors>
+    <detector id="1" name="Aluminium_Pipe" type="TubeSegment"  >
+	<material name="Aluminium"/>
+	<tubs rmin="3.3*cm" rmax="3.5*cm" zhalf="200*cm" />
+      <position x="0*cm" y="0*cm" z="200.0*cm" />
+   </detector>    
+
+    <detector id="2" name="Aluminium_window" type="TubeSegment"  >
+	<material name="Aluminium"/>
+	<tubs rmin="0*cm" rmax="3.5*cm" zhalf="0.25*cm" />
+      <position x="0*cm" y="0*cm" z="400.25*cm" />
+   </detector>    
+
+    <detector id="3" name="Air1" type="TestBeamCalorimeter"  insideTrackingVolume="true">
+      <dimensions x="world_side" y="world_side" />
+      <position z="1328.75*cm" />
+      <layer repeat="1">       
+        <slice material = "Air" thickness = "1856.5*cm" sensitive = "no" />
+      </layer>	
+    </detector>    
+
+  <detector id="4" name="LeadShielding" type="SiTrackerBarrel"  insideTrackingVolume="true">
+        <module name="Lead_Block">
+ 	   <module_envelope length="27.50*cm" width="80*cm" thickness="4534*cm"/>
+            <module_component length="5.0*cm" width="80*cm" thickness="20*cm" material="Lead" sensitive="no" >
+              <position x="-10*cm" y="(-7.5*cm+2.5*cm)" z="2267.0*cm" />
+            </module_component>
+    	    <module_component length="7.5*cm" width="27.5*cm" thickness="20*cm" material="Lead" sensitive="no" >
+              <position x="16.25*cm" y="1.25*cm" z="2267.0*cm" />
+            </module_component>
+             <module_component length="7.5*cm" width="47.5*cm" thickness="20*cm" material="Lead" sensitive="no" >
+              <position x="-26.25*cm" y="1.25*cm" z="2267.0*cm" />
+            </module_component>
+    	    <module_component length="15*cm" width="80*cm" thickness="20*cm" material="Lead" sensitive="no" >
+              <position x="-10*cm" y="12.5*cm" z="2267.0*cm" />
+            </module_component>
+        </module>
+	<module name="Concrete_Block1">
+ 	   <module_envelope length="35.0*cm" width="80*cm" thickness="4574*cm"/>
+            <module_component length="5.0*cm" width="80*cm" thickness="20*cm" material="heavyConcrete" sensitive="no" >
+              <position x="-10*cm" y="(-7.5*cm+2.5*cm)" z="2287.0*cm" />
+            </module_component>
+             <module_component length="10.0*cm" width="27.5*cm" thickness="20*cm" material="heavyConcrete" sensitive="no" >
+              <position x="16.25*cm" y="2.5*cm" z="2287.0*cm" />
+            </module_component>     
+            <module_component length="10.0*cm" width="47.5*cm" thickness="20*cm" material="heavyConcrete" sensitive="no" >
+              <position x="-26.25*cm" y="2.5*cm" z="2287.0*cm" />
+            </module_component>        
+            <module_component length="20.0*cm" width="80*cm" thickness="20*cm" material="heavyConcrete" sensitive="no" >
+              <position x="-10*cm" y="17.5*cm" z="2287.0*cm" />
+            </module_component>     
+        </module>
+        <module name="Concrete_fundament">
+ 	   <module_envelope length="162.5*cm" width="80*cm" thickness="4554*cm"/>
+            <module_component length="162.5*cm" width="80*cm" thickness="40*cm" material="heavyConcrete" sensitive="no" >
+              <position x="-10*cm" y="-88.75*cm" z="2277*cm" />
+            </module_component>
+        </module>
+ 	 <module name="Concrete_SideBlock">
+ 	   <module_envelope length="205*cm" width="40*cm" thickness="4654*cm"/>
+            <module_component length="205*cm" width="40*cm" thickness="40*cm" material="heavyConcrete" sensitive="no" >
+              <position x="-70*cm" y="-67.5*cm" z="2327*cm" />
+            </module_component>
+        </module>
+   </detector>  
+
+    <detector id="5" name="Air2" type="TestBeamCalorimeter"  insideTrackingVolume="true">
+      <dimensions x="world_side" y="world_side" />
+      <position z="2301.875*cm" />
+      <layer repeat="1">       
+        <slice material = "Air" thickness = "9.75*cm" sensitive = "no" />
+      </layer>	
+    </detector>    
+
+  <detector id="6" name="ConverterTarget" type="TestBeamCalorimeter"  insideTrackingVolume="true">
+      <dimensions x="5.0 * cm" y="5*cm" />
+      <position x="0.0*cm" y="0.0*cm" z="2307.0*cm" />
+      <layer repeat="1">       
+        <slice material = "Copper" thickness = "0.5*cm" sensitive = "no" />
+      </layer>	
+    </detector>    
+
+    <detector id="7" name="Air3" type="TestBeamCalorimeter"  insideTrackingVolume="true">
+      <dimensions x="world_side" y="world_side" />
+      <position z="2323.6225*cm" />
+      <layer repeat="1">       
+        <slice material = "Air" thickness = "32.745*cm" sensitive = "no" />
+      </layer>	
+    </detector>    
+
+    <detector id="8" name="Kapton_Window" type="TubeSegment"  >
+	<material name="Kapton"/>
+	<tubs rmin="0*cm" rmax="3.5*cm" zhalf="0.005*cm" />
+      <position x="0*cm" y="0*cm" z="2340.0*cm" />
+   </detector>    
+
+    <detector id="9" name="Aluminium_Pipe2" type="TubeSegment"  >
+	<material name="Aluminium"/>
+	<tubs rmin="3.3*cm" rmax="3.5*cm" zhalf="13.8125*cm" />
+      <position x="0*cm" y="0*cm" z="2353.8125*cm" />
+   </detector>    
+
+    <detector id="10" name="Iron_Pipe" type="TubeSegment"  >
+	<material name="Iron"/>
+	<tubs rmin="12.25*cm" rmax="12.7*cm" zhalf="8.625*cm" />
+      <position x="0*cm" y="0*cm" z="2358.625*cm" />
+   </detector>    
+
+   <detector id="11" name="DipoleMagnet" type="SiTrackerBarrel"  insideTrackingVolume="true">
+        <module name="FirstIronLayer">
+ 	   <module_envelope length="80.6*cm" width="110*cm" thickness="4736*cm"/>
+            <module_component length="27.6*cm" width="110*cm" thickness="0.75*cm" material="Iron" sensitive="no" >
+              <position x="0*cm" y="(27.6*cm*0.5+25.4*cm*0.5)" z="2367.625*cm" />
+            </module_component>
+    	    <module_component length="27.6*cm" width="110*cm" thickness="0.75*cm" material="Iron" sensitive="no" >
+              <position x="0*cm" y="-(27.6*cm*0.5+25.4*cm*0.5)" z="2367.625*cm" />
+            </module_component>
+             <module_component length="25.4*cm" width="42.3*cm" thickness="0.75*cm" material="Iron" sensitive="no" >
+              <position x="(25.4*cm*0.5+42.3*cm*0.5)" y="0*cm" z="2367.625*cm" />
+            </module_component>
+    	    <module_component length="25.4*cm" width="42.3*cm" thickness="0.75*cm" material="Iron" sensitive="no" >
+              <position x="-(25.4*cm*0.5+42.3*cm*0.5)" y="0*cm" z="2367.625*cm" />
+            </module_component>
+        </module>
+	<module name="IronSurrounding">
+ 	   <module_envelope length="80.6*cm" width="110*cm" thickness="4840*cm"/>
+            <module_component length="21.8*cm" width="110*cm" thickness="104*cm" material="Iron" sensitive="no" >
+              <position x="0*cm" y="(21.8*cm*0.5+37*cm*0.5)" z="2420.0*cm" />
+            </module_component>
+             <module_component length="21.8*cm" width="110*cm" thickness="104*cm" material="Iron" sensitive="no" >
+              <position x="0*cm" y="-(21.8*cm*0.5+37*cm*0.5)" z="2420.0*cm" />
+            </module_component>     
+            <module_component length="37*cm" width="22.25*cm" thickness="104*cm" material="Iron" sensitive="no" >
+              <position x="(37*cm*0.5+65.5*cm*0.5)" y="0*cm" z="2420.0*cm" />
+            </module_component>        
+            <module_component length="37*cm" width="22.25*cm" thickness="104*cm" material="Iron" sensitive="no" >
+              <position x="-(37*cm*0.5+65.5*cm*0.5)" y="0*cm" z="2420.0*cm" />
+            </module_component>     
+        </module>
+        <module name="LastIronLayer">
+ 	   <module_envelope length="80.6*cm" width="110*cm" thickness="4945*cm"/>
+            <module_component length="27.6*cm" width="110*cm" thickness="0.75*cm" material="Iron" sensitive="no" >
+              <position x="0*cm" y="(27.6*cm*0.5+25.4*cm*0.5)" z="2472.375*cm" />
+            </module_component>
+    	    <module_component length="27.6*cm" width="110*cm" thickness="0.75*cm" material="Iron" sensitive="no" >
+              <position x="0*cm" y="-(27.6*cm*0.5+25.4*cm*0.5)" z="2472.375*cm" />
+            </module_component>
+             <module_component length="25.4*cm" width="42.3*cm" thickness="0.75*cm" material="Iron" sensitive="no" >
+              <position x="(25.4*cm*0.5+42.3*cm*0.5)" y="0*cm" z="2472.375*cm" />
+            </module_component>
+    	    <module_component length="25.4*cm" width="42.3*cm" thickness="0.75*cm" material="Iron" sensitive="no" >
+              <position x="-(25.4*cm*0.5+42.3*cm*0.5)" y="0*cm" z="2472.375*cm" />
+            </module_component>
+        </module>
+	<module name="UpperMagnetCoil">
+ 	   <module_envelope length="25*cm" width="65.5*cm" thickness="7231*cm"/>
+            <module_component length="12*cm" width="65.5*cm" thickness="20.25*cm" material="Copper" sensitive="no" >
+              <position x="0*cm" y="(12*cm*0.5+13*cm*0.5)" z="2378.125*cm" />
+            </module_component>
+            <module_component length="12*cm" width="20.25*cm" thickness="63.5*cm" material="Copper" sensitive="no" >
+              <position x="(20.25*cm*0.5+25*cm*0.5)" y="(12*cm*0.5+13*cm*0.5)" z="2420.0*cm" />
+            </module_component>
+            <module_component length="12*cm" width="20.25*cm" thickness="63.5*cm" material="Copper" sensitive="no" >
+              <position x="-(20.25*cm*0.5+25*cm*0.5)" y="(12*cm*0.5+13*cm*0.5)" z="2420.0*cm" />
+            </module_component>
+            <module_component length="12*cm" width="65.5*cm" thickness="20.25*cm" material="Copper" sensitive="no" >
+              <position x="0*cm" y="(12*cm*0.5+13*cm*0.5)" z="2461.875*cm" />
+            </module_component>
+        </module>
+	<module name="LowerMagnetCoil">
+ 	   <module_envelope length="25*cm" width="65.5*cm" thickness="7231*cm"/>
+            <module_component length="12*cm" width="65.5*cm" thickness="20.25*cm" material="Copper" sensitive="no" >
+              <position x="0*cm" y="-(12*cm*0.5+13*cm*0.5)" z="2378.125*cm" />
+            </module_component>
+            <module_component length="12*cm" width="20.25*cm" thickness="63.5*cm" material="Copper" sensitive="no" >
+              <position x="(20.25*cm*0.5+25*cm*0.5)" y="-(12*cm*0.5+13*cm*0.5)" z="2420.0*cm" />
+            </module_component>
+            <module_component length="12*cm" width="20.25*cm" thickness="63.5*cm" material="Copper" sensitive="no" >
+              <position x="-(20.25*cm*0.5+25*cm*0.5)" y="-(12*cm*0.5+13*cm*0.5)" z="2420.0*cm" />
+            </module_component>
+            <module_component length="12*cm" width="65.5*cm" thickness="20.25*cm" material="Copper" sensitive="no" >
+              <position x="0*cm" y="-(12*cm*0.5+13*cm*0.5)" z="2461.875*cm" />
+            </module_component>
+        </module>
+	<module name="IronPole">
+ 	   <module_envelope length="(13.5*cm+10*cm+13.5*cm)" width="25*cm" thickness="4840*cm"/>
+            <module_component length="13.5*cm" width="25*cm" thickness="63.5*cm" material="Iron" sensitive="no" >
+              <position x="0*cm" y="(13.5*cm*0.5+10*cm*0.5)" z="2420.0*cm" />
+            </module_component>
+            <module_component length="13.5*cm" width="25*cm" thickness="63.5*cm" material="Iron" sensitive="no" >
+              <position x="0*cm" y="-(13.5*cm*0.5+10*cm*0.5)" z="2420.0*cm" />
+            </module_component>
+        </module>
+    </detector>    
+
+    <detector id="12" name="Iron_Pipe2" type="TubeSegment"  >
+	<material name="Iron"/>
+	<tubs rmin="12.25*cm" rmax="12.7*cm" zhalf="12.0*cm" />
+      <position x="0*cm" y="0*cm" z="2484.75*cm" />
+   </detector>  
+
+    <detector id="13" name="Aluminium_Pipe3" type="TubeSegment"  >
+	<material name="Aluminium"/>
+	<tubs rmin="3.3*cm" rmax="3.5*cm" zhalf="13.625*cm"/> 
+      <position x="0*cm" y="0*cm" z="2486.375*cm" /> 
+   </detector>    
+
+    <detector id="14" name="Aluminium_Pipe4" type="TubeSegment"  >
+	<material name="Aluminium"/>
+	<tubs rmin="3.3*cm" rmax="3.5*cm" zhalf="5*cm"/> 
+      <position x="0.16*cm" y="0*cm" z="2504.997*cm" /> 
+      <rotation x="0" y="0.032" z="0" />
+   </detector>    
+
+
+   <detector id="15" name="Collimator" type="SiTrackerBarrel"  insideTrackingVolume="true">
+        <module name="HorizontalCollimator">
+ 	   <module_envelope length="25.4*cm" width="25.4*cm" thickness="5030*cm"/>
+            <module_component length="15*cm" width="15*cm" thickness="10*cm" material="Lead" sensitive="no" >
+              <position x="(0.48*cm+(0.999488*(15*cm*0.5+0.15*cm*0.5)))" y="0*cm" z="(2514.991*cm-(0.0319945*(15*cm*0.5+0.15*cm*0.5)))" />  
+              <rotation x="0" y="0.032" z="0" />
+            </module_component>
+    	    <module_component length="15*cm" width="15*cm" thickness="10*cm" material="Lead" sensitive="no" >
+              <position x="(0.48*cm-(0.999488*(15*cm*0.5+0.15*cm*0.5)))" y="0*cm" z="(2514.991*cm+(0.0319945*(15*cm*0.5+0.15*cm*0.5)))" /> 
+              <rotation x="0" y="0.032" z="0" />
+            </module_component>
+        </module>
+        <module name="VerticalCollimator">
+ 	   <module_envelope length="25.4*cm" width="25.4*cm" thickness="5060*cm"/>
+             <module_component length="15*cm" width="15*cm" thickness="10*cm" material="Lead" sensitive="no" >
+              <position x="0.96*cm" y="(15*cm*0.5+0.15*cm*0.5)" z="2529.982*cm" /> 
+              <rotation x="0" y="0.032" z="0" />
+            </module_component>
+    	    <module_component length="15*cm" width="15*cm" thickness="10*cm" material="Lead" sensitive="no" >
+              <position x="0.96*cm" y="-(15*cm*0.5+0.15*cm*0.5)" z="2529.982*cm" /> 
+              <rotation x="0" y="0.032" z="0" />
+            </module_component>
+        </module>
+   </detector>    
+
+<!--
+    <detector id="11" name="Aluminium_Pipe4" type="TubeSegment"  >
+	<material name="Aluminium"/>
+	<tubs rmin="12.25*cm" rmax="12.7*cm" zhalf="5*cm" />
+      <position x="0*cm" y="0*cm" z="2516.0*cm" />
+   </detector>    
+-->
+ </detectors>
+
+  <!-- Sensitive Detector readout segmentation -->
+  <readouts>
+  </readouts>
+
+  <fields>
+	 <field type="BoxDipole" name="TestBeamDipole"
+	 	     funit="tesla"
+	             x="0*cm"
+	             y="0*cm"
+	             z="2420.0*cm"
+	             dx="(65.5*cm*0.5)"
+	             dy="(37*cm*0.5)"
+	             dz="(104*cm*0.5)"
+	             bx="0.0"
+	             by="0.5"
+	             bz="0.0">     
+	</field>
+  </fields>
+</lccdd>

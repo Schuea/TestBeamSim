@@ -1,0 +1,18 @@
+/lcio/PDGFlag true
+/lcio/filename DESY_II_beam.slcio
+/lcdd/url ./DESY_II_beam.lcdd
+/run/initialize 
+/generator/select gps
+/gps/particle e-
+/gps/pos/type Beam
+/gps/pos/halfx 350 nm
+/gps/pos/sigma_x 10 nm
+/gps/pos/halfy 35 nm
+/gps/pos/sigma_y 1 nm
+/gps/pos/centre 0 0 0 cm
+/gps/direction 0. 0. 1
+/gps/ene/type Gauss 
+/gps/ene/mono 6.3 GeV
+/gps/ene/sigma 7.56 MeV
+/random/seed
+/run/beamOn 10000000

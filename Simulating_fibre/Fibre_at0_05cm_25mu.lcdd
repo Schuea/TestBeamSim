@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lcdd xmlns:lcdd="http://www.lcsim.org/schemas/lcdd/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="http://www.lcsim.org/schemas/lcdd/1.0/lcdd.xsd">
+  <header>
+    <detector name="CarbonFiber" />
+    <generator name="GeomConverter" version="1.0" file="/afs/desy.de/user/s/schuea/mymarlin/Simulating_fibre/Fibre_at1cm_25mu.xml" checksum="4117914571" />
+    <author name="Marcel Stanitzki" />
+    <comment>NONE</comment>
+  </header>
+  <iddict>
+    <idspec name="CarbonFiberHits" length="64">
+      <idfield signed="false" label="system" length="8" start="0" />
+      <idfield signed="true" label="y" length="21" start="8" />
+      <idfield signed="false" label="barrel" length="3" start="29" />
+      <idfield signed="true" label="x" length="21" start="32" />
+      <idfield signed="false" label="layer" length="11" start="53" />
+    </idspec>
+  </iddict>
+  <sensitive_detectors>
+    <calorimeter name="CarbonFibre" ecut="0.0" eunit="MeV" verbose="0" hits_collection="CarbonFiberHits">
+      <idspecref ref="CarbonFiberHits" />
+      <grid_xyz grid_size_x="1.0" grid_size_y="0.1" grid_size_z="0.0" />
+    </calorimeter>
+  </sensitive_detectors>
+  <limits />
+  <regions>
+    <region name="TrackingRegion" store_secondaries="true" kill_tracks="false" cut="10.0" lunit="mm" threshold="1.0" eunit="MeV" />
+  </regions>
+  <display>
+    <vis name="WorldVis" line_style="unbroken" drawing_style="wireframe" show_daughters="true" visible="false">
+      <color R="1.0" G="1.0" B="1.0" alpha="1.0" />
+    </vis>
+    <vis name="TrackingVis" line_style="unbroken" drawing_style="wireframe" show_daughters="true" visible="false">
+      <color R="1.0" G="1.0" B="1.0" alpha="1.0" />
+    </vis>
+  </display>
+  <gdml>
+    <define>
+      <rotation name="identity_rot" x="0.0" y="0.0" z="0.0" unit="radian" />
+      <rotation name="reflect_rot" x="3.141592653589793" y="0.0" z="0.0" unit="radian" />
+      <position name="identity_pos" x="0.0" y="0.0" z="0.0" unit="mm" />
+      <constant name="world_side" value="2.0" />
+      <constant name="cm" value="10.0" />
+      <constant name="tracking_region_radius" value="1500.0" />
+      <constant name="world_y" value="2.0" />
+      <constant name="world_z" value="2.0" />
+      <constant name="tracking_region_zmax" value="1.0" />
+      <constant name="world_x" value="2.0" />
+      <position name="CarbonFibre_position" x="0.0" y="0.0" z="0.5" unit="mm" />
+      <position name="CarbonFibre_layerType0_slice0_position" x="0.0" y="0.0" z="0.0" unit="mm" />
+      <position name="CarbonFibre_layer0_position" x="0.0" y="0.0" z="0.0" unit="mm" />
+    </define>
+    <materials>
+      <element Z="75" formula="Re" name="Re">
+        <atom type="A" unit="g/mol" value="186.207" />
+      </element>
+      <element Z="74" formula="W" name="W">
+        <atom type="A" unit="g/mol" value="183.842" />
+      </element>
+      <element Z="28" formula="Ni" name="Ni">
+        <atom type="A" unit="g/mol" value="58.6933" />
+      </element>
+      <element Z="26" formula="Fe" name="Fe">
+        <atom type="A" unit="g/mol" value="55.8451" />
+      </element>
+      <element Z="6" formula="C" name="C">
+        <atom type="A" unit="g/mol" value="12.0107" />
+      </element>
+      <element Z="1" formula="H" name="H">
+        <atom type="A" unit="g/mol" value="1.00794" />
+      </element>
+      <element Z="8" formula="O" name="O">
+        <atom type="A" unit="g/mol" value="15.9994" />
+      </element>
+      <element Z="7" formula="N" name="N">
+        <atom type="A" unit="g/mol" value="14.0068" />
+      </element>
+      <material name="Rhenium">
+        <D value="21.02" unit="g/cm3" type="density" />
+        <fraction n="1.0" ref="Re" />
+      </material>
+      <material name="TungstenDens23">
+        <D value="17.7" unit="g/cm3" type="density" />
+        <fraction n="0.925" ref="W" />
+        <fraction n="0.066" ref="Ni" />
+        <fraction n="0.009" ref="Fe" />
+      </material>
+      <material name="TungstenDens24">
+        <D value="17.8" unit="g/cm3" type="density" />
+        <fraction n="0.93" ref="W" />
+        <fraction n="0.061" ref="Ni" />
+        <fraction n="0.009" ref="Fe" />
+      </material>
+      <material name="TungstenDens25">
+        <D value="18.2" unit="g/cm3" type="density" />
+        <fraction n="0.950" ref="W" />
+        <fraction n="0.044" ref="Ni" />
+        <fraction n="0.006" ref="Fe" />
+      </material>
+      <material name="Epoxy">
+        <D type="density" value="1.3" unit="g/cm3" />
+        <composite n="44" ref="H" />
+        <composite n="15" ref="C" />
+        <composite n="7" ref="O" />
+      </material>
+      <material name="CarbonFiber">
+        <D type="density" value="1.5" unit="g/cm3" />
+        <fraction n="0.65" ref="C" />
+        <fraction n="0.35" ref="Epoxy" />
+      </material>
+      <material name="CarbonFiber_25percent">
+        <D type="density" value="0.375" unit="g/cm3" />
+        <fraction n="1.0" ref="CarbonFiber" />
+      </material>
+      <material name="CarbonFiber_15percent">
+        <D type="density" value="0.225" unit="g/cm3" />
+        <fraction n="1.0" ref="CarbonFiber" />
+      </material>
+      <material name="Rohacell31">
+        <D type="density" value="0.032" unit="g/cm3" />
+        <composite n="9" ref="C" />
+        <composite n="13" ref="H" />
+        <composite n="2" ref="O" />
+        <composite n="1" ref="N" />
+      </material>
+      <material name="Rohacell31_50percent">
+        <D type="density" value="0.016" unit="g/cm3" />
+        <fraction n="1.0" ref="Rohacell31" />
+      </material>
+      <material name="Rohacell31_15percent">
+        <D type="density" value="0.0048" unit="g/cm3" />
+        <fraction n="1.0" ref="Rohacell31" />
+      </material>
+      <element name="Ar" formula="Ar" Z="18">
+        <atom type="A" unit="g/mol" value="39.9477" />
+      </element>
+      <material name="Air">
+        <D type="density" unit="g/cm3" value="0.0012" />
+        <fraction n="0.754" ref="N" />
+        <fraction n="0.234" ref="O" />
+        <fraction n="0.012" ref="Ar" />
+      </material>
+      <material name="Carbon">
+        <RL type="X0" unit="cm" value="21.3485" />
+        <NIL type="lambda" unit="cm" value="40.1008" />
+        <D type="density" unit="g/cm3" value="2" />
+        <composite n="1" ref="C" />
+      </material>
+    </materials>
+    <solids>
+      <box name="world_box" x="world_x" y="world_y" z="world_z" />
+      <tube name="tracking_cylinder" deltaphi="6.283185307179586" rmin="0.0" rmax="tracking_region_radius" z="2*tracking_region_zmax" />
+      <box name="CarbonFibre_box" x="0.025" y="100.0" z="0.025" />
+      <box name="CarbonFibre_layerType0_box" x="0.025" y="100.0" z="0.025" />
+      <box name="CarbonFibre_layerType0_slice0_box" x="0.025" y="100.0" z="0.025" />
+    </solids>
+    <structure>
+      <volume name="CarbonFibre_layerType0_slice0">
+        <materialref ref="Carbon" />
+        <solidref ref="CarbonFibre_layerType0_slice0_box" />
+      </volume>
+      <volume name="CarbonFibre_layerType0">
+        <materialref ref="Air" />
+        <solidref ref="CarbonFibre_layerType0_box" />
+        <physvol>
+          <volumeref ref="CarbonFibre_layerType0_slice0" />
+          <positionref ref="CarbonFibre_layerType0_slice0_position" />
+          <rotationref ref="identity_rot" />
+          <physvolid field_name="slice" value="0" />
+        </physvol>
+      </volume>
+      <volume name="CarbonFibre_envelope">
+        <materialref ref="Air" />
+        <solidref ref="CarbonFibre_box" />
+        <physvol>
+          <volumeref ref="CarbonFibre_layerType0" />
+          <positionref ref="CarbonFibre_layer0_position" />
+          <rotationref ref="identity_rot" />
+          <physvolid field_name="layer" value="0" />
+        </physvol>
+      </volume>
+      <volume name="tracking_volume">
+        <materialref ref="Air" />
+        <solidref ref="tracking_cylinder" />
+        <physvol>
+          <volumeref ref="CarbonFibre_envelope" />
+          <positionref ref="CarbonFibre_position" />
+          <rotationref ref="identity_rot" />
+          <physvolid field_name="system" value="1" />
+        </physvol>
+        <regionref ref="TrackingRegion" />
+        <visref ref="TrackingVis" />
+      </volume>
+      <volume name="world_volume">
+        <materialref ref="Air" />
+        <solidref ref="world_box" />
+        <physvol>
+          <volumeref ref="tracking_volume" />
+          <positionref ref="identity_pos" />
+          <rotationref ref="identity_rot" />
+        </physvol>
+        <visref ref="WorldVis" />
+      </volume>
+    </structure>
+    <setup name="Default" version="1.0">
+      <world ref="world_volume" />
+    </setup>
+  </gdml>
+  <fields />
+</lcdd>
+

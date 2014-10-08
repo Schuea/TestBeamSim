@@ -31,30 +31,15 @@ class SimProcessor : public marlin::Processor {
 
   private:
 
-	float * Fill_RebinningArrays(const int nbins, const float min, const float max, const int dimensions);
-
-	void MakeEnergyHistogram(TTree *Tree, TH2F *histo, const int ParticleID);
-
-	void GetBinEnergyDistribution(TTree* Tree, TH2F* histo, const int ParticleID);
-
-	
 	void registerInputCollectionProcessor(Collection_Processor_Interface* p);
 	void registerOutputCollectionProcessor(OutputCollection_Processor_Interface* p);
 
 	int _iRun;  // Run number
     	int _iEvt;  // Event number
 
-	ofstream Hvalues_for_macros;
-
 	TFile *File;
 	TTree *Tree;
-	TCanvas* Deflection_Canvas;
 	TCanvas* Map_Canvas;
-
-
-	TH2F* rebinned_Photon_Deflection_Fibre;
-	TH2F* EnergyMap_Electron_Deflection_Fibre;
-	TH2F* EnergyMap_Photon_Deflection_Fibre;
 
 	std::vector<Collection_Processor_Interface*> input_col_processors;
 	std::vector<OutputCollection_Processor_Interface*> output_col_processors;

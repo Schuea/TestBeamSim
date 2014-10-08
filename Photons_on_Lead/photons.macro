@@ -1,0 +1,12 @@
+/lcio/PDGFlag true
+/lcio/filename LeadBlock_20cm_Concrete_20cm_5GeV_2.slcio
+/lcdd/url Only_LeadBlock_20cm_Concrete_20cm.lcdd
+/run/initialize
+/generator/select gun
+/gun/particle gamma
+/gun/position 0 0 0
+/gun/direction 0. 0. 1
+/gun/energy 5 GeV
+/random/seed
+/run/beamOn 50000
+
