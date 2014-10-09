@@ -75,7 +75,8 @@ int main(int argc,char *argv[]){
 		cerr << "Unkown error... Try again and observe the possible drawing options!" << endl;
 		exit(1);
 	}
-
+	
+	cout << "Your choice of particles:" << endl;
 	cout << "Particle_ID1 = "<< Particle_ID1 <<endl;
 	cout << "Particle_ID2 = "<< Particle_ID2 <<endl;
 	cout << "Particle_ID3 = "<< Particle_ID3 <<endl;
@@ -89,58 +90,19 @@ int main(int argc,char *argv[]){
 std::pair<float,float> Particle_vector(int step_n, TTree * Tree, int Particle_number, int Particle_ID1, int Particle_ID2, int Particle_ID3, int Particle_ID4, int Particle_ID5, int Particle_ID6, int id, float start, float end, float z_start, float z_end){
 	
         if(Particle_ID1 != 0 && id!=Particle_ID1 && id!=Particle_ID2 && id!=Particle_ID3 && id!=Particle_ID4 && id!=Particle_ID5 && id!=Particle_ID6) throw string("Not a particle we are interested in");    
+
 	float t_n = 0;
-	float v_zn=0, v_xn = 0;
+	float v_zn = 0, v_xn = 0;
+
 	t_n = step_n / sqrt( pow((z_end-z_start),2.0) + pow((end-start),2.0) );
 	v_zn = z_start + t_n*(z_end-z_start);
 	v_xn = start + t_n*(end-start);
+
 	std::pair<float,float> result(v_zn,v_xn);
 	return result;
 }
 
-//
-//std::pair<float,float> Particle_vector_yz(int step_n, TTree * Tree, int Particle_number, int Particle_ID1, int Particle_ID2, int Particle_ID3, int Particle_ID4, int Particle_ID5, int Particle_ID6){
-//	
-//	int   id = 0; 
-//        float y_start=0,z_start = 0; 
-//        float y_end=0,z_end = 0; 
-//         
-//        Tree->SetBranchAddress("Particle_ID",&id); 
-//        Tree->SetBranchAddress("Vertexy",&y_start); 
-//        Tree->SetBranchAddress("Vertexz",&z_start);
-//        Tree->SetBranchAddress("Reflectiony",&y_end); 
-//        Tree->SetBranchAddress("Reflectionz",&z_end); 
-// 
-//        Tree->GetEntry(Particle_number); 
-//        if(Particle_ID1 != 0 && id!=Particle_ID1 && id!=Particle_ID2 && id!=Particle_ID3 && id!=Particle_ID4 && id!=Particle_ID5 && id!=Particle_ID6) throw string("Not a particle we are interested in");    
-///*
-//	cout << "y_start = " << y_start << endl;
-//	cout << "y_end = " << y_end << endl;
-//	cout << "z_start = " << z_start << endl;
-//	cout << "z_end = " << z_end << endl;
-//*/
-//	float t_n = 0;
-//	float v_zn=0, v_yn = 0;
-//	t_n = step_n / sqrt( pow((z_end-z_start),2.0) + pow((y_end-y_start),2.0) );
-//	v_zn = z_start + t_n*(z_end-z_start);
-//	v_yn = y_start + t_n*(y_end-y_start);
-//
-//	std::pair<float,float> vector(v_zn,v_yn);
-//	return vector;
-//}
-
-bool DontDuplicateBins(TH2F *histo, int bin, int prevbin, float x, float y){
-	if(bin == prevbin){
-		return false;
-	} else{
-		histo->Fill(x,y);
-		return true;
-	}
-}
-
-
 void DrawingMacro(string name, int Particle_ID1, int Particle_ID2, int Particle_ID3, int Particle_ID4, int Particle_ID5, int Particle_ID6){
-	TH1::SetDefaultSumw2();
 
 	TFile * input_rootfile = new TFile(name.c_str(),"READ");
 	cout << "Inputfile size = " << input_rootfile->GetSize() << endl;
@@ -172,9 +134,11 @@ void DrawingMacro(string name, int Particle_ID1, int Particle_ID2, int Particle_
 	int xz_prev_stored_binno = 0;
 	int yz_prev_stored_binno = 0;
         int entries = Tree->GetEntries(); 
+
  	int   id = 0; 
         float x_start=0,y_start=0,z_start = 0; 
 	float x_end=0,y_end=0,z_end = 0; 
+
 	Tree->SetBranchAddress("Particle_ID",&id); 
 	Tree->SetBranchAddress("Vertexx",&x_start); 
 	Tree->SetBranchAddress("Reflectionx",&x_end); 
@@ -182,6 +146,7 @@ void DrawingMacro(string name, int Particle_ID1, int Particle_ID2, int Particle_
 	Tree->SetBranchAddress("Reflectiony",&y_end); 
 	Tree->SetBranchAddress("Vertexz",&z_start);
 	Tree->SetBranchAddress("Reflectionz",&z_end);       
+
 	for(int Particle_number = 0; Particle_number < 10000/*entries*/; ++Particle_number){ 
 		Tree->GetEntry(Particle_number); 
 
@@ -192,7 +157,8 @@ void DrawingMacro(string name, int Particle_ID1, int Particle_ID2, int Particle_
 			try{
 				xz_vector_point_n = Particle_vector(step_n, Tree, Particle_number, Particle_ID1, Particle_ID2, Particle_ID3, Particle_ID4, Particle_ID5, Particle_ID6, id, x_start, x_end, z_start, z_end); 
 				yz_vector_point_n = Particle_vector(step_n, Tree, Particle_number, Particle_ID1, Particle_ID2, Particle_ID3, Particle_ID4, Particle_ID5, Particle_ID6, id, y_start, y_end, z_start, z_end); 
-			} catch(string error){
+			} 
+			catch(string error){
 				break;
 			} 
 
@@ -205,42 +171,17 @@ void DrawingMacro(string name, int Particle_ID1, int Particle_ID2, int Particle_
 			float yz_y_n = 0;
 			yz_x_n = yz_vector_point_n.first;
 			yz_y_n = yz_vector_point_n.second;
-			//cout << "xz_x_n = "<< xz_x_n << ", xz_y_n = "<< xz_y_n << endl; 	
-			//cout << "dfference x = "<< xz_x_n-yz_x_n << ", difference y = "<< xz_y_n-yz_y_n << endl; 	
-			//Check if one bin_number is double counted:
+		
 			int xz_bin_number = 0;
 			int yz_bin_number = 0;
 			xz_bin_number = FluxMap_xz->FindBin(xz_x_n,xz_y_n,0);
 			yz_bin_number = FluxMap_yz->FindBin(yz_x_n,yz_y_n,0);
 
-
-			//FLAW HERE - If x global bin position the same then does not fill y plot
-			DontDuplicateBins(FluxMap_xz,xz_bin_number,xz_prev_stored_binno,xz_x_n,xz_y_n);
-			DontDuplicateBins(FluxMap_yz,yz_bin_number,yz_prev_stored_binno,yz_x_n,yz_y_n);
+			if(xz_bin_number != xz_prev_stored_binno) FluxMap_xz->Fill(xz_x_n,xz_y_n);
+			if(yz_bin_number != yz_prev_stored_binno) FluxMap_yz->Fill(yz_x_n,yz_y_n);
+	
 			xz_prev_stored_binno = xz_bin_number;
 			yz_prev_stored_binno = yz_bin_number;
-//			if(xz_bin_number == xz_prev_stored_binno){
-//				if(yz_bin_number == yz_prev_stored_binno){
-//					continue;
-//				}
-//				else{
-//					yz_prev_stored_binno = yz_bin_number;
-//					FluxMap_yz->Fill(yz_x_n,yz_y_n);
-//				}	
-//				continue;
-//			}
-//			else{
-//				xz_prev_stored_binno = xz_bin_number;
-//				FluxMap_xz->Fill(xz_x_n,xz_y_n);
-//			}	
-//		
-//			if(yz_bin_number == yz_prev_stored_binno){
-//				continue;
-//			}
-//			else{
-//				yz_prev_stored_binno = yz_bin_number;
-//				FluxMap_yz->Fill(yz_x_n,yz_y_n);
-//			}	
 		}
 		
 	}
