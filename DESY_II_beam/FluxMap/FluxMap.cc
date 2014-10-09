@@ -77,13 +77,16 @@ int main(int argc,char *argv[]){
 	}
 	
 	cout << "Your choice of particles:" << endl;
-	cout << "Particle_ID1 = "<< Particle_ID1 <<endl;
-	cout << "Particle_ID2 = "<< Particle_ID2 <<endl;
-	cout << "Particle_ID3 = "<< Particle_ID3 <<endl;
-	cout << "Particle_ID4 = "<< Particle_ID4 <<endl;
-	cout << "Particle_ID5 = "<< Particle_ID5 <<endl;
-	cout << "Particle_ID6 = "<< Particle_ID6 <<endl;
-
+	if(Particle_ID1!=0) {
+				    cout << "Particle_ID1 = "<< Particle_ID1 <<endl;
+		if(Particle_ID2!=0) cout << "Particle_ID2 = "<< Particle_ID2 <<endl;
+		if(Particle_ID3!=0) cout << "Particle_ID3 = "<< Particle_ID3 <<endl;
+		if(Particle_ID4!=0) cout << "Particle_ID4 = "<< Particle_ID4 <<endl;
+		if(Particle_ID5!=0) cout << "Particle_ID5 = "<< Particle_ID5 <<endl;
+		if(Particle_ID6!=0) cout << "Particle_ID6 = "<< Particle_ID6 <<endl;
+	}
+	else cout << "All particles occurring\n" << endl; 
+	
 	DrawingMacro(filename,Particle_ID1, Particle_ID2, Particle_ID3, Particle_ID4, Particle_ID5, Particle_ID6);
 }
 
@@ -187,6 +190,9 @@ void DrawingMacro(string name, int Particle_ID1, int Particle_ID2, int Particle_
 	}
 
 	fluxmap_xz_Canvas->cd();
+	
+	gROOT->ForceStyle();
+
 	gStyle->SetOptStat(11);
 	gPad->SetLogz();
 	FluxMap_xz->SetContour(999);
