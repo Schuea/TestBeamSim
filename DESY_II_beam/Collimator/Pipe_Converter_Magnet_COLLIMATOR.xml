@@ -15,14 +15,14 @@
     <constant name="cm" value="10"/>
     
     <!-- world -->
-    <constant name="world_side" value="5070*cm" />
+    <constant name="world_side" value="5082*cm" />
     <constant name="world_x" value="world_side" />
     <constant name="world_y" value="world_side" />
     <constant name="world_z" value="world_side" />
 
     <!-- tracking region -->
     <constant name="tracking_region_radius" value="150*cm"/>
-    <constant name="tracking_region_zmax" value="2535*cm"/>
+    <constant name="tracking_region_zmax" value="2542*cm"/>
 
   </define>
   <materials>
@@ -113,6 +113,18 @@
 
     <material name="Stainless_steel_1.4435"> 
        <D type="density" value="8" unit="g/cm3"/> 
+       <fraction n="0.0003" ref="C"/> 
+       <fraction n="0.01" ref="Si"/> 
+       <fraction n="0.02" ref="Mn"/> 
+       <fraction n="0.00045" ref="P"/> 
+       <fraction n="0.0003" ref="S"/> 
+       <fraction n="0.0011" ref="N"/> 
+       <fraction n="0.18" ref="Cr"/> 
+       <fraction n="0.03" ref="Mo"/> 
+       <fraction n="0.14" ref="Ni"/> 
+      
+       <fraction n="0.61785" ref="Steel235"/> 
+  <!--
        <fraction n="0.03/100" ref="C"/> 
        <fraction n="1.0/100" ref="Si"/> 
        <fraction n="2.0/100" ref="Mn"/> 
@@ -121,7 +133,8 @@
        <fraction n="0.11/100" ref="N"/> 
        <fraction n="18.0/100" ref="Cr"/> 
        <fraction n="3.0/100" ref="Mo"/> 
-       <fraction n="14.0/100" ref="No"/> 
+       <fraction n="14.0/100" ref="Ni"/> 
+    -->
     </material>
 
     <material name="Tungsten_S17"> 
