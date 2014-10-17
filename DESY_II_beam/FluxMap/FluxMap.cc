@@ -26,7 +26,7 @@
 
 using namespace std;
 
-void DrawingMacro(string name, int Particle_ID1, int Particle_ID2, int Particle_ID3, int Particle_ID4, int Particle_ID5, int Particle_ID6); 
+void DrawingMacro(string name,string name_IDs, int Particle_ID1, int Particle_ID2, int Particle_ID3, int Particle_ID4, int Particle_ID5, int Particle_ID6); 
 
 int main(int argc,char *argv[]){
 	if(argc < 3 || argc > 8){
@@ -39,9 +39,6 @@ int main(int argc,char *argv[]){
     		cerr << "e.g. ./FluxMap file.root all" << endl;
     		exit(1);
 	}	
-	string filename;
-	filename = argv[1];
-
 	string Particle_ID_string1, Particle_ID_string2, Particle_ID_string3, Particle_ID_string4, Particle_ID_string5, Particle_ID_string6;
 	if (argc >= 3) Particle_ID_string1 = argv[2];
 	if (argc >= 4) Particle_ID_string2 = argv[3];
@@ -50,44 +47,68 @@ int main(int argc,char *argv[]){
 	if (argc >= 7) Particle_ID_string5 = argv[6];
 	if (argc = 8)  Particle_ID_string6 = argv[7];
 
+	string filename;
+	filename = argv[1];
+	stringstream filename_IDs;
+
 	int Particle_ID1=0;
 	int Particle_ID2=0;
 	int Particle_ID3=0;
 	int Particle_ID4=0;
 	int Particle_ID5=0;
 	int Particle_ID6=0;
-       
-	if (argc >= 3 && Particle_ID_string1 !=  "all"){
-		       Particle_ID1= atoi(Particle_ID_string1.c_str());	
-	}
-	if (argc >= 4) Particle_ID2= atoi(Particle_ID_string2.c_str());	
-	if (argc >= 5) Particle_ID3= atoi(Particle_ID_string3.c_str());	
-	if (argc >= 6) Particle_ID4= atoi(Particle_ID_string4.c_str());	
-	if (argc >= 7) Particle_ID5= atoi(Particle_ID_string5.c_str());	
-	if (argc = 8)  Particle_ID6= atoi(Particle_ID_string6.c_str());	
-
-	else if(Particle_ID1 == 0 && (Particle_ID2 != 0 || Particle_ID3 != 0 || Particle_ID4 != 0 || Particle_ID5 != 0 || Particle_ID6 != 0)){
-		cerr << "Wrong options!" << endl;
-		cerr << "If all particles wanted, type 'all' as ONLY draw option!" << endl;
-		exit(1);
-	}
-	else {
-		cerr << "Unkown error... Try again and observe the possible drawing options!" << endl;
-		exit(1);
-	}
+     
+	if ( Particle_ID_string1 !=  "all"){
+		if (argc >= 3) Particle_ID1= atoi(Particle_ID_string1.c_str());	
+		if (argc >= 4) Particle_ID2= atoi(Particle_ID_string2.c_str());	
+		if (argc >= 5) Particle_ID3= atoi(Particle_ID_string3.c_str());	
+		if (argc >= 6) Particle_ID4= atoi(Particle_ID_string4.c_str());	
+		if (argc >= 7) Particle_ID5= atoi(Particle_ID_string5.c_str());	
+		if (argc  = 8) Particle_ID6= atoi(Particle_ID_string6.c_str());	
 	
-	cout << "Your choice of particles:" << endl;
-	if(Particle_ID1!=0) {
+		if(Particle_ID1!=0) {
+			cout << "Your choice of particles:" << endl;
 				    cout << "Particle_ID1 = "<< Particle_ID1 <<endl;
 		if(Particle_ID2!=0) cout << "Particle_ID2 = "<< Particle_ID2 <<endl;
 		if(Particle_ID3!=0) cout << "Particle_ID3 = "<< Particle_ID3 <<endl;
 		if(Particle_ID4!=0) cout << "Particle_ID4 = "<< Particle_ID4 <<endl;
 		if(Particle_ID5!=0) cout << "Particle_ID5 = "<< Particle_ID5 <<endl;
 		if(Particle_ID6!=0) cout << "Particle_ID6 = "<< Particle_ID6 <<endl;
-	}
-	else cout << "All particles occurring\n" << endl; 
+
+		filename_IDs << filename << "_" << Particle_ID1 << "_" << Particle_ID2 << "_" << Particle_ID3 << "_" << Particle_ID4 << "_" << Particle_ID5 << "_" << Particle_ID6;
+		}
 	
-	DrawingMacro(filename,Particle_ID1, Particle_ID2, Particle_ID3, Particle_ID4, Particle_ID5, Particle_ID6);
+		else if(Particle_ID1 == 0 && (Particle_ID2 != 0 || Particle_ID3 != 0 || Particle_ID4 != 0 || Particle_ID5 != 0 || Particle_ID6 != 0)){
+			cerr << "Wrong options!" << endl;
+			cerr << "If all particles wanted, type 'all' as ONLY draw option!" << endl;
+			exit(1);
+		}
+		
+		else {
+			cerr << "Error... Try again and observe the possible drawing options!" << endl;
+			cerr << "Possible options for particles: PDG particle ID code(s) OR 'all'" << endl;
+    			cerr << "e.g. ./FluxMap file.root 11" << endl;
+    			cerr << "e.g. ./FluxMap file.root 11 -11 22" << endl;
+    			cerr << "e.g. ./FluxMap file.root all" << endl;
+			exit(1);
+		}
+	}
+	else if(Particle_ID_string1=="all"){
+		cout << "Your choice of particles:" << endl;
+		cout << "All particles occurring\n" << endl; 
+		filename_IDs << filename << "_all";
+	}	
+	else {
+		cerr << "Unkown error... Try again and observe the possible drawing options!" << endl;
+		cerr << "Possible options for particles: PDG particle ID code(s) OR 'all'" << endl;
+    		cerr << "e.g. ./FluxMap file.root 11" << endl;
+    		cerr << "e.g. ./FluxMap file.root 11 -11 22" << endl;
+    		cerr << "e.g. ./FluxMap file.root all" << endl;
+		exit(1);
+	}
+	cout << filename_IDs.str() <<endl;
+
+	DrawingMacro(filename,filename_IDs.str(),Particle_ID1, Particle_ID2, Particle_ID3, Particle_ID4, Particle_ID5, Particle_ID6);
 }
 
 std::pair<float,float> Particle_vector(int step_n, TTree * Tree, int Particle_number, int Particle_ID1, int Particle_ID2, int Particle_ID3, int Particle_ID4, int Particle_ID5, int Particle_ID6, int id, float start, float end, float z_start, float z_end){
@@ -105,7 +126,7 @@ std::pair<float,float> Particle_vector(int step_n, TTree * Tree, int Particle_nu
 	return result;
 }
 
-void DrawingMacro(string name, int Particle_ID1, int Particle_ID2, int Particle_ID3, int Particle_ID4, int Particle_ID5, int Particle_ID6){
+void DrawingMacro(string name,string name_IDs, int Particle_ID1, int Particle_ID2, int Particle_ID3, int Particle_ID4, int Particle_ID5, int Particle_ID6){
 
 	TFile * input_rootfile = new TFile(name.c_str(),"READ");
 	cout << "Inputfile size = " << input_rootfile->GetSize() << endl;
@@ -113,10 +134,11 @@ void DrawingMacro(string name, int Particle_ID1, int Particle_ID2, int Particle_
 	cout << "Accessed TTree.." << endl;
 
 	stringstream output_filename;
-	output_filename << "fluxmap_" << name;
+	output_filename << "fluxmap_" << name_IDs;
 	TFile * output_rootfile = new TFile(output_filename.str().c_str(),"RECREATE");
 
-	const int TB_line_length = 24900; //length of the TB line (in mm) is also the number of x-bins -> resolution 1 mm
+//	const int TB_line_length = 24900; //length of the TB line (in mm) is also the number of x-bins -> resolution 1 mm
+	const int TB_line_length = 24727.5; //length of the TB line (in mm) is also the number of x-bins -> resolution 1 mm
 
 	TH2F * FluxMap_xz = new TH2F("FluxMap_xz","Flux map x vs. z of particles along the TB line",TB_line_length,0,TB_line_length,3000,-1500,1500);
 	FluxMap_xz->GetXaxis()->SetTitle("z (mm)");
@@ -201,9 +223,9 @@ void DrawingMacro(string name, int Particle_ID1, int Particle_ID2, int Particle_
 
 	string canvasname=fluxmap_xz_Canvas->GetName();
 	fluxmap_xz_Canvas->Write();
-	fluxmap_xz_Canvas->Print((canvasname+".eps").c_str());
-	fluxmap_xz_Canvas->Print((canvasname+".pdf").c_str());
-	fluxmap_xz_Canvas->Print((canvasname+".C").c_str());
+	fluxmap_xz_Canvas->Print((canvasname+name_IDs+".eps").c_str());
+	fluxmap_xz_Canvas->Print((canvasname+name_IDs+".pdf").c_str());
+	fluxmap_xz_Canvas->Print((canvasname+name_IDs+".C").c_str());
 	fluxmap_xz_Canvas->Close();
 
 	fluxmap_yz_Canvas->cd();
@@ -215,9 +237,9 @@ void DrawingMacro(string name, int Particle_ID1, int Particle_ID2, int Particle_
 
 	string canvasname2=fluxmap_yz_Canvas->GetName();
 	fluxmap_yz_Canvas->Write();
-	fluxmap_yz_Canvas->Print((canvasname2+".eps").c_str());
-	fluxmap_yz_Canvas->Print((canvasname2+".pdf").c_str());
-	fluxmap_yz_Canvas->Print((canvasname2+".C").c_str());
+	fluxmap_yz_Canvas->Print((canvasname2+name_IDs+".eps").c_str());
+	fluxmap_yz_Canvas->Print((canvasname2+name_IDs+".pdf").c_str());
+	fluxmap_yz_Canvas->Print((canvasname2+name_IDs+".C").c_str());
 	fluxmap_yz_Canvas->Close();
 
 	output_rootfile->Write();

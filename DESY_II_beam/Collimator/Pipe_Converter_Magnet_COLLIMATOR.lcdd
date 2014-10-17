@@ -2,7 +2,7 @@
 <lcdd xmlns:lcdd="http://www.lcsim.org/schemas/lcdd/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="http://www.lcsim.org/schemas/lcdd/1.0/lcdd.xsd">
   <header>
     <detector name="CopperTarget" />
-    <generator name="GeomConverter" version="1.0" file="/afs/desy.de/user/s/schuea/mymarlin/DESY_II_beam/Collimator/Pipe_Converter_Magnet_COLLIMATOR.xml" checksum="2043779989" />
+    <generator name="GeomConverter" version="1.0" file="/afs/desy.de/user/s/schuea/mymarlin/DESY_II_beam/Collimator/Pipe_Converter_Magnet_COLLIMATOR.xml" checksum="2365310527" />
     <author name="Marcel Stanitzki" />
     <comment>NONE</comment>
   </header>
@@ -25,20 +25,20 @@
       <rotation name="identity_rot" x="0.0" y="0.0" z="0.0" unit="radian" />
       <rotation name="reflect_rot" x="3.141592653589793" y="0.0" z="0.0" unit="radian" />
       <position name="identity_pos" x="0.0" y="0.0" z="0.0" unit="mm" />
-      <constant name="world_side" value="50820.0" />
+      <constant name="world_side" value="50860.0" />
       <constant name="cm" value="10.0" />
       <constant name="tracking_region_radius" value="1500.0" />
-      <constant name="world_y" value="50820.0" />
-      <constant name="world_z" value="50820.0" />
-      <constant name="tracking_region_zmax" value="25420.0" />
-      <constant name="world_x" value="50820.0" />
-      <position name="Collimator_HorizontalCollimator_component0_position" x="72.26544" y="0.0" z="25147.75037125" unit="mm" />
+      <constant name="world_y" value="50860.0" />
+      <constant name="world_z" value="50860.0" />
+      <constant name="tracking_region_zmax" value="25430.0" />
+      <constant name="world_x" value="50860.0" />
+      <position name="Collimator_HorizontalCollimator_component0_position" x="72.66" y="0.0" z="25160.239999999998" unit="mm" />
       <rotation name="Collimator_HorizontalCollimator_component0_rotation" x="0.0" y="0.032" z="0.0" unit="radian" />
-      <position name="Collimator_HorizontalCollimator_component1_position" x="-62.665440000000004" y="0.0" z="25152.06962875" unit="mm" />
+      <position name="Collimator_HorizontalCollimator_component1_position" x="-62.27" y="0.0" z="25164.56" unit="mm" />
       <rotation name="Collimator_HorizontalCollimator_component1_rotation" x="0.0" y="0.032" z="0.0" unit="radian" />
-      <position name="Collimator_VerticalCollimator_component0_position" x="11.326878" y="67.5" z="25353.805552" unit="mm" />
+      <position name="Collimator_VerticalCollimator_component0_position" x="1.1726" y="67.5" z="25366.300000000003" unit="mm" />
       <rotation name="Collimator_VerticalCollimator_component0_rotation" x="0.0" y="0.032" z="0.0" unit="radian" />
-      <position name="Collimator_VerticalCollimator_component1_position" x="11.326878" y="-67.5" z="25353.805552" unit="mm" />
+      <position name="Collimator_VerticalCollimator_component1_position" x="11.726" y="-67.5" z="25366.300000000003" unit="mm" />
       <rotation name="Collimator_VerticalCollimator_component1_rotation" x="0.0" y="0.032" z="0.0" unit="radian" />
       <position name="Air1_position" x="0.0" y="0.0" z="13287.5" unit="mm" />
       <position name="Air1_layerType0_slice0_position" x="0.0" y="0.0" z="0.0" unit="mm" />
@@ -303,23 +303,23 @@
     <solids>
       <box name="world_box" x="world_x" y="world_y" z="world_z" />
       <tube name="tracking_cylinder" deltaphi="6.283185307179586" rmin="0.0" rmax="tracking_region_radius" z="2*tracking_region_zmax" />
-      <box name="Collimator_HorizontalCollimator_box" x="254.0" y="254.0" z="50300.0" />
+      <box name="Collimator_HorizontalCollimator_box" x="254.0" y="254.0" z="50330.0" />
       <box name="Collimator_HorizontalCollimator_component0_box" x="125.0" y="150.0" z="125.0" />
       <box name="Collimator_HorizontalCollimator_component1_box" x="125.0" y="150.0" z="125.0" />
-      <box name="Collimator_VerticalCollimator_box" x="254.0" y="254.0" z="50600.0" />
+      <box name="Collimator_VerticalCollimator_box" x="254.0" y="254.0" z="50740.0" />
       <box name="Collimator_VerticalCollimator_component0_box" x="150.0" y="125.0" z="125.0" />
       <box name="Collimator_VerticalCollimator_component1_box" x="150.0" y="125.0" z="125.0" />
-      <box name="Air1_box" x="50820.0" y="50820.0" z="18565.0" />
-      <box name="Air1_layerType0_box" x="50820.0" y="50820.0" z="18565.0" />
-      <box name="Air1_layerType0_slice0_box" x="50820.0" y="50820.0" z="18565.0" />
+      <box name="Air1_box" x="50860.0" y="50860.0" z="18565.0" />
+      <box name="Air1_layerType0_box" x="50860.0" y="50860.0" z="18565.0" />
+      <box name="Air1_layerType0_slice0_box" x="50860.0" y="50860.0" z="18565.0" />
       <tube name="Iron_Pipe_tube" rmin="122.5" rmax="127.0" z="172.5" deltaphi="6.283185307179586" />
-      <box name="Air3_box" x="50820.0" y="50820.0" z="327.45" />
-      <box name="Air3_layerType0_box" x="50820.0" y="50820.0" z="327.45" />
-      <box name="Air3_layerType0_slice0_box" x="50820.0" y="50820.0" z="327.45" />
+      <box name="Air3_box" x="50860.0" y="50860.0" z="327.45" />
+      <box name="Air3_layerType0_box" x="50860.0" y="50860.0" z="327.45" />
+      <box name="Air3_layerType0_slice0_box" x="50860.0" y="50860.0" z="327.45" />
       <tube name="Aluminium_Pipe_tube" rmin="33.0" rmax="35.0" z="4000.0" deltaphi="6.283185307179586" />
-      <box name="Air2_box" x="50820.0" y="50820.0" z="97.5" />
-      <box name="Air2_layerType0_box" x="50820.0" y="50820.0" z="97.5" />
-      <box name="Air2_layerType0_slice0_box" x="50820.0" y="50820.0" z="97.5" />
+      <box name="Air2_box" x="50860.0" y="50860.0" z="97.5" />
+      <box name="Air2_layerType0_box" x="50860.0" y="50860.0" z="97.5" />
+      <box name="Air2_layerType0_slice0_box" x="50860.0" y="50860.0" z="97.5" />
       <tube name="Kapton_Window_tube" rmin="0.0" rmax="35.0" z="0.1" deltaphi="6.283185307179586" />
       <tube name="Iron_Pipe2_tube" rmin="122.5" rmax="127.0" z="240.0" deltaphi="6.283185307179586" />
       <box name="ConverterTarget_box" x="50.0" y="50.0" z="5.0" />

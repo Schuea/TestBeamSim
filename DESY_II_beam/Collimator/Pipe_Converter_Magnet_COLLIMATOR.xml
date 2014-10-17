@@ -15,14 +15,14 @@
     <constant name="cm" value="10"/>
     
     <!-- world -->
-    <constant name="world_side" value="5082*cm" />
+    <constant name="world_side" value="5086*cm" />
     <constant name="world_x" value="world_side" />
     <constant name="world_y" value="world_side" />
     <constant name="world_z" value="world_side" />
 
     <!-- tracking region -->
     <constant name="tracking_region_radius" value="150*cm"/>
-    <constant name="tracking_region_zmax" value="2542*cm"/>
+    <constant name="tracking_region_zmax" value="2543*cm"/>
 
   </define>
   <materials>
@@ -359,6 +359,7 @@
     <detector id="14" name="StainlessSteel_Pipe3" type="TubeSegment"  >
 	<material name="Stainless_steel_1.4435"/>
 	<tubs rmin="5.0*cm" rmax="5.2*cm" zhalf="5*cm"/> 
+<!--      <position x="5*cm*sin(32mrad)" y="0*cm" z="2500*cm+5*cm*cos(32mrad)" />   -->
       <position x="0.16*cm" y="0*cm" z="2504.997*cm" /> 
       <rotation x="0" y="0.032" z="0" />
    </detector>    
@@ -366,24 +367,28 @@
 
    <detector id="15" name="Collimator" type="SiTrackerBarrel"  insideTrackingVolume="true">
         <module name="HorizontalCollimator">
- 	   <module_envelope length="25.4*cm" width="25.4*cm" thickness="5030*cm"/>
+ 	   <module_envelope length="25.4*cm" width="25.4*cm" thickness="5033*cm"/>
             <module_component length="15*cm" width="12.5*cm" thickness="12.5*cm" material="Tungsten_S17" sensitive="no" >
-              <position x="(0.48*cm+(0.999488*(12.5*cm*0.5+1.0*cm*0.5)))" y="0*cm" z="(2514.991*cm-(0.0319945*(12.5*cm*0.5+1.0*cm*0.5)))" />  
+<!--              <position x="16.25cm*sin(32mrad) + 6.75cm*cos(32mrad)" y="0*cm" z="2500cm + 16.25cm*cos(32mrad) - 6.75cm*sin(32mrad)" />  -->
+              <position x="7.266*cm" y="0*cm" z="2516.024*cm" />  
               <rotation x="0" y="0.032" z="0" />
             </module_component>
     	    <module_component length="15*cm" width="12.5*cm" thickness="12.5*cm" material="Tungsten_S17" sensitive="no" >
-              <position x="(0.48*cm-(0.999488*(12.5*cm*0.5+1.0*cm*0.5)))" y="0*cm" z="(2514.991*cm+(0.0319945*(12.5*cm*0.5+1.0*cm*0.5)))" /> 
+<!--              <position x="16.25cm*sin(32mrad) - 6.75cm*cos(32mrad)" y="0*cm" z="2500cm + 16.25cm*cos(32mrad) + 6.75cm*sin(32mrad)" />  -->
+              <position x="-6.227*cm" y="0*cm" z="2516.456*cm" /> 
               <rotation x="0" y="0.032" z="0" />
             </module_component>
         </module>
         <module name="VerticalCollimator">
- 	   <module_envelope length="25.4*cm" width="25.4*cm" thickness="5060*cm"/>
+ 	   <module_envelope length="25.4*cm" width="25.4*cm" thickness="5074*cm"/>
              <module_component length="12.5*cm" width="15*cm" thickness="12.5*cm" material="Tungsten_S17" sensitive="no" >
-              <position x="(0.48*cm+(7.9*cm*0.0319945)+2*(12.5*cm*0.5*0.0319945))" y="(12.5*cm*0.5+1.0*cm*0.5)" z="(2514.991*cm+(7.9*cm*0.999488)+2*(12.5*cm*0.5*0.999488))" /> 
+<!--              <position x="36.65cm*sin(32mrad)" y="1cm*0.5 + 12.5cm*0.5" z="2500cm + 36.65cm*cos(32mrad)" />  -->
+              <position x="1.1726" y="6.75*cm" z="2536.63*cm" /> 
               <rotation x="0" y="0.032" z="0" />
             </module_component>
     	    <module_component length="12.5*cm" width="15*cm" thickness="12.5*cm" material="Tungsten_S17" sensitive="no" >
-              <position x="(0.48*cm+(7.9*cm*0.0319945)+2*(12.5*cm*0.5*0.0319945))" y="-(12.5*cm*0.5+1.0*cm*0.5)" z="(2514.991*cm+(7.9*cm*0.999488)+2*(12.5*cm*0.5*0.999488))" /> 
+<!--              <position x="36.65cm*sin(32mrad)" y="-(1cm*0.5 + 12.5cm*0.5)" z="2500cm + 36.65cm*cos(32mrad)" />  -->
+              <position x="1.1726*cm" y="-6.75*cm" z="2536.63*cm" /> 
               <rotation x="0" y="0.032" z="0" />
             </module_component>
         </module>
