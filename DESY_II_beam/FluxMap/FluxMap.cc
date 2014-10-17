@@ -126,6 +126,28 @@ std::pair<float,float> Particle_vector(int step_n, TTree * Tree, int Particle_nu
 	return result;
 }
 
+std::pair<float,float> Circular_path(int step, TTree * Tree, int Particle_number, int Particle_ID1, int Particle_ID2, int Particle_ID3, int Particle_ID4, int Particle_ID5, int Particle_ID6, int id, float start, float end, float z_start, float start, float energy, float charge, float Magnetic_field_strength){
+	
+        if(Particle_ID1 != 0 && id!=Particle_ID1 && id!=Particle_ID2 && id!=Particle_ID3 && id!=Particle_ID4 && id!=Particle_ID5 && id!=Particle_ID6) throw string("Not a particle we are interested in");    
+	
+	float radius = 0;
+	radius = energy/(0.3*abs(charge)*Magnetic_field_strength);
+
+	int sign = 0;
+	if(charge<0) sign = -1;
+	if(charge>0) sign =  1;
+
+	float phi_n = 0;
+	float v_zn = 0, v_xn = 0;
+
+	phi_n = sign*step;
+	v_zn = z_start + radius*cos(phi_n);
+	v_xn = start + radius*sin(phi_n);
+
+	std::pair<float,float> result(v_zn,v_xn);
+	return result;
+}
+
 void DrawingMacro(string name,string name_IDs, int Particle_ID1, int Particle_ID2, int Particle_ID3, int Particle_ID4, int Particle_ID5, int Particle_ID6){
 
 	TFile * input_rootfile = new TFile(name.c_str(),"READ");
@@ -137,8 +159,16 @@ void DrawingMacro(string name,string name_IDs, int Particle_ID1, int Particle_ID
 	output_filename << "fluxmap_" << name_IDs;
 	TFile * output_rootfile = new TFile(output_filename.str().c_str(),"RECREATE");
 
-//	const int TB_line_length = 24900; //length of the TB line (in mm) is also the number of x-bins -> resolution 1 mm
-	const int TB_line_length = 24727.5; //length of the TB line (in mm) is also the number of x-bins -> resolution 1 mm
+//	const float TB_line_length = 24900; //length of the TB line (in mm) is also the number of x-bins -> resolution 1 mm
+	const float TB_line_length = 24727.5; //length of the TB line (in mm) is also the number of x-bins -> resolution 1 mm
+	const float x_start_magnetic_field = -327.5;
+	const float x_end_magnetic_field = 327.5;
+	const float y_start_magnetic_field = -185;
+	const float y_end_magnetic_field = 185;
+	const float z_start_magnetic_field = 23680;
+	const float z_end_magnetic_field = 24720;
+
+	const float B = 0.5; 
 
 	TH2F * FluxMap_xz = new TH2F("FluxMap_xz","Flux map x vs. z of particles along the TB line",TB_line_length,0,TB_line_length,3000,-1500,1500);
 	FluxMap_xz->GetXaxis()->SetTitle("z (mm)");
@@ -156,15 +186,28 @@ void DrawingMacro(string name,string name_IDs, int Particle_ID1, int Particle_ID
 	TCanvas* fluxmap_xz_Canvas = new TCanvas("FluxMap_xz_Canvas");
 	TCanvas* fluxmap_yz_Canvas = new TCanvas("FluxMap_yz_Canvas");
 
+	float xz_prev_x_n = 0;
+	float xz_prev_y_n = 0;
+	float yz_prev_x_n = 0;
+	float yz_prev_y_n = 0;
+
+	float xz_start_circle_x = 0;
+	float xz_start_circle_y = 0;
+	float yz_start_circle_x = 0;
+	float yz_start_circle_y = 0;
+
 	int xz_prev_stored_binno = 0;
 	int yz_prev_stored_binno = 0;
         int entries = Tree->GetEntries(); 
 
- 	int   id = 0; 
+ 	int   id = 0;
+	float energy=0, charge=0; 
         float x_start=0,y_start=0,z_start = 0; 
 	float x_end=0,y_end=0,z_end = 0; 
 
 	Tree->SetBranchAddress("Particle_ID",&id); 
+	Tree->SetBranchAddress("Energy",&energy); 
+	Tree->SetBranchAddress("Charge",&charge); 
 	Tree->SetBranchAddress("Vertexx",&x_start); 
 	Tree->SetBranchAddress("Reflectionx",&x_end); 
 	Tree->SetBranchAddress("Vertexy",&y_start); 
@@ -175,13 +218,32 @@ void DrawingMacro(string name,string name_IDs, int Particle_ID1, int Particle_ID
 	for(int Particle_number = 0; Particle_number < 10000/*entries*/; ++Particle_number){ 
 		Tree->GetEntry(Particle_number); 
 
+		float circle_step_x = 0.01;
+		float circle_step_y = 0.01;
 		for(int step_n = 1; step_n <= TB_line_length; ++step_n){
 			std::pair<float,float> xz_vector_point_n;
 			std::pair<float,float> yz_vector_point_n;
 
 			try{
-				xz_vector_point_n = Particle_vector(step_n, Tree, Particle_number, Particle_ID1, Particle_ID2, Particle_ID3, Particle_ID4, Particle_ID5, Particle_ID6, id, x_start, x_end, z_start, z_end); 
-				yz_vector_point_n = Particle_vector(step_n, Tree, Particle_number, Particle_ID1, Particle_ID2, Particle_ID3, Particle_ID4, Particle_ID5, Particle_ID6, id, y_start, y_end, z_start, z_end); 
+				if ( charge==0 || (xz_prev_x_n !< z_end_magnetic_field && xz_prev_x_n !> z_start_magnetic_field && xz_prev_y_n !< x_end_magnetic_field && xz_prev_y_n !> x_start_magnetic_field)){
+					xz_vector_point_n = Particle_vector(step_n, Tree, Particle_number, Particle_ID1, Particle_ID2, Particle_ID3, Particle_ID4, Particle_ID5, Particle_ID6, id, x_start, x_end, z_start, z_end); 
+				}
+				else{
+					 if(circle_step_x<2*M_Pi/100){
+						xz_vector_point_n = Circular_path(circle_step_x, Tree, Particle_number, Particle_ID1, Particle_ID2, Particle_ID3, Particle_ID4, Particle_ID5, Particle_ID6, id, xz_start_circle_x, xz_start_circle_y, energy, charge, B); 
+						circle_step_x+=0.01;
+					}
+				} 
+				
+				if ( charge==0 || (yz_prev_x_n !< z_end_magnetic_field && yz_prev_x_n !> z_start_magnetic_field && yz_prev_y_n !< y_end_magnetic_field && yz_prev_y_n !> y_start_magnetic_field)){
+					yz_vector_point_n = Particle_vector(step_n, Tree, Particle_number, Particle_ID1, Particle_ID2, Particle_ID3, Particle_ID4, Particle_ID5, Particle_ID6, id, y_start, y_end, z_start, z_end); 
+				}
+				else {
+					if(circle_step_y<2*M_Pi/100){
+						yz_vector_point_n = Circular_path(circle_step_y, Tree, Particle_number, Particle_ID1, Particle_ID2, Particle_ID3, Particle_ID4, Particle_ID5, Particle_ID6, id, yz_start_circle_x, yz_start_circle_y, energy, charge, B); 
+						circle_step_y+=1;
+					}
+				}
 			} 
 			catch(string error){
 				break;
@@ -189,11 +251,12 @@ void DrawingMacro(string name,string name_IDs, int Particle_ID1, int Particle_ID
 
 			float xz_x_n = 0;
 			float xz_y_n = 0;
+			float yz_x_n = 0;
+			float yz_y_n = 0;
+
 			xz_x_n = xz_vector_point_n.first;
 			xz_y_n = xz_vector_point_n.second;
 
-			float yz_x_n = 0;
-			float yz_y_n = 0;
 			yz_x_n = yz_vector_point_n.first;
 			yz_y_n = yz_vector_point_n.second;
 		
@@ -205,8 +268,21 @@ void DrawingMacro(string name,string name_IDs, int Particle_ID1, int Particle_ID
 			if(xz_bin_number != xz_prev_stored_binno) FluxMap_xz->Fill(xz_x_n,xz_y_n);
 			if(yz_bin_number != yz_prev_stored_binno) FluxMap_yz->Fill(yz_x_n,yz_y_n);
 	
+			if( xz_x_n > z_start_magnetic_field-1 && xz_x_n < z_start_magnetic_field+1 && xz_y_n > x_start_magnetic_field-1 && xz_y_n < x_start_magnetic_field+1){
+				xz_start_circle_x = xz_x_n;
+				xz_start_circle_y = xz_y_n;
+			}
+			if( yz_x_n > z_start_magnetic_field-1 && yz_x_n < z_start_magnetic_field+1 && yz_y_n > y_start_magnetic_field-1 && yz_y_n < y_start_magnetic_field+1){
+				yz_start_circle_x = yz_x_n;
+				yz_start_circle_y = yz_y_n;
+			}
+
 			xz_prev_stored_binno = xz_bin_number;
 			yz_prev_stored_binno = yz_bin_number;
+			xz_prev_x_n = xz_x_n;
+			xz_prev_y_n = xz_y_n;
+			yz_prev_x_n = yz_x_n;
+			yz_prev_y_n = yz_z_n;
 		}
 		
 	}
