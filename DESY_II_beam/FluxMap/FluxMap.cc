@@ -18,6 +18,8 @@
 #include "TMath.h"
 #include "TROOT.h"
 
+#define _USE_MATH_DEFINES
+#include <cmath>  
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -126,7 +128,7 @@ std::pair<float,float> Particle_vector(int step_n, TTree * Tree, int Particle_nu
 	return result;
 }
 
-std::pair<float,float> Circular_path(int step, TTree * Tree, int Particle_number, int Particle_ID1, int Particle_ID2, int Particle_ID3, int Particle_ID4, int Particle_ID5, int Particle_ID6, int id, float start, float end, float z_start, float start, float energy, float charge, float Magnetic_field_strength){
+std::pair<float,float> Circular_path(int step, TTree * Tree, int Particle_number, int Particle_ID1, int Particle_ID2, int Particle_ID3, int Particle_ID4, int Particle_ID5, int Particle_ID6, int id, float z_start, float start, float energy, float charge, float Magnetic_field_strength){
 	
         if(Particle_ID1 != 0 && id!=Particle_ID1 && id!=Particle_ID2 && id!=Particle_ID3 && id!=Particle_ID4 && id!=Particle_ID5 && id!=Particle_ID6) throw string("Not a particle we are interested in");    
 	
@@ -225,23 +227,23 @@ void DrawingMacro(string name,string name_IDs, int Particle_ID1, int Particle_ID
 			std::pair<float,float> yz_vector_point_n;
 
 			try{
-				if ( charge==0 || (xz_prev_x_n !< z_end_magnetic_field && xz_prev_x_n !> z_start_magnetic_field && xz_prev_y_n !< x_end_magnetic_field && xz_prev_y_n !> x_start_magnetic_field)){
+				if ( charge==0 || (xz_prev_x_n > z_end_magnetic_field  &&  xz_prev_x_n < z_start_magnetic_field  &&  xz_prev_y_n > x_end_magnetic_field  &&  xz_prev_y_n < x_start_magnetic_field)){
 					xz_vector_point_n = Particle_vector(step_n, Tree, Particle_number, Particle_ID1, Particle_ID2, Particle_ID3, Particle_ID4, Particle_ID5, Particle_ID6, id, x_start, x_end, z_start, z_end); 
 				}
 				else{
-					 if(circle_step_x<2*M_Pi/100){
+					 if(circle_step_x<2*M_PI/100){
 						xz_vector_point_n = Circular_path(circle_step_x, Tree, Particle_number, Particle_ID1, Particle_ID2, Particle_ID3, Particle_ID4, Particle_ID5, Particle_ID6, id, xz_start_circle_x, xz_start_circle_y, energy, charge, B); 
 						circle_step_x+=0.01;
 					}
 				} 
 				
-				if ( charge==0 || (yz_prev_x_n !< z_end_magnetic_field && yz_prev_x_n !> z_start_magnetic_field && yz_prev_y_n !< y_end_magnetic_field && yz_prev_y_n !> y_start_magnetic_field)){
+				if ( charge==0 || (yz_prev_x_n > z_end_magnetic_field  &&  yz_prev_x_n < z_start_magnetic_field  &&  yz_prev_y_n > y_end_magnetic_field  &&  yz_prev_y_n < y_start_magnetic_field)){
 					yz_vector_point_n = Particle_vector(step_n, Tree, Particle_number, Particle_ID1, Particle_ID2, Particle_ID3, Particle_ID4, Particle_ID5, Particle_ID6, id, y_start, y_end, z_start, z_end); 
 				}
 				else {
-					if(circle_step_y<2*M_Pi/100){
+					if(circle_step_y<2*M_PI/100){
 						yz_vector_point_n = Circular_path(circle_step_y, Tree, Particle_number, Particle_ID1, Particle_ID2, Particle_ID3, Particle_ID4, Particle_ID5, Particle_ID6, id, yz_start_circle_x, yz_start_circle_y, energy, charge, B); 
-						circle_step_y+=1;
+						circle_step_y+=0.01;
 					}
 				}
 			} 
@@ -282,7 +284,7 @@ void DrawingMacro(string name,string name_IDs, int Particle_ID1, int Particle_ID
 			xz_prev_x_n = xz_x_n;
 			xz_prev_y_n = xz_y_n;
 			yz_prev_x_n = yz_x_n;
-			yz_prev_y_n = yz_z_n;
+			yz_prev_y_n = yz_y_n;
 		}
 		
 	}
