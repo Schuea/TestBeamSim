@@ -248,6 +248,28 @@ void DrawingMacro(string name,string name_IDs, int Particle_ID1, int Particle_ID
 		float circle_step_x = 0.01;
 		float circle_step_y = 0.01;
 	
+		enum{
+			OutsideVertex,
+			InsideVertex,
+			OutsideVertexEntering,
+			MagnetLeaving
+		};
+
+		int WhichCase = -1;
+
+		if((z_vertex < z_start_magnetic_field || z_vertex > z_end_magnetic_field)
+		|| (!(z_vertex < z_start_magnetic_field || z_vertex > z_end_magnetic_field)
+		&& x_vertex < x_start_magnetic_field || x_vertex > x_end_magnetic_field)){
+			WhichCase = OutsideVertex;
+		}
+		else if(x_vertex > x_start_magnetic_field 
+		&& x_vertex < x_end_magnetic_field 
+		&& z_vertex > z_start_magnetic_field 
+		&& z_vertex < z_end_magnetic_field){
+			WhichCase = InsideVertex;
+		}
+		bool FirstTimeEntering(true);
+		bool CircleCompleted(false);
 		for(int step_n = 1; step_n <= TB_line_length; ++step_n){
 			std::pair<float,float> xz_vector_point_n;
 			std::pair<float,float> yz_vector_point_n;
@@ -259,48 +281,103 @@ void DrawingMacro(string name,string name_IDs, int Particle_ID1, int Particle_ID
 
 			try{
 			// Case 1+2: Particles going past the magnet + Particles enter the magnet
-				if((z_vertex < z_start_magnetic_field || z_vertex > z_end_magnetic_field)
-				|| (!(z_vertex < z_start_magnetic_field || z_vertex > z_end_magnetic_field) 
-				&& x_vertex < x_start_magnetic_field || x_vertex > x_end_magnetic_field)){
-					xz_vector_point_n = Particle_vector(step_n, Tree, Particle_number, Particle_ID1, Particle_ID2, Particle_ID3, Particle_ID4, Particle_ID5, Particle_ID6, id, xz_start_vector_y, x_end, xz_start_vector_x, z_end); 
-					xz_x_n = xz_vector_point_n.first;
-					xz_y_n = xz_vector_point_n.second;
-
-					if(xz_y_n > x_start_magnetic_field && xz_y_n < x_end_magnetic_field && xz_x_n > z_start_magnetic_field && xz_x_n < z_end_magnetic_field){
-						if((xz_x_n > z_start_magnetic_field-2 || xz_x_n < z_start_magnetic_field+2) && (xz_y_n > x_start_magnetic_field-2 || xz_y_n < x_start_magnetic_field+2)){
-							xz_start_circle_x = xz_x_n;
-							xz_start_circle_y = xz_y_n;
+				switch(WhichCase){
+					case OutsideVertex:
+						xz_vector_point_n = Particle_vector(step_n, 
+										    Tree, 
+										    Particle_number, 
+										    Particle_ID1, 
+										    Particle_ID2, 
+										    Particle_ID3, 
+										    Particle_ID4, 
+										    Particle_ID5, 
+										    Particle_ID6, 
+										    id, 
+										    x_vertex, 
+										    x_end, 
+										    z_vertex, 
+										    z_end); 
+						xz_x_n = xz_vector_point_n.first;
+						xz_y_n = xz_vector_point_n.second;
+						if(xz_y_n > x_start_magnetic_field 
+								&& xz_y_n < x_end_magnetic_field 
+								&& xz_x_n > z_start_magnetic_field 
+								&& xz_x_n < z_end_magnetic_field){
+							WhichCase = OutsideVertexEntering;
 						}
-						xz_vector_point_n = Circular_path(circle_step_x, Tree, Particle_number, Particle_ID1, Particle_ID2, Particle_ID3, Particle_ID4, Particle_ID5, Particle_ID6, id, xz_start_circle_x, xz_start_circle_y, energy, charge, B); 
+						break;
+					case OutsideVertexEntering:
+						xz_start_circle_x = xz_x_n;
+						xz_start_circle_y = xz_y_n;
+						WhichCase = MagnetInside;
+						break;
+					case InsideVertex:
+						xz_start_circle_x = z_vertex;
+						xz_start_circle_y = x_vertex;
+						WhichCase = MagnetInside;
+						break;
+					case MagnetInside:
+						if(circle_step_x>=2*M_PI){
+							CircleCompleted = true;
+							break;
+						}
+						xz_vector_point_n = Circular_path(circle_step_x, 
+								Tree, 
+								Particle_number, 
+								Particle_ID1, 
+								Particle_ID2, 
+								Particle_ID3,
+								Particle_ID4, 
+								Particle_ID5, 
+								Particle_ID6, 
+								id, 
+								xz_start_circle_x, 
+								xz_start_circle_y, 
+								energy, 
+								charge, 
+								B); 
 						xz_x_n = xz_vector_point_n.first;
 						xz_y_n = xz_vector_point_n.second;
-		
 						circle_step_x+=0.01;
-					}
-				
-				}
-			// Case 3: Particles are created in the magnet
-				if(x_vertex > x_start_magnetic_field && x_vertex < x_end_magnetic_field && z_vertex > z_start_magnetic_field && z_vertex < z_end_magnetic_field){
-					xz_start_circle_x = z_vertex;
-					xz_start_circle_y = x_vertex;
-		
-					if(xz_x_n > z_start_magnetic_field && xz_x_n < z_end_magnetic_field && xz_y_n < x_end_magnetic_field && xz_y_n > x_start_magnetic_field && circle_step_x<2*M_PI){
-						xz_vector_point_n = Circular_path(circle_step_x, Tree, Particle_number, Particle_ID1, Particle_ID2, Particle_ID3, Particle_ID4, Particle_ID5, Particle_ID6, id, xz_start_circle_x, xz_start_circle_y, energy, charge, B); 
-						xz_x_n = xz_vector_point_n.first;
-						xz_y_n = xz_vector_point_n.second;
-		
-					//	cout << "circle_step_x = " << circle_step_x << endl;
-						circle_step_x+=0.01;
-					}
-					else if((xz_x_n < z_start_magnetic_field || xz_x_n > z_end_magnetic_field) && (xz_y_n < x_start_magnetic_field || xz_y_n > x_end_magnetic_field)){
-						if((xz_x_n < z_start_magnetic_field-2 || xz_x_n > z_start_magnetic_field+2) && (xz_y_n < x_start_magnetic_field-2 || xz_y_n > x_start_magnetic_field+2)){
+						if(xz_x_n < z_start_magnetic_field || xz_x_n > z_end_magnetic_field)
+					     || (!(xz_x_n < z_start_magnetic_field || xz_x_n > z_end_magnetic_field)
+					     &&    xz_y_n < x_start_magnetic_field || xz_y_n > x_end_magnetic_field){
 							xz_start_vector_x = xz_x_n;
 							xz_start_vector_y = xz_y_n;
-						}
-
-						xz_vector_point_n = Particle_vector(step_n, Tree, Particle_number, Particle_ID1, Particle_ID2, Particle_ID3, Particle_ID4, Particle_ID5, Particle_ID6, id, xz_start_vector_y, x_end, xz_start_vector_x, z_end); 
+							WhichCase = MagnetLeaving;
+					     	}
+						break;
+					case MagnetLeaving:
+						xz_vector_point_n = Particle_vector(step_n, 
+										    Tree, 
+										    Particle_number, 
+										    Particle_ID1, 
+										    Particle_ID2, 
+										    Particle_ID3, 
+										    Particle_ID4, 
+										    Particle_ID5, 
+										    Particle_ID6, 
+										    id, 
+										    xz_start_vector_y, 
+										    x_end, 
+										    xz_start_vector_x, 
+										    z_end); 
 						xz_x_n = xz_vector_point_n.first;
 						xz_y_n = xz_vector_point_n.second;
+						break;
+					default:
+						cerr << "Scenario did not match anything we envisioned..." << endl;
+				};
+				if(CircleCompleted) break;
+
+				
+			// Case 3: Particles are created in the magnet
+
+		
+					else if((xz_x_n < z_start_magnetic_field || xz_x_n > z_end_magnetic_field) && (xz_y_n < x_start_magnetic_field || xz_y_n > x_end_magnetic_field)){
+						if((xz_x_n < z_start_magnetic_field-2 || xz_x_n > z_start_magnetic_field+2) && (xz_y_n < x_start_magnetic_field-2 || xz_y_n > x_start_magnetic_field+2)){
+						}
+
 					
 					}
 				}
