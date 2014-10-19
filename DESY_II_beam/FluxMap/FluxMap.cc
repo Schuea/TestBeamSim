@@ -259,7 +259,9 @@ void DrawingMacro(string name,string name_IDs, int Particle_ID1, int Particle_ID
 
 			try{
 			// Case 1+2: Particles going past the magnet + Particles enter the magnet
-				if((x_vertex < x_start_magnetic_field || x_vertex > x_end_magnetic_field) && (z_vertex < z_start_magnetic_field || z_vertex < z_end_magnetic_field)){
+				if((z_vertex < z_start_magnetic_field || z_vertex > z_end_magnetic_field)
+				|| (!(z_vertex < z_start_magnetic_field || z_vertex > z_end_magnetic_field) 
+				&& x_vertex < x_start_magnetic_field || x_vertex > x_end_magnetic_field)){
 					xz_vector_point_n = Particle_vector(step_n, Tree, Particle_number, Particle_ID1, Particle_ID2, Particle_ID3, Particle_ID4, Particle_ID5, Particle_ID6, id, xz_start_vector_y, x_end, xz_start_vector_x, z_end); 
 					xz_x_n = xz_vector_point_n.first;
 					xz_y_n = xz_vector_point_n.second;
@@ -268,14 +270,11 @@ void DrawingMacro(string name,string name_IDs, int Particle_ID1, int Particle_ID
 						if((xz_x_n > z_start_magnetic_field-2 || xz_x_n < z_start_magnetic_field+2) && (xz_y_n > x_start_magnetic_field-2 || xz_y_n < x_start_magnetic_field+2)){
 							xz_start_circle_x = xz_x_n;
 							xz_start_circle_y = xz_y_n;
-							cout << "xz_start_circle_x = xz_x_n; " << xz_x_n << endl;
-							cout << "xz_start_circle_y = xz_y_n; " << xz_y_n << endl;
 						}
 						xz_vector_point_n = Circular_path(circle_step_x, Tree, Particle_number, Particle_ID1, Particle_ID2, Particle_ID3, Particle_ID4, Particle_ID5, Particle_ID6, id, xz_start_circle_x, xz_start_circle_y, energy, charge, B); 
 						xz_x_n = xz_vector_point_n.first;
 						xz_y_n = xz_vector_point_n.second;
 		
-					//	cout << "circle_step_x = " << circle_step_x << endl;
 						circle_step_x+=0.01;
 					}
 				
@@ -297,8 +296,6 @@ void DrawingMacro(string name,string name_IDs, int Particle_ID1, int Particle_ID
 						if((xz_x_n < z_start_magnetic_field-2 || xz_x_n > z_start_magnetic_field+2) && (xz_y_n < x_start_magnetic_field-2 || xz_y_n > x_start_magnetic_field+2)){
 							xz_start_vector_x = xz_x_n;
 							xz_start_vector_y = xz_y_n;
-							cout << "xz_start_vector_x = xz_x_n; " << xz_x_n << endl;
-							cout << "xz_start_vector_y = xz_y_n; " << xz_y_n << endl;
 						}
 
 						xz_vector_point_n = Particle_vector(step_n, Tree, Particle_number, Particle_ID1, Particle_ID2, Particle_ID3, Particle_ID4, Particle_ID5, Particle_ID6, id, xz_start_vector_y, x_end, xz_start_vector_x, z_end); 
@@ -308,59 +305,6 @@ void DrawingMacro(string name,string name_IDs, int Particle_ID1, int Particle_ID
 					}
 				}
 
-//--------------------------------------------------------------------------------------------------
-				if ( charge==0 ||(xz_prev_x_n > z_end_magnetic_field || xz_prev_x_n < z_start_magnetic_field) || ((xz_prev_x_n > z_end_magnetic_field || xz_prev_x_n < z_start_magnetic_field)&&(xz_prev_y_n > x_end_magnetic_field || xz_prev_y_n < x_start_magnetic_field))){
-					xz_vector_point_n = Particle_vector(step_n, Tree, Particle_number, Particle_ID1, Particle_ID2, Particle_ID3, Particle_ID4, Particle_ID5, Particle_ID6, id, x_vertex, x_end, z_vertex, z_end); 
-				//	cout << "xz" << endl;
-					xz_x_n = xz_vector_point_n.first;
-					xz_y_n = xz_vector_point_n.second;
-				}
-				else{	
-					if(x_vertex > x_start_magnetic_field && x_vertex < x_end_magnetic_field && z_vertex > z_start_magnetic_field && z_vertex < z_end_magnetic_field){
-						xz_start_circle_x = z_vertex;
-						xz_start_circle_y = x_vertex;
-					}
-					else{
-						xz_start_circle_x = xz_enter_magnet_x;
-						xz_start_circle_y = xz_enter_magnet_y;
-					}
-					if(circle_step_x<2*M_PI){
-						xz_vector_point_n = Circular_path(circle_step_x, Tree, Particle_number, Particle_ID1, Particle_ID2, Particle_ID3, Particle_ID4, Particle_ID5, Particle_ID6, id, xz_start_circle_x, xz_start_circle_y, energy, charge, B); 
-						xz_x_n = xz_vector_point_n.first;
-						xz_y_n = xz_vector_point_n.second;
-		
-				//		cout << "xz" << endl;
-				//		cout << "circle_step_x = " << circle_step_x << endl;
-						circle_step_x+=0.01;
-					}
-				} 
-				
-				if ( charge==0 ||(yz_prev_x_n > z_end_magnetic_field || yz_prev_x_n < z_start_magnetic_field) || ((yz_prev_x_n > z_end_magnetic_field || yz_prev_x_n < z_start_magnetic_field)&&(yz_prev_y_n > y_end_magnetic_field || yz_prev_y_n < y_start_magnetic_field))){
-					yz_vector_point_n = Particle_vector(step_n, Tree, Particle_number, Particle_ID1, Particle_ID2, Particle_ID3, Particle_ID4, Particle_ID5, Particle_ID6, id, y_vertex, y_end, z_vertex, z_end); 
-				//	cout << "yz" << endl;
-	
-					yz_x_n = yz_vector_point_n.first;
-					yz_y_n = yz_vector_point_n.second;
-				}
-				else {
-					if(y_vertex > y_start_magnetic_field && y_vertex < y_end_magnetic_field && z_vertex > z_start_magnetic_field && z_vertex < z_end_magnetic_field){
-						yz_start_circle_x = z_vertex;
-						yz_start_circle_y = y_vertex;
-					}
-					else{
-						yz_start_circle_x = yz_enter_magnet_x;
-						yz_start_circle_y = yz_enter_magnet_y;
-					}
-					if(circle_step_y<2*M_PI){
-						yz_vector_point_n = Circular_path(circle_step_y, Tree, Particle_number, Particle_ID1, Particle_ID2, Particle_ID3, Particle_ID4, Particle_ID5, Particle_ID6, id, yz_start_circle_x, yz_start_circle_y, energy, charge, B); 
-						yz_x_n = yz_vector_point_n.first;
-						yz_y_n = yz_vector_point_n.second;
-
-				//		cout << "yz" << endl;
-				//		cout << "circle_step_y = " << circle_step_y << endl;
-						circle_step_y+=0.01;
-					}
-				}
 			} 
 			catch(string error){
 				break;
