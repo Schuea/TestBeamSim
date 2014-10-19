@@ -219,7 +219,7 @@ void DrawingMacro(string name,string name_IDs, int Particle_ID1, int Particle_ID
 	Tree->SetBranchAddress("Vertexz",&z_vertex);
 	Tree->SetBranchAddress("Reflectionz",&z_end);       
 
-	for(int Particle_number = 0; Particle_number < 10000/*entries*/; ++Particle_number){ 
+	for(int Particle_number = 0; Particle_number < 100/*entries*/; ++Particle_number){ 
 		Tree->GetEntry(Particle_number); 
 
 		float xz_prev_x_n = 0;
@@ -252,6 +252,7 @@ void DrawingMacro(string name,string name_IDs, int Particle_ID1, int Particle_ID
 			OutsideVertex,
 			InsideVertex,
 			OutsideVertexEntering,
+			MagnetInside,
 			MagnetLeaving
 		};
 
@@ -268,7 +269,6 @@ void DrawingMacro(string name,string name_IDs, int Particle_ID1, int Particle_ID
 		&& z_vertex < z_end_magnetic_field){
 			WhichCase = InsideVertex;
 		}
-		bool FirstTimeEntering(true);
 		bool CircleCompleted(false);
 		for(int step_n = 1; step_n <= TB_line_length; ++step_n){
 			std::pair<float,float> xz_vector_point_n;
@@ -339,9 +339,9 @@ void DrawingMacro(string name,string name_IDs, int Particle_ID1, int Particle_ID
 						xz_x_n = xz_vector_point_n.first;
 						xz_y_n = xz_vector_point_n.second;
 						circle_step_x+=0.01;
-						if(xz_x_n < z_start_magnetic_field || xz_x_n > z_end_magnetic_field)
+						if((xz_x_n < z_start_magnetic_field || xz_x_n > z_end_magnetic_field)
 					     || (!(xz_x_n < z_start_magnetic_field || xz_x_n > z_end_magnetic_field)
-					     &&    xz_y_n < x_start_magnetic_field || xz_y_n > x_end_magnetic_field){
+					     &&    xz_y_n < x_start_magnetic_field || xz_y_n > x_end_magnetic_field)){
 							xz_start_vector_x = xz_x_n;
 							xz_start_vector_y = xz_y_n;
 							WhichCase = MagnetLeaving;
@@ -367,21 +367,9 @@ void DrawingMacro(string name,string name_IDs, int Particle_ID1, int Particle_ID
 						break;
 					default:
 						cerr << "Scenario did not match anything we envisioned..." << endl;
+						break;
 				};
 				if(CircleCompleted) break;
-
-				
-			// Case 3: Particles are created in the magnet
-
-		
-					else if((xz_x_n < z_start_magnetic_field || xz_x_n > z_end_magnetic_field) && (xz_y_n < x_start_magnetic_field || xz_y_n > x_end_magnetic_field)){
-						if((xz_x_n < z_start_magnetic_field-2 || xz_x_n > z_start_magnetic_field+2) && (xz_y_n < x_start_magnetic_field-2 || xz_y_n > x_start_magnetic_field+2)){
-						}
-
-					
-					}
-				}
-
 			} 
 			catch(string error){
 				break;
