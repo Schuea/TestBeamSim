@@ -120,7 +120,7 @@ std::pair<float,float> Particle_vector(int step_n, TTree * Tree, int Particle_nu
 	float t_n = 0;
 	float v_zn = 0, v_xn = 0;
 
-	t_n = step_n / sqrt( pow((z_end-z_start),2.0) + pow((end-start),2.0) );
+	t_n = ((float)step_n) / sqrt( pow((z_end-z_start),2.0) + pow((end-start),2.0) );
 	v_zn = z_start + t_n*(z_end-z_start);
 	v_xn = start + t_n*(end-start);
 /*
@@ -219,13 +219,8 @@ void DrawingMacro(string name,string name_IDs, int Particle_ID1, int Particle_ID
 	Tree->SetBranchAddress("Vertexz",&z_vertex);
 	Tree->SetBranchAddress("Reflectionz",&z_end);       
 
-	for(int Particle_number = 0; Particle_number < 100/*entries*/; ++Particle_number){ 
+	for(int Particle_number = 0; Particle_number < 1000/*entries*/; ++Particle_number){ 
 		Tree->GetEntry(Particle_number); 
-
-		float xz_prev_x_n = 0;
-		float xz_prev_y_n = 0;
-		float yz_prev_x_n = 0;
-		float yz_prev_y_n = 0;
 
 		float xz_start_vector_x = 0;
 		float xz_start_vector_y = 0;
@@ -236,11 +231,6 @@ void DrawingMacro(string name,string name_IDs, int Particle_ID1, int Particle_ID
 		float xz_start_circle_y = 0;
 		float yz_start_circle_x = 0;
 		float yz_start_circle_y = 0;
-
-		float xz_enter_magnet_x = 0;
-		float xz_enter_magnet_y = 0;
-		float yz_enter_magnet_x = 0;
-		float yz_enter_magnet_y = 0;
 
 		int xz_prev_stored_binno = 0;
 		int yz_prev_stored_binno = 0;
@@ -269,7 +259,10 @@ void DrawingMacro(string name,string name_IDs, int Particle_ID1, int Particle_ID
 		&& z_vertex < z_end_magnetic_field){
 			WhichCase = InsideVertex;
 		}
+
 		bool CircleCompleted(false);
+
+
 		for(int step_n = 1; step_n <= TB_line_length; ++step_n){
 			std::pair<float,float> xz_vector_point_n;
 			std::pair<float,float> yz_vector_point_n;
@@ -280,7 +273,6 @@ void DrawingMacro(string name,string name_IDs, int Particle_ID1, int Particle_ID
 			float yz_y_n = 0;
 
 			try{
-			// Case 1+2: Particles going past the magnet + Particles enter the magnet
 				switch(WhichCase){
 					case OutsideVertex:
 						xz_vector_point_n = Particle_vector(step_n, 
@@ -306,16 +298,19 @@ void DrawingMacro(string name,string name_IDs, int Particle_ID1, int Particle_ID
 							WhichCase = OutsideVertexEntering;
 						}
 						break;
+				
 					case OutsideVertexEntering:
 						xz_start_circle_x = xz_x_n;
 						xz_start_circle_y = xz_y_n;
 						WhichCase = MagnetInside;
 						break;
+				
 					case InsideVertex:
 						xz_start_circle_x = z_vertex;
 						xz_start_circle_y = x_vertex;
 						WhichCase = MagnetInside;
 						break;
+				
 					case MagnetInside:
 						if(circle_step_x>=2*M_PI){
 							CircleCompleted = true;
@@ -347,6 +342,7 @@ void DrawingMacro(string name,string name_IDs, int Particle_ID1, int Particle_ID
 							WhichCase = MagnetLeaving;
 					     	}
 						break;
+				
 					case MagnetLeaving:
 						xz_vector_point_n = Particle_vector(step_n, 
 										    Tree, 
@@ -366,7 +362,8 @@ void DrawingMacro(string name,string name_IDs, int Particle_ID1, int Particle_ID
 						xz_y_n = xz_vector_point_n.second;
 						break;
 					default:
-						cerr << "Scenario did not match anything we envisioned..." << endl;
+				
+					cerr << "Scenario did not match anything we envisioned..." << endl;
 						break;
 				};
 				if(CircleCompleted) break;
@@ -383,29 +380,9 @@ void DrawingMacro(string name,string name_IDs, int Particle_ID1, int Particle_ID
 
 			if(xz_bin_number != xz_prev_stored_binno) FluxMap_xz->Fill(xz_x_n,xz_y_n);
 			if(yz_bin_number != yz_prev_stored_binno) FluxMap_yz->Fill(yz_x_n,yz_y_n);
-	
-			if( xz_x_n > z_start_magnetic_field-2 && xz_x_n < z_start_magnetic_field+2 && xz_y_n > x_start_magnetic_field-2 && xz_y_n < x_start_magnetic_field+2){
-				cout << "Circle startpoint set!" << endl;
-				xz_enter_magnet_x = xz_x_n;
-				xz_enter_magnet_y = xz_y_n;
-				cout << "xz_enter_magnet_x = xz_x_n; " << xz_x_n << endl;
-				cout << "xz_enter_magnet_y = xz_y_n; " << xz_y_n << endl;
-			}
-	
-			if( yz_x_n > z_start_magnetic_field-2 && yz_x_n < z_start_magnetic_field+2 && yz_y_n > y_start_magnetic_field-2 && yz_y_n < y_start_magnetic_field+2){
-				cout << "Circle startpoint set!" << endl;
-				yz_enter_magnet_x = yz_x_n;
-				yz_enter_magnet_y = yz_y_n;
-				cout << "yz_enter_magnet_x = yz_x_n; " << yz_x_n << endl;
-				cout << "yz_enter_magnet_y = yz_y_n; " << yz_y_n << endl;
-			}
 
 			xz_prev_stored_binno = xz_bin_number;
 			yz_prev_stored_binno = yz_bin_number;
-			xz_prev_x_n = xz_x_n;
-			xz_prev_y_n = xz_y_n;
-			yz_prev_x_n = yz_x_n;
-			yz_prev_y_n = yz_y_n;
 		}
 		
 	}
