@@ -199,6 +199,10 @@ streamlog_out(DEBUG0)<< "Line " << __LINE__  << " File " << __FILE__ << endl;
 		
 		charge_ = p->getCharge();
 		energy_ = p->getEnergy();
+		
+		momentumx_ = p->getMomentum()[0];
+		momentumy_ = p->getMomentum()[1];
+		momentumz_ = p->getMomentum()[2];
 		momentum_ = sqrt( (p->getMomentum()[0])*(p->getMomentum()[0]) + (p->getMomentum()[1])*(p->getMomentum()[1]) + (p->getMomentum()[2])*(p->getMomentum()[2]) );
 				
 		reflectionx_ = p->getEndpoint()[0];
@@ -277,6 +281,9 @@ streamlog_out(DEBUG0)<< "Line " << __LINE__  << " File " << __FILE__ << endl;
 
 		charge_=0;
 		energy_=0;
+		momentumx_=0;
+		momentumy_=0;
+		momentumz_=0;
 		momentum_=0;
         	reflectionx_=0;
         	reflectiony_=0;
@@ -316,6 +323,9 @@ streamlog_out(DEBUG0)<< "Line " << __LINE__  << " File " << __FILE__ << endl;
 
 		tree_->Branch("Charge",&charge_,"Charge/F");
 		tree_->Branch("Energy",&energy_,"Energy/F");
+		tree_->Branch("Momentumx",&momentumx_,"Momentum/F");
+		tree_->Branch("Momentumy",&momentumy_,"Momentum/F");
+		tree_->Branch("Momentumz",&momentumz_,"Momentum/F");
 		tree_->Branch("Momentum",&momentum_,"Momentum/F");
 		tree_->Branch("Reflectionx",&reflectionx_,"Reflectionx/F");
 		tree_->Branch("Reflectiony",&reflectiony_,"Reflectiony/F");
@@ -351,6 +361,9 @@ cout << "Line " << __LINE__  << " File " << __FILE__ << endl;
         
 	float charge_;
 	float energy_;
+	float momentumx_;
+	float momentumy_;
+	float momentumz_;
 	float momentum_;
 	float reflectionx_;
 	float reflectiony_;
