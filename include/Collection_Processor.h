@@ -42,7 +42,6 @@ REGISTER_COLLECTION(EVENT::LCGenericObject);
 class Collection_Processor_Interface{
 
 	public:
-
 	Collection_Processor_Interface (const char* name,
 		const char* description,const char* defaultName):name_(name),description_(description),defaultName_(defaultName){}
 	
@@ -397,7 +396,6 @@ class InputCollectionProcessor_SimCalorimeterHit_collection: public Collection_P
 			HitPosition_y_ = p->getPosition()[1];
 	//cout << "HitPosition_y_ = " << HitPosition_y_ << endl;	
 			HitPosition_z_ = p->getPosition()[2];
-	//cout << "HitPosition_z_ = " << HitPosition_z_ << endl;	
 
 			MCParticle *hitparticle = p->getParticleCont(i);
 			HitVertex_x_ = hitparticle->getVertex()[0];
@@ -411,7 +409,9 @@ class InputCollectionProcessor_SimCalorimeterHit_collection: public Collection_P
 			HitEnergy_ = hitparticle->getEnergy();
 			HitCharge_ = hitparticle->getCharge();
 
-			tree_fill();
+		//	tree_fill();
+			tree_->Fill();
+			tree_reset();
 		}
 
 	}

@@ -53,11 +53,13 @@ void SimProcessor::init() {
 	streamlog_out(DEBUG4) << "Running init" << endl;
 
 	File = new TFile("Sim.root","RECREATE"/*"UPDATE"*/,"TestBeam Simulation");
-	Tree = new TTree("Tree","SimHisto_Tree");
+	Tree_MCParticle = new TTree("Tree_MCP","TTree for MCParticles");
+	Tree_EnterMagnet = new TTree("Tree_EnterMagnet","TTree for SimCalorimeterHit");
+	Tree_LeaveMagnet = new TTree("Tree_LeaveMagnet","TTree for SimCalorimeterHit");
 
-	registerInputCollectionProcessor(new InputCollectionProcessor_MCParticle_collection(Tree,"InputCollectionName","MCParticle"));
-	registerInputCollectionProcessor(new InputCollectionProcessor_SimCalorimeterHit_collection(Tree,"InputCollectionName2","EnterMagnetPositions"));
-	registerInputCollectionProcessor(new InputCollectionProcessor_SimCalorimeterHit_collection(Tree,"InputCollectionName3","LeaveMagnetPositions"));
+	registerInputCollectionProcessor(new InputCollectionProcessor_MCParticle_collection(Tree_MCParticle,"InputCollectionName","MCParticle"));
+	registerInputCollectionProcessor(new InputCollectionProcessor_SimCalorimeterHit_collection(Tree_EnterMagnet,"InputCollectionName2","EnterMagnetPositions"));
+	registerInputCollectionProcessor(new InputCollectionProcessor_SimCalorimeterHit_collection(Tree_LeaveMagnet,"InputCollectionName3","LeaveMagnetPositions"));
 //	registerInputCollectionProcessor(new InputCollectionProcessor_LCGenericObject_collection(Tree,"InputCollectionName4","MCParticleEndPointEnergy"));
 
 	registerOutputCollectionProcessor(new OutputCollectionProcessor_MCParticle_collection("MCParticlePhotonSource"));
