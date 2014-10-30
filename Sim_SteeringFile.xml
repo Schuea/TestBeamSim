@@ -4,7 +4,7 @@
  </execute>
 
  <global>
-  <parameter name="LCIOInputFiles"> /nfs/dust/atlas/user/schuea/scratch/sid_complete/v01-17-02-sid/Marlin/v01-05/examples/mymarlin/DESY_II_beam/Only_DESY_beam/DESY_II_beam.slcio </parameter>
+  <parameter name="LCIOInputFiles"> /nfs/dust/atlas/user/schuea/scratch/sid_complete/v01-17-02-sid/Marlin/v01-05/examples/mymarlin/DESY_II_beam/Only_DESY_beam/DESY_II_beam1.slcio </parameter>
   <!-- limit the number of processed records (run+evt): -->  
   <parameter name="MaxRecordNumber" value="10000001" />  
   <parameter name="SkipNEvents" value="0" />  
