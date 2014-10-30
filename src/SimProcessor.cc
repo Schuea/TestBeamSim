@@ -55,9 +55,10 @@ void SimProcessor::init() {
 	File = new TFile("Sim.root","RECREATE"/*"UPDATE"*/,"TestBeam Simulation");
 	Tree = new TTree("Tree","SimHisto_Tree");
 
-	registerInputCollectionProcessor(new InputCollectionProcessor_MCParticle_collection(Tree,"MCParticle"));
-	registerInputCollectionProcessor(new InputCollectionProcessor_SimCalorimeterHit_collection(Tree,"CarbonFiberHits"));
-	registerInputCollectionProcessor(new InputCollectionProcessor_LCGenericObject_collection(Tree,"MCParticleEndPointEnergy"));
+	registerInputCollectionProcessor(new InputCollectionProcessor_MCParticle_collection(Tree,"InputCollectionName","MCParticle"));
+	registerInputCollectionProcessor(new InputCollectionProcessor_SimCalorimeterHit_collection(Tree,"InputCollectionName2","EnterMagnetPositions"));
+	registerInputCollectionProcessor(new InputCollectionProcessor_SimCalorimeterHit_collection(Tree,"InputCollectionName3","LeaveMagnetPositions"));
+//	registerInputCollectionProcessor(new InputCollectionProcessor_LCGenericObject_collection(Tree,"InputCollectionName4","MCParticleEndPointEnergy"));
 
 	registerOutputCollectionProcessor(new OutputCollectionProcessor_MCParticle_collection("MCParticlePhotonSource"));
 
@@ -101,23 +102,18 @@ void SimProcessor::processEvent( LCEvent * evt ) {
 	streamlog_out(DEBUG0) << "Running processEvent" << endl;
 	
 	//Process single collections in specific functions
-
-	/*const std::vector<std::string>* CollectionNames = evt->getCollectionNames();	
-	for(size_t i=0; i<CollectionNames->size(); ++i){
-		std::cout<<CollectionNames->at(i)<<std::endl;
+	const vector<string> *names = evt->getCollectionNames();
+	for(size_t i=0; i<input_col_processors.size(); ++i){
+		for(int j = 0; j < names->size(); ++j){
+	//		cout << input_col_processors.at(i)->getCol() << " = " <<  names->at(j) << endl;
+			if(input_col_processors.at(i)->getCol() == names->at(j)) {
+				input_col_processors.at(i)->processCurrentEvent_InputCollection(evt); //in Collection_Processor.h
+				streamlog_out(MESSAGE1) << "Process InputCollection #"<< i <<" for current event #" << evt->getEventNumber()  << endl;
+			}
+		}
 	}
 
- 	for( StringVec::const_iterator it = CollectionNames->begin();it != CollectionNames->end() ; it++ ){  
-
-	}*/
-
-	//for(size_t i=0; i<input_col_processors.size(); ++i){
-		//input_col_processors.at(0/*only MCParticle*/)->processCurrentEvent_InputCollection(evt); //in Collection_Processor.h
-		//streamlog_out(MESSAGE1) << "Process InputCollection #"<< i <<" for current event #" << evt->getEventNumber()  << endl;
-	//}
-	input_col_processors.at(0/*only MCParticle*/)->processCurrentEvent_InputCollection(evt); //in Collection_Processor.h
-/*
-	for(size_t j=0; j<output_col_processors.size(); ++j){
+/*	for(size_t j=0; j<output_col_processors.size(); ++j){
 streamlog_out(DEBUG0) << "Line " << __LINE__ << endl;
 		output_col_processors.at(j)->processCurrentEvent_OutputCollection(evt); //in Collection_Processor.h
 		streamlog_out(DEBUG4) << "Process OutputCollection #"<< j <<" for current event #" << evt->getEventNumber()  << endl;
