@@ -1,0 +1,11 @@
+/lcio/PDGFlag true
+/lcio/filename ./Example.slcio
+/lcdd/url ./ScintillatorPlate_MAGNET_0_59T_wo_Collimator.lcdd
+/run/initialize 
+/generator/select gun
+/gun/particle gamma
+/gun/position 0 0 0
+/gun/direction 0. 0. 1
+/gun/energy 3 GeV
+/random/seed
+/run/beamOn 10000
