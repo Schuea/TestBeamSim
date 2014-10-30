@@ -76,25 +76,19 @@ class Collection_Processor_Template : public Collection_Processor_Interface{
 	}
 
 	virtual ~Collection_Processor_Template(){
-streamlog_out(DEBUG0) << "Line " << __LINE__  << " File " << __FILE__ << endl;
 		std::cout<<"~Collection_Processor_Template()"<<Typename_<<std::endl;
 	}
 
 	virtual void processCurrentEvent_InputCollection( lcio::LCEvent * evt){
-streamlog_out(DEBUG0) << "Line " << __LINE__  << " File " << __FILE__ << endl;
 		EVENT::LCCollection* col=evt->getCollection(getCol());
 		
 		tree_reset();
 			int nMCP = col->getNumberOfElements()  ;
 		//std::cout<<nMCP<<std::endl;
 			for(int i=0; i< nMCP ; i++){
-streamlog_out(DEBUG0) << "Line " << __LINE__  << " File " << __FILE__ << endl;
 				T* p = dynamic_cast<T*>( col->getElementAt(i));		
 				fillInHist(p,evt);
-				tree_fill();
-streamlog_out(DEBUG0) << "Line " << __LINE__  << " File " << __FILE__ << endl;
 			}
-streamlog_out(DEBUG0) << "Line " << __LINE__  << " File " << __FILE__ << endl;
 	}
 
 	virtual std::string& getTypeName(){
@@ -113,9 +107,8 @@ class InputCollectionProcessor_MCParticle_collection: public Collection_Processo
 
 	public:
 	
-	InputCollectionProcessor_MCParticle_collection(TTree* tree,const char* defaultName):Collection_Processor_Template("InputCollectionName",
-				 "Collection name for MC Particles",defaultName),tree_(tree){		
-		z_axis_ = new float[3];
+	InputCollectionProcessor_MCParticle_collection(TTree* tree,const char* Name,const char* defaultName):Collection_Processor_Template(Name,"Collection name for MC Particles",defaultName),tree_(tree){		
+		z_axis_ = new double[3];
 		z_axis_[0] = 0.0;
 		z_axis_[1] = 0.0;
 		z_axis_[2] = 1.0;
@@ -126,17 +119,17 @@ class InputCollectionProcessor_MCParticle_collection: public Collection_Processo
 		std::cout<<"~InputCollectionProcessor_MCParticle_collection"<<std::endl;
 	}
 
-	float scalar_product(float a[3], float b[3]){
-		float result = 0;
+	double scalar_product(double a[3], double b[3]){
+		double result = 0;
 		for (int d=0; d<3; d++) {
 			result += a[d]*b[d];
 		}
 		return result;
 	}
 
-	float norm(float a[3]){
-		float result = 0;
-		float tmp=0;
+	double norm(double a[3]){
+		double result = 0;
+		double tmp=0;
 		for (int d=0; d<3; d++) {
 			tmp += a[d]*a[d];
 		}
@@ -262,7 +255,7 @@ streamlog_out(DEBUG0)<< "Line " << __LINE__  << " File " << __FILE__ << endl;
 				angle_initialfinal_=0;
 			}
 		}
-		
+		tree_fill();
 	}
 
 	virtual void tree_reset(){
@@ -360,25 +353,25 @@ cout << "Line " << __LINE__  << " File " << __FILE__ << endl;
 	bool stopped_status_;
         
 	float charge_;
-	float energy_;
-	float momentumx_;
-	float momentumy_;
-	float momentumz_;
-	float momentum_;
-	float reflectionx_;
-	float reflectiony_;
-	float reflectionz_;
-	float vertexx_;
-	float vertexy_;
-	float vertexz_;
+	double energy_;
+	double momentumx_;
+	double momentumy_;
+	double momentumz_;
+	double momentum_;
+	double reflectionx_;
+	double reflectiony_;
+	double reflectionz_;
+	double vertexx_;
+	double vertexy_;
+	double vertexz_;
 
 	float angle_initialfinal_;
 	float theta_;
 	float eta_;
  
-	float *z_axis_;
-	float initialparticle_course_[3];
-	float finalparticle_course_[3];
+	double *z_axis_;
+	double initialparticle_course_[3];
+	double finalparticle_course_[3];
 	
 	
 };
@@ -388,39 +381,58 @@ class InputCollectionProcessor_SimCalorimeterHit_collection: public Collection_P
 
 	public:
 	
-	InputCollectionProcessor_SimCalorimeterHit_collection(TTree* tree,const char* defaultName):Collection_Processor_Template	("InputCollectionName2",
-				 "Collection name for SimCalorimeterHits",defaultName),tree_(tree){		
-streamlog_out(DEBUG0) << "Line " << __LINE__  << " File " << __FILE__ << endl;
+	InputCollectionProcessor_SimCalorimeterHit_collection(TTree* tree,const char* Name,const char* defaultName):Collection_Processor_Template (Name,"Collection name for SimCalorimeterHits",defaultName),tree_(tree){		
+	//cout << Name << endl;	
 		registerTTree();
 		tree_reset();
-streamlog_out(DEBUG0) << "Line " << __LINE__  << " File " << __FILE__ << endl;
 	}
 
 //____________EDIT:
 
 	virtual void fillInHist(EVENT::SimCalorimeterHit *p, lcio::LCEvent * evt){
-/*
-		event_id_= evt->getEventNumber();
-		particle_id_ = p->getPDG();
-		
-		energy_ = p->getEnergy();
-				
-		reflectionx_ = p->getEndpoint()[0];
-		reflectiony_ = p->getEndpoint()[1];
-		reflectionz_ = p->getEndpoint()[2];
-*/
+		for(int i = 0; i < p->getNMCContributions(); ++i){
+
+			HitPosition_x_ = p->getPosition()[0];
+	//cout << "HitPosition_x_ = " << HitPosition_x_ << endl;	
+			HitPosition_y_ = p->getPosition()[1];
+	//cout << "HitPosition_y_ = " << HitPosition_y_ << endl;	
+			HitPosition_z_ = p->getPosition()[2];
+	//cout << "HitPosition_z_ = " << HitPosition_z_ << endl;	
+
+			MCParticle *hitparticle = p->getParticleCont(i);
+			HitVertex_x_ = hitparticle->getVertex()[0];
+			HitVertex_y_ = hitparticle->getVertex()[1];
+			HitVertex_z_ = hitparticle->getVertex()[2];
+			HitEndpoint_x_ = hitparticle->getEndpoint()[0];
+			HitEndpoint_y_ = hitparticle->getEndpoint()[1];
+			HitEndpoint_z_ = hitparticle->getEndpoint()[2];
+
+			HitParticle_id_ = hitparticle->getPDG();
+			HitEnergy_ = hitparticle->getEnergy();
+			HitCharge_ = hitparticle->getCharge();
+
+			tree_fill();
+		}
+
 	}
 
 	virtual void tree_reset(){
-/*
-		event_id_=0;
-		particle_id_=0;
 
-		energy_=0;
-        	reflectionx_=0;
-        	reflectiony_=0;
-        	reflectionz_=0;
-*/
+		HitParticle_id_=0;
+		HitCharge_=0;
+		HitEnergy_=0;
+        	HitPosition_x_=0;
+        	HitPosition_y_=0;
+        	HitPosition_z_=0;
+	
+		HitVertex_x_=0;
+        	HitVertex_y_=0;
+        	HitVertex_z_=0;
+
+		HitEndpoint_x_=0;
+        	HitEndpoint_y_=0;
+        	HitEndpoint_z_=0;
+
 	}
 
 	virtual void tree_fill(){
@@ -428,29 +440,44 @@ streamlog_out(DEBUG0) << "Line " << __LINE__  << " File " << __FILE__ << endl;
 	}
 
  	void registerTTree(){
-/*
-		tree_->Branch("Event_ID",&event_id_,"Event_ID/I");
-		tree_->Branch("Particle_ID",&particle_id_,"Particle_ID/I");
-	
-		tree_->Branch("Energy",&energy_,"Energy/F");
-		tree_->Branch("Reflectionx",&reflectionx_,"Reflectionx/F");
-		tree_->Branch("Reflectiony",&reflectiony_,"Reflectiony/F");
-		tree_->Branch("Reflectionz",&reflectionz_,"Reflectionz/F");
-*/
+
+		tree_->Branch("HitParticle_ID",&HitParticle_id_,"HitParticle_ID/I");
+		tree_->Branch("HitCharge",&HitCharge_,"HitCharge/F");
+		tree_->Branch("HitEnergy",&HitEnergy_,"HitEnergy/F");
+		tree_->Branch("HitPosition_x",&HitPosition_x_,"HitPosition_x/F");
+		tree_->Branch("HitPosition_y",&HitPosition_y_,"HitPosition_y/F");
+		tree_->Branch("HitPosition_z",&HitPosition_z_,"HitPosition_z/F");
+
+		tree_->Branch("HitVertex_x",&HitVertex_x_,"HitVertex_x/D");
+		tree_->Branch("HitVertex_y",&HitVertex_y_,"HitVertex_y/D");
+		tree_->Branch("HitVertex_z",&HitVertex_z_,"HitVertex_z/D");
+
+		tree_->Branch("HitEndpoint_x",&HitEndpoint_x_,"HitEndpoint_x/D");
+		tree_->Branch("HitEndpoint_y",&HitEndpoint_y_,"HitEndpoint_y/D");
+		tree_->Branch("HitEndpoint_z",&HitEndpoint_z_,"HitEndpoint_z/D");
+
 	}
 
 	private:
 
 	TTree* tree_;
-/*
-	int event_id_;
-	int particle_id_;
 
-        float energy_;
-	float reflectionx_;
-	float reflectiony_;
-	float reflectionz_;
-*/
+	int HitParticle_id_;
+	float HitCharge_;
+        float HitEnergy_;
+
+	float HitPosition_x_;
+	float HitPosition_y_;
+	float HitPosition_z_;
+
+	double HitVertex_x_;
+	double HitVertex_y_;
+	double HitVertex_z_;
+	
+	double HitEndpoint_x_;
+	double HitEndpoint_y_;
+	double HitEndpoint_z_;
+
 //_____________________________
 
 };
@@ -459,8 +486,7 @@ class InputCollectionProcessor_LCGenericObject_collection: public Collection_Pro
 
 	public:
 	
-	InputCollectionProcessor_LCGenericObject_collection(TTree* tree,const char* defaultName):Collection_Processor_Template("InputCollectionName3",
-				 "Collection name for LCGenericObject",defaultName),tree_(tree){		
+	InputCollectionProcessor_LCGenericObject_collection(TTree* tree,const char* Name,const char* defaultName):Collection_Processor_Template(Name,"Collection name for LCGenericObject",defaultName),tree_(tree){		
 		registerTTree();
 		tree_reset();
 	}
@@ -477,6 +503,7 @@ class InputCollectionProcessor_LCGenericObject_collection: public Collection_Pro
 		reflectionx_ = p->getEndpoint()[0];
 		reflectiony_ = p->getEndpoint()[1];
 		reflectionz_ = p->getEndpoint()[2];
+		tree_fill();
 */
 	}
 
