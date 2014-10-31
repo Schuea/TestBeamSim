@@ -47,18 +47,30 @@ void DrawingMacro(string name1){
 
 	TFile * input_rootfile1 = new TFile(name1.c_str(),"READ");
 	cout << "Inputfile1 size = " << input_rootfile1->GetSize() << endl;
-	TTree * T1 = (TTree*)input_rootfile1->Get("Tree");
-	cout << "Accessed TTree.." << endl;
+	TTree * T_EnterMagnet = (TTree*)input_rootfile1->Get("Tree_EnterMagnet");
+	TTree * T_LeaveMagnet = (TTree*)input_rootfile1->Get("Tree_LeaveMagnet");
+	cout << "Accessed TTrees.." << endl;
 
-	int   hit_id=0;
-	float hit_posi_x=0;	
-	float hit_posi_y=0;	
-	float hit_posi_z=0;	
+	int   hit_enter_id=0;
+	float hit_enter_posi_x=0;	
+	float hit_enter_posi_y=0;	
+	float hit_enter_posi_z=0;	
 
-	T1->SetBranchAddress("HitParticle_ID",&hit_id);
-	T1->SetBranchAddress("HitPosition_x",&hit_posi_x);
-	T1->SetBranchAddress("HitPosition_y",&hit_posi_y);
-	T1->SetBranchAddress("HitPosition_z",&hit_posi_z);
+	int   hit_leave_id=0;
+	float hit_leave_posi_x=0;	
+	float hit_leave_posi_y=0;	
+	float hit_leave_posi_z=0;	
+
+
+	T_EnterMagnet->SetBranchAddress("HitParticle_ID",&hit_enter_id);
+	T_EnterMagnet->SetBranchAddress("HitPosition_x",&hit_enter_posi_x);
+	T_EnterMagnet->SetBranchAddress("HitPosition_y",&hit_enter_posi_y);
+	T_EnterMagnet->SetBranchAddress("HitPosition_z",&hit_enter_posi_z);
+
+	T_LeaveMagnet->SetBranchAddress("HitParticle_ID",&hit_leave_id);
+	T_LeaveMagnet->SetBranchAddress("HitPosition_x",&hit_leave_posi_x);
+	T_LeaveMagnet->SetBranchAddress("HitPosition_y",&hit_leave_posi_y);
+	T_LeaveMagnet->SetBranchAddress("HitPosition_z",&hit_leave_posi_z);
 
 	float z_start_magnet = 23672.5;
 	float z_end_magnet = 24720.0;
@@ -77,31 +89,26 @@ void DrawingMacro(string name1){
 	DeflectionHisto_ElePosi_0_59T->GetXaxis()->SetTitle("Theta (degree)");
 	DeflectionHisto_ElePosi_0_59T->GetXaxis()->CenterTitle();
 
-	for(int n=0; n<= T1->GetEntries(); ++n){
-		T1->GetEntry(n);
+	for(int n=0; n<= T_LeaveMagnet->GetEntries(); ++n){
+		T_EnterMagnet->GetEntry(n);
+		T_LeaveMagnet->GetEntry(n);
 
 		float hit_start_point[3];
 		float hit_end_point[3];
-		if(hit_posi_z == z_start_magnet) {
-			hit_start_point[0] = hit_posi_x;
-			hit_start_point[1] = hit_posi_y;
-			hit_start_point[2] = hit_posi_z;
-			cout << "hit_posi_x = " << hit_posi_x << endl;
-			cout << "hit_posi_y = " << hit_posi_y << endl;
-			cout << "hit_posi_z = " << hit_posi_z << endl;
-		}
-		if(hit_posi_z == z_end_magnet) {
-			hit_end_point[0] = hit_posi_x;
-			hit_end_point[1] = hit_posi_y;
-			hit_end_point[2] = hit_posi_z;
-			cout << "hit_posi_x = " << hit_posi_x << endl;
-			cout << "hit_posi_y = " << hit_posi_y << endl;
-			cout << "hit_posi_z = " << hit_posi_z << endl;
-		}
-		else {
-			cerr << "hit_posi_z != z_start/end_magnet" << endl;
-			exit(1);
-		}
+		
+		hit_start_point[0] = hit_enter_posi_x;
+		hit_start_point[1] = hit_enter_posi_y;
+		hit_start_point[2] = hit_enter_posi_z;
+		cout << "hit_posi_x = " << hit_enter_posi_x << endl;
+		cout << "hit_posi_y = " << hit_enter_posi_y << endl;
+		cout << "hit_posi_z = " << hit_enter_posi_z << endl;
+		
+		hit_end_point[0] = hit_leave_posi_x;
+		hit_end_point[1] = hit_leave_posi_y;
+		hit_end_point[2] = hit_leave_posi_z;
+		cout << "hit_posi_x = " << hit_leave_posi_x << endl;
+		cout << "hit_posi_y = " << hit_leave_posi_y << endl;
+		cout << "hit_posi_z = " << hit_leave_posi_z << endl;
 
 		float particle_course[3];
 
