@@ -405,6 +405,10 @@ class InputCollectionProcessor_SimCalorimeterHit_collection: public Collection_P
 			HitEndpoint_y_ = hitparticle->getEndpoint()[1];
 			HitEndpoint_z_ = hitparticle->getEndpoint()[2];
 
+			HitMomentum_x_ = hitparticle->getMomentum()[0];
+			HitMomentum_y_ = hitparticle->getMomentum()[1];
+			HitMomentum_z_ = hitparticle->getMomentum()[2];
+
 			HitParticle_id_ = hitparticle->getPDG();
 			HitEnergy_ = hitparticle->getEnergy();
 			HitCharge_ = hitparticle->getCharge();
@@ -433,6 +437,10 @@ class InputCollectionProcessor_SimCalorimeterHit_collection: public Collection_P
         	HitEndpoint_y_=0;
         	HitEndpoint_z_=0;
 
+		HitMomentum_x_=0;
+        	HitMomentum_y_=0;
+        	HitMomentum_z_=0;
+
 	}
 
 	virtual void tree_fill(){
@@ -444,6 +452,7 @@ class InputCollectionProcessor_SimCalorimeterHit_collection: public Collection_P
 		tree_->Branch("HitParticle_ID",&HitParticle_id_,"HitParticle_ID/I");
 		tree_->Branch("HitCharge",&HitCharge_,"HitCharge/F");
 		tree_->Branch("HitEnergy",&HitEnergy_,"HitEnergy/F");
+	
 		tree_->Branch("HitPosition_x",&HitPosition_x_,"HitPosition_x/F");
 		tree_->Branch("HitPosition_y",&HitPosition_y_,"HitPosition_y/F");
 		tree_->Branch("HitPosition_z",&HitPosition_z_,"HitPosition_z/F");
@@ -455,6 +464,11 @@ class InputCollectionProcessor_SimCalorimeterHit_collection: public Collection_P
 		tree_->Branch("HitEndpoint_x",&HitEndpoint_x_,"HitEndpoint_x/D");
 		tree_->Branch("HitEndpoint_y",&HitEndpoint_y_,"HitEndpoint_y/D");
 		tree_->Branch("HitEndpoint_z",&HitEndpoint_z_,"HitEndpoint_z/D");
+
+		tree_->Branch("HitMomentum_x",&HitMomentum_x_,"HitMomentum_x/D");
+		tree_->Branch("HitMomentum_y",&HitMomentum_y_,"HitMomentum_y/D");
+		tree_->Branch("HitMomentum_z",&HitMomentum_z_,"HitMomentum_z/D");
+
 
 	}
 
@@ -477,6 +491,10 @@ class InputCollectionProcessor_SimCalorimeterHit_collection: public Collection_P
 	double HitEndpoint_x_;
 	double HitEndpoint_y_;
 	double HitEndpoint_z_;
+	
+	double HitMomentum_x_;
+	double HitMomentum_y_;
+	double HitMomentum_z_;
 
 //_____________________________
 
