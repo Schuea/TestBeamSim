@@ -84,14 +84,19 @@ void DrawingMacro(string name1){
 	output_filename << "Theta_plots_TBmagnet.root";
 	TFile * output_rootfile = new TFile(output_filename.str().c_str(),"RECREATE");
 
-	TH1F * DeflectionHisto_ElePosi_0_59T = new TH1F("Theta_ElePosi_0_59T","Deflection of electrons and positrons existing behind magnet with B = 0.59T",80,0,2);
+	TH1F * DeflectionHisto_ElePosi_0_59T = new TH1F("Theta_ElePosi_0_59T","Deflection of electrons and positrons existing behind magnet with B = 0.59T",80,0,0.1);
 	DeflectionHisto_ElePosi_0_59T->SetLineColor(kRed-6);
-	DeflectionHisto_ElePosi_0_59T->GetXaxis()->SetTitle("Theta (degree)");
+	DeflectionHisto_ElePosi_0_59T->GetXaxis()->SetTitle("Theta (Radians)");
 	DeflectionHisto_ElePosi_0_59T->GetXaxis()->CenterTitle();
 
 	for(int n=0; n<= T_LeaveMagnet->GetEntries(); ++n){
 		T_EnterMagnet->GetEntry(n);
 		T_LeaveMagnet->GetEntry(n);
+
+		if((hit_enter_id!=11 && hit_enter_id!=-11)) continue;           
+		if((hit_leave_id!=11 && hit_leave_id!=-11)) continue;           
+		if(hit_leave_posi_x<-25||hit_leave_posi_x>25) continue;
+		if(hit_leave_posi_y<-25||hit_leave_posi_y>25) continue;
 
 		float hit_start_point[3];
 		float hit_end_point[3];
@@ -99,27 +104,27 @@ void DrawingMacro(string name1){
 		hit_start_point[0] = hit_enter_posi_x;
 		hit_start_point[1] = hit_enter_posi_y;
 		hit_start_point[2] = hit_enter_posi_z;
-		cout << "hit_posi_x = " << hit_enter_posi_x << endl;
-		cout << "hit_posi_y = " << hit_enter_posi_y << endl;
-		cout << "hit_posi_z = " << hit_enter_posi_z << endl;
+	//	cout << "hit_posi_x = " << hit_enter_posi_x << endl;
+	//	cout << "hit_posi_y = " << hit_enter_posi_y << endl;
+	//	cout << "hit_posi_z = " << hit_enter_posi_z << endl;
 		
 		hit_end_point[0] = hit_leave_posi_x;
 		hit_end_point[1] = hit_leave_posi_y;
 		hit_end_point[2] = hit_leave_posi_z;
-		cout << "hit_posi_x = " << hit_leave_posi_x << endl;
-		cout << "hit_posi_y = " << hit_leave_posi_y << endl;
-		cout << "hit_posi_z = " << hit_leave_posi_z << endl;
+	//	cout << "hit_posi_x = " << hit_leave_posi_x << endl;
+	//	cout << "hit_posi_y = " << hit_leave_posi_y << endl;
+	//	cout << "hit_posi_z = " << hit_leave_posi_z << endl;
 
 		float particle_course[3];
 
 		for(int d=0; d<3; ++d){
 			particle_course[d] = hit_end_point[d] - hit_start_point[d];
 
-			cout << "particle_course["<< d << "] = " << particle_course[d] << endl;
+	//		cout << "particle_course["<< d << "] = " << particle_course[d] << endl;
 		}
 		float theta = 0.0;
 		theta = acos(scalar_product(z_axis,particle_course)/(norm(z_axis)*norm(particle_course)));	
-		cout << "theta = " << theta << endl;
+	//	cout << "theta = " << theta << endl;
 
 		DeflectionHisto_ElePosi_0_59T->Fill(theta);
 	}
