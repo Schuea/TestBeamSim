@@ -112,6 +112,25 @@ int main(int argc,char *argv[]){
 	DrawingMacro(filename,IDs.str(),Particle_ID1, Particle_ID2, Particle_ID3, Particle_ID4, Particle_ID5, Particle_ID6);
 }
 
+float scalar_product(float a[2], float b[2]){
+		float result = 0;
+		for (int d=0; d<2; d++) {
+			result += a[d]*b[d];
+		}
+		return result;
+}
+
+
+float norm(float a[2]){
+		float result = 0;
+		float tmp=0;
+		for (int d=0; d<2; d++) {
+			tmp += a[d]*a[d];
+		}
+		result = sqrt(tmp);
+		return result;
+}
+
 std::pair<float,float> Particle_vector(float step_n, TTree * Tree, int Particle_ID1, int Particle_ID2, int Particle_ID3, int Particle_ID4, int Particle_ID5, int Particle_ID6, int id, float start, float end, float z_start, float z_end){
 
 	if(Particle_ID1 != 0 && id!=Particle_ID1 && id!=Particle_ID2 && id!=Particle_ID3 && id!=Particle_ID4 && id!=Particle_ID5 && id!=Particle_ID6) throw string("Not a particle we are interested in");    
@@ -127,10 +146,27 @@ std::pair<float,float> Particle_vector(float step_n, TTree * Tree, int Particle_
 	return result;
 }
 
-std::pair<float,float> Circular_path(float step, TTree * Tree, int Particle_ID1, int Particle_ID2, int Particle_ID3, int Particle_ID4, int Particle_ID5, int Particle_ID6, int id, float z_start, float start, float hit_energy, float hit_charge, float Magnetic_field_strength){
+std::pair<float,float> Circular_path(float step, TTree * Tree, int Particle_ID1, int Particle_ID2, int Particle_ID3, int Particle_ID4, int Particle_ID5, int Particle_ID6, int id, float z_start, float start, double momentum_z, double momentum, float hit_energy, float hit_charge, float Magnetic_field_strength){
 
 	if(Particle_ID1 != 0 && id!=Particle_ID1 && id!=Particle_ID2 && id!=Particle_ID3 && id!=Particle_ID4 && id!=Particle_ID5 && id!=Particle_ID6) throw string("Not a particle we are interested in");    
 
+	//Calculate incoming angle theta:
+	float z_axis[2];
+	z_axis[0] = 1.0;
+	z_axis[1] = 0.0;
+
+	float incoming_course[2];
+	incoming_course[0] = float(momentum_z);
+	incoming_course[1] = float(momentum);
+	float length = norm(incoming_course);
+	float normalized_course[2];
+	normalized_course[0] = length*incoming_course[0]/abs(length);
+	normalized_course[1] = length*incoming_course[1]/abs(length);
+
+	float theta = 0.0;
+	theta = acos(scalar_product(z_axis,normalized_course)/(norm(z_axis)*norm(normalized_course)));	
+
+	//Calculating path:
 	float sign = 0.0;
 	if(hit_charge<0) sign = -1.0;
 	if(hit_charge>0) sign =  1.0;
@@ -147,6 +183,11 @@ std::pair<float,float> Circular_path(float step, TTree * Tree, int Particle_ID1,
 	float v_zn = 0, v_xn = 0;
 	v_zn = z_start + chord*sin(0.5*(M_PI-phi_n));
 	v_xn = start + chord*cos(0.5*(M_PI-phi_n));
+
+	//Matrix transformation:
+	float v_zn_transf = cos(theta)*v_zn - sin(theta)*v_xn;
+	float v_xn_transf = sin(theta)*v_zn + cos(theta)*v_xn;
+
 	//	v_zn = z_start + radius*cos(phi_n);
 	//	v_xn = start + radius*sin(phi_n);
 
@@ -158,7 +199,7 @@ std::pair<float,float> Circular_path(float step, TTree * Tree, int Particle_ID1,
 	//cout << "v_zn = " << v_zn <<endl; 
 	//cout << "v_xn = " << v_xn <<endl; 
 
-	std::pair<float,float> result(v_zn,v_xn);
+	std::pair<float,float> result(v_zn_transf,v_xn_transf);
 	return result;
 }
 
@@ -207,6 +248,7 @@ void DrawingMacro(string name, string IDs, int Particle_ID1, int Particle_ID2, i
 	int hit_id_before = 0;
 	float hit_energy_before = 0, hit_charge_before = 0, hit_posi_x_before = 0, hit_posi_y_before = 0, hit_posi_z_before = 0; 
 	double hit_vertex_x_before = 0, hit_vertex_y_before = 0, hit_vertex_z_before = 0, hit_endposi_x_before = 0, hit_endposi_y_before = 0, hit_endposi_z_before = 0; 
+	double hit_momentum_x_before = 0, hit_momentum_y_before = 0, hit_momentum_z_before = 0;
 	int hit_id_after = 0;
 	float hit_energy_after = 0, hit_charge_after = 0, hit_posi_x_after = 0, hit_posi_y_after = 0, hit_posi_z_after = 0; 
 	double hit_vertex_x_after = 0, hit_vertex_y_after = 0, hit_vertex_z_after = 0, hit_endposi_x_after = 0, hit_endposi_y_after = 0, hit_endposi_z_after = 0; 
@@ -232,6 +274,9 @@ void DrawingMacro(string name, string IDs, int Particle_ID1, int Particle_ID2, i
 	Tree_BeforeMagnet->SetBranchAddress("HitEndpoint_x",&hit_endposi_x_before);
 	Tree_BeforeMagnet->SetBranchAddress("HitEndpoint_y",&hit_endposi_y_before);
 	Tree_BeforeMagnet->SetBranchAddress("HitEndpoint_z",&hit_endposi_z_before);
+	Tree_BeforeMagnet->SetBranchAddress("HitMomentum_x",&hit_momentum_x_before);
+	Tree_BeforeMagnet->SetBranchAddress("HitMomentum_y",&hit_momentum_y_before);
+	Tree_BeforeMagnet->SetBranchAddress("HitMomentum_z",&hit_momentum_z_before);
 
 	Tree_AfterMagnet->SetBranchAddress("HitParticle_ID",&hit_id_after);
 	Tree_AfterMagnet->SetBranchAddress("HitCharge",&hit_charge_after); 
@@ -350,7 +395,9 @@ void DrawingMacro(string name, string IDs, int Particle_ID1, int Particle_ID2, i
 						Particle_ID6, 
 						hit_id_before, 
 						xz_start_circle_x, 
-						xz_start_circle_y, 
+						xz_start_circle_y,
+						hit_momentum_z_before,
+						hit_momentum_x_before,
 						hit_energy_before, 
 						hit_charge_before, 
 						B); 
