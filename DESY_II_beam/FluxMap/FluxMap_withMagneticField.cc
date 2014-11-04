@@ -300,8 +300,11 @@ void DrawingMacro(string name, string IDs, int Particle_ID1, int Particle_ID2, i
 	std::pair<float,float> yz_vector_point_n;
 
 
-	for(int Particle_number = 0; Particle_number < entries_noscintillator; ++Particle_number){ 
-		Tree_NoScintillator->GetEntry(Particle_number); 
+	for(int Particle_number = 0; Particle_number < 10000/*entries_noscintillator*/; ++Particle_number){ 
+
+//		Tree_NoScintillator->GetEntry(Particle_number); 
+		Tree_BeforeMagnet->GetEntry(Particle_number); 
+	
 		float xz_x_n = 0;
 		float xz_y_n = 0;
 		float yz_x_n = 0;
@@ -320,18 +323,25 @@ void DrawingMacro(string name, string IDs, int Particle_ID1, int Particle_ID2, i
 				}
 
 				xz_vector_point_n = Particle_vector(step_n, 
-						Tree_NoScintillator, 
+					//	Tree_NoScintillator, 
+					 	Tree_BeforeMagnet, 
 						Particle_ID1, 
 						Particle_ID2, 
 						Particle_ID3, 
 						Particle_ID4, 
 						Particle_ID5, 
 						Particle_ID6, 
-						id, 
-						x_vertex, 
-						x_end, 
-						z_vertex, 
-						z_end); 
+					//	id, 
+					//	x_vertex, 
+					//	x_end, 
+					//	z_vertex, 
+					//	z_end); 
+						hit_id_before, 
+						hit_vertex_x_before, 
+						hit_posi_x_before, 
+						hit_vertex_z_before, 
+						hit_posi_z_before); 
+			
 				xz_x_n = xz_vector_point_n.first;
 				xz_y_n = xz_vector_point_n.second;
 
@@ -349,10 +359,17 @@ void DrawingMacro(string name, string IDs, int Particle_ID1, int Particle_ID2, i
 		}
 
 	}
-	for(int Particle_number = 0; Particle_number < entries_beforemagnet; ++Particle_number){ 
+	for(int Particle_number = 0; Particle_number < 10000/*entries_beforemagnet*/; ++Particle_number){ 
 
-		float circle_step_x = 0.01;
-		float circle_step_y = 0.01;
+		Tree_BeforeMagnet->GetEntry(Particle_number); 
+	
+		float circle_step_x = 0.005;
+		float circle_step_y = 0.005;
+		
+		float xz_start_circle_x = 0;
+		float xz_start_circle_y = 0;
+		float yz_start_circle_x = 0;
+		float yz_start_circle_y = 0;
 
 		float xz_x_n = 0;
 		float xz_y_n = 0;
@@ -361,15 +378,10 @@ void DrawingMacro(string name, string IDs, int Particle_ID1, int Particle_ID2, i
 		int xz_prev_stored_binno = 0;
 		int yz_prev_stored_binno = 0;
 
-
-		Tree_BeforeMagnet->GetEntry(Particle_number); 
 		for(float step_n = 1; step_n <= Total_TB_line_length; step_n+=1){
 			if(Particle_number % 100 == 0 && int(step_n) % 1000 == 0) cout << Particle_number << "," << step_n << endl;
+
 			try{
-				float xz_start_circle_x = 0;
-				float xz_start_circle_y = 0;
-				float yz_start_circle_x = 0;
-				float yz_start_circle_y = 0;
 
 				if(hit_vertex_x_before > x_start_magnetic_field &&
 						hit_vertex_z_before > z_start_magnetic_field &&
@@ -404,7 +416,7 @@ void DrawingMacro(string name, string IDs, int Particle_ID1, int Particle_ID2, i
 				xz_x_n = xz_vector_point_n.first;
 				xz_y_n = xz_vector_point_n.second;
 
-				circle_step_x+=0.01;
+				circle_step_x+=0.005;
 
 				if((xz_x_n < z_start_magnetic_field || xz_x_n > z_end_magnetic_field)
 						|| (!(xz_x_n < z_start_magnetic_field || xz_x_n > z_end_magnetic_field)
@@ -425,7 +437,8 @@ void DrawingMacro(string name, string IDs, int Particle_ID1, int Particle_ID2, i
 			} catch(...){}
 		}
 	}
-	for(int Particle_number = 0; Particle_number < entries_aftermagnet; ++Particle_number){ 
+	for(int Particle_number = 0; Particle_number < 10000/*entries_aftermagnet*/; ++Particle_number){ 
+
 		Tree_AfterMagnet->GetEntry(Particle_number); 
 		float xz_x_n = 0;
 		float xz_y_n = 0;
@@ -436,9 +449,8 @@ void DrawingMacro(string name, string IDs, int Particle_ID1, int Particle_ID2, i
 		int yz_prev_stored_binno = 0;
 		for(float step_n = 1; step_n <= Total_TB_line_length; step_n+=1){
 			if(Particle_number % 100 == 0 && int(step_n) % 1000 == 0) cout << Particle_number << "," << step_n << endl;
-			try{
 
-
+				try{
 
 				xz_vector_point_n = Particle_vector(step_n, 
 						Tree_AfterMagnet, 
