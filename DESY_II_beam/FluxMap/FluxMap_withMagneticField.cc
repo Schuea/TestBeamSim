@@ -207,7 +207,6 @@ void DrawingMacro(string name, string IDs, int Particle_ID1, int Particle_ID2, i
 
 	TFile * input_rootfile = new TFile(name.c_str(),"READ");
 	cout << "Inputfile  size = " << input_rootfile->GetSize() << endl;
-	TTree * Tree_NoScintillator = (TTree*)input_rootfile->Get("Tree_MCP");
 	TTree * Tree_BeforeMagnet = (TTree*)input_rootfile->Get("Tree_EnterMagnet");
 	TTree * Tree_AfterMagnet = (TTree*)input_rootfile->Get("Tree_LeaveMagnet");
 
@@ -243,8 +242,6 @@ void DrawingMacro(string name, string IDs, int Particle_ID1, int Particle_ID2, i
 	TCanvas* fluxmap_xz_Canvas = new TCanvas("FluxMap_withMagneticField_xz_Canvas");
 	TCanvas* fluxmap_yz_Canvas = new TCanvas("FluxMap_withMagneticField_yz_Canvas");
 
-	int id = 0;
-	float x_vertex = 0, y_vertex = 0, z_vertex = 0, x_end = 0, y_end = 0, z_end = 0; 
 	int hit_id_before = 0;
 	float hit_energy_before = 0, hit_charge_before = 0, hit_posi_x_before = 0, hit_posi_y_before = 0, hit_posi_z_before = 0; 
 	double hit_vertex_x_before = 0, hit_vertex_y_before = 0, hit_vertex_z_before = 0, hit_endposi_x_before = 0, hit_endposi_y_before = 0, hit_endposi_z_before = 0; 
@@ -253,13 +250,6 @@ void DrawingMacro(string name, string IDs, int Particle_ID1, int Particle_ID2, i
 	float hit_energy_after = 0, hit_charge_after = 0, hit_posi_x_after = 0, hit_posi_y_after = 0, hit_posi_z_after = 0; 
 	double hit_vertex_x_after = 0, hit_vertex_y_after = 0, hit_vertex_z_after = 0, hit_endposi_x_after = 0, hit_endposi_y_after = 0, hit_endposi_z_after = 0; 
 
-	Tree_NoScintillator->SetBranchAddress("Particle_ID",&id); 
-	Tree_NoScintillator->SetBranchAddress("Vertexx",&x_vertex); 
-	Tree_NoScintillator->SetBranchAddress("Reflectionx",&x_end); 
-	Tree_NoScintillator->SetBranchAddress("Vertexy",&y_vertex); 
-	Tree_NoScintillator->SetBranchAddress("Reflectiony",&y_end); 
-	Tree_NoScintillator->SetBranchAddress("Vertexz",&z_vertex);
-	Tree_NoScintillator->SetBranchAddress("Reflectionz",&z_end);       
 
 	Tree_BeforeMagnet->SetBranchAddress("HitParticle_ID",&hit_id_before);
 	Tree_BeforeMagnet->SetBranchAddress("HitCharge",&hit_charge_before); 
@@ -292,80 +282,26 @@ void DrawingMacro(string name, string IDs, int Particle_ID1, int Particle_ID2, i
 	Tree_AfterMagnet->SetBranchAddress("HitEndpoint_y",&hit_endposi_y_after);
 	Tree_AfterMagnet->SetBranchAddress("HitEndpoint_z",&hit_endposi_z_after);
 
-	int entries_noscintillator = Tree_NoScintillator->GetEntries(); 
 	int entries_beforemagnet = Tree_BeforeMagnet->GetEntries(); 
 	int entries_aftermagnet = Tree_AfterMagnet->GetEntries(); 
 
 	std::pair<float,float> xz_vector_point_n;
 	std::pair<float,float> yz_vector_point_n;
 
+	enum{
+		OutsideMagnet,
+		InsideMagnet
+	};
 
-	for(int Particle_number = 0; Particle_number < 10000/*entries_noscintillator*/; ++Particle_number){ 
+	int WhichCase = -1;
 
-//		Tree_NoScintillator->GetEntry(Particle_number); 
-		Tree_BeforeMagnet->GetEntry(Particle_number); 
-	
-		float xz_x_n = 0;
-		float xz_y_n = 0;
-		float yz_x_n = 0;
-		float yz_y_n = 0;
-
-		int xz_prev_stored_binno = 0;
-		int yz_prev_stored_binno = 0;
-
-		for(float step_n = 1; step_n <= Total_TB_line_length; step_n+=1){
-			try{
-				if(xz_y_n > x_start_magnetic_field 
-						&& xz_y_n < x_end_magnetic_field 
-						&& xz_x_n > z_start_magnetic_field){
-					//If particle enters the magnetic field then stop
-					break;
-				}
-
-				xz_vector_point_n = Particle_vector(step_n, 
-					//	Tree_NoScintillator, 
-					 	Tree_BeforeMagnet, 
-						Particle_ID1, 
-						Particle_ID2, 
-						Particle_ID3, 
-						Particle_ID4, 
-						Particle_ID5, 
-						Particle_ID6, 
-					//	id, 
-					//	x_vertex, 
-					//	x_end, 
-					//	z_vertex, 
-					//	z_end); 
-						hit_id_before, 
-						hit_vertex_x_before, 
-						hit_posi_x_before, 
-						hit_vertex_z_before, 
-						hit_posi_z_before); 
-			
-				xz_x_n = xz_vector_point_n.first;
-				xz_y_n = xz_vector_point_n.second;
-
-				int xz_bin_number = 0;
-				int yz_bin_number = 0;
-				xz_bin_number = FluxMap_xz->FindBin(xz_x_n,xz_y_n,0);
-				yz_bin_number = FluxMap_yz->FindBin(yz_x_n,yz_y_n,0);
-
-				if(xz_bin_number != xz_prev_stored_binno) FluxMap_xz->Fill(xz_x_n,xz_y_n);
-				if(yz_bin_number != yz_prev_stored_binno) FluxMap_yz->Fill(yz_x_n,yz_y_n);
-
-				xz_prev_stored_binno = xz_bin_number;
-				yz_prev_stored_binno = yz_bin_number;
-			} catch(...){}
-		}
-
-	}
 	for(int Particle_number = 0; Particle_number < 10000/*entries_beforemagnet*/; ++Particle_number){ 
 
 		Tree_BeforeMagnet->GetEntry(Particle_number); 
-	
+
 		float circle_step_x = 0.005;
 		float circle_step_y = 0.005;
-		
+
 		float xz_start_circle_x = 0;
 		float xz_start_circle_y = 0;
 		float yz_start_circle_x = 0;
@@ -375,68 +311,135 @@ void DrawingMacro(string name, string IDs, int Particle_ID1, int Particle_ID2, i
 		float xz_y_n = 0;
 		float yz_x_n = 0;
 		float yz_y_n = 0;
+
 		int xz_prev_stored_binno = 0;
 		int yz_prev_stored_binno = 0;
 
+		if((hit_vertex_z_before < z_start_magnetic_field || hit_vertex_z_before > z_end_magnetic_field)
+				|| (!(hit_vertex_z_before < z_start_magnetic_field || hit_vertex_z_before > z_end_magnetic_field)
+					&& hit_vertex_x_before < x_start_magnetic_field || hit_vertex_x_before > x_end_magnetic_field)){
+			WhichCase = OutsideMagnet;
+		}
+		else if(hit_vertex_x_before > x_start_magnetic_field
+				&& hit_vertex_x_before < x_end_magnetic_field
+				&& hit_vertex_z_before > z_start_magnetic_field
+				&& hit_vertex_z_before < z_end_magnetic_field){
+			xz_start_circle_x = hit_vertex_z_before;
+			xz_start_circle_y = hit_vertex_x_before;
+			WhichCase = InsideMagnet;
+		}
+
+
 		for(float step_n = 1; step_n <= Total_TB_line_length; step_n+=1){
-			if(Particle_number % 100 == 0 && int(step_n) % 1000 == 0) cout << Particle_number << "," << step_n << endl;
-
 			try{
+				switch(WhichCase){
 
-				if(hit_vertex_x_before > x_start_magnetic_field &&
-						hit_vertex_z_before > z_start_magnetic_field &&
-						hit_vertex_x_before < x_end_magnetic_field &&
-						hit_vertex_z_before < z_end_magnetic_field){
-					xz_start_circle_x = hit_vertex_z_before;
-					xz_start_circle_y = hit_vertex_x_before;
-				} else{
-					xz_start_circle_x = hit_posi_z_before;
-					xz_start_circle_y = hit_posi_x_before;
-				}
+					case OutsideMagnet:
 
-				if(circle_step_x>=2*M_PI){
-					break;
-				}
-				xz_vector_point_n = Circular_path(circle_step_x, 
-						Tree_BeforeMagnet, 
-						Particle_ID1, 
-						Particle_ID2, 
-						Particle_ID3,
-						Particle_ID4, 
-						Particle_ID5, 
-						Particle_ID6, 
-						hit_id_before, 
-						xz_start_circle_x, 
-						xz_start_circle_y,
-						hit_momentum_z_before,
-						hit_momentum_x_before,
-						hit_energy_before, 
-						hit_charge_before, 
-						B); 
-				xz_x_n = xz_vector_point_n.first;
-				xz_y_n = xz_vector_point_n.second;
+						if(hit_posi_x_before > x_start_magnetic_field 
+								&& hit_posi_x_before < x_end_magnetic_field){
 
-				circle_step_x+=0.005;
+							if(xz_y_n > x_start_magnetic_field 
+									&& xz_y_n < x_end_magnetic_field 
+									&& xz_x_n > z_start_magnetic_field){
+								//If particle enters the magnetic field then switch case
+								xz_start_circle_x = hit_posi_z_before;
+								xz_start_circle_y = hit_posi_x_before;
+								WhichCase = InsideMagnet;
+							}	
 
-				if((xz_x_n < z_start_magnetic_field || xz_x_n > z_end_magnetic_field)
-						|| (!(xz_x_n < z_start_magnetic_field || xz_x_n > z_end_magnetic_field)
-							&&    xz_y_n < x_start_magnetic_field || xz_y_n > x_end_magnetic_field)){
-					break;
-				}
+							xz_vector_point_n = Particle_vector(step_n, 
+									Tree_BeforeMagnet, 
+									Particle_ID1, 
+									Particle_ID2, 
+									Particle_ID3, 
+									Particle_ID4, 
+									Particle_ID5, 
+									Particle_ID6, 
+									hit_id_before, 
+									hit_vertex_x_before, 
+									hit_posi_x_before, 
+									hit_vertex_z_before, 
+									hit_posi_z_before); 
 
-				int xz_bin_number = 0;
-				int yz_bin_number = 0;
-				xz_bin_number = FluxMap_xz->FindBin(xz_x_n,xz_y_n,0);
-				yz_bin_number = FluxMap_yz->FindBin(yz_x_n,yz_y_n,0);
+							xz_x_n = xz_vector_point_n.first;
+							xz_y_n = xz_vector_point_n.second;
+						}
+						else{
+							xz_vector_point_n = Particle_vector(step_n, 
+									Tree_BeforeMagnet, 
+									Particle_ID1, 
+									Particle_ID2, 
+									Particle_ID3, 
+									Particle_ID4, 
+									Particle_ID5, 
+									Particle_ID6, 
+									hit_id_before, 
+									hit_vertex_x_before, 
+									hit_endposi_x_before, 
+									hit_vertex_z_before, 
+									hit_endposi_z_before); 
 
-				if(xz_bin_number != xz_prev_stored_binno) FluxMap_xz->Fill(xz_x_n,xz_y_n);
-				if(yz_bin_number != yz_prev_stored_binno) FluxMap_yz->Fill(yz_x_n,yz_y_n);
+							xz_x_n = xz_vector_point_n.first;
+							xz_y_n = xz_vector_point_n.second;
+						}
+						break;
 
-				xz_prev_stored_binno = xz_bin_number;
-				yz_prev_stored_binno = yz_bin_number;
+
+					case InsideMagnet:
+
+						if(circle_step_x>=2*M_PI){
+							break;
+						}
+						xz_vector_point_n = Circular_path(circle_step_x, 
+								Tree_BeforeMagnet, 
+								Particle_ID1, 
+								Particle_ID2, 
+								Particle_ID3,
+								Particle_ID4, 
+								Particle_ID5, 
+								Particle_ID6, 
+								hit_id_before, 
+								xz_start_circle_x, 
+								xz_start_circle_y,
+								hit_momentum_z_before,
+								hit_momentum_x_before,
+								hit_energy_before, 
+								hit_charge_before, 
+								B); 
+						xz_x_n = xz_vector_point_n.first;
+						xz_y_n = xz_vector_point_n.second;
+
+						circle_step_x+=0.005;
+
+						if((xz_x_n < z_start_magnetic_field || xz_x_n > z_end_magnetic_field)
+								|| (!(xz_x_n < z_start_magnetic_field || xz_x_n > z_end_magnetic_field)
+									&&    xz_y_n < x_start_magnetic_field || xz_y_n > x_end_magnetic_field)){
+							break;
+						}
+						break;
+
+					default:
+
+						cerr << "Scenario did not match anything we envisioned..." << endl;
+						break;
+				};
 			} catch(...){}
 		}
+
+		int xz_bin_number = 0;
+		int yz_bin_number = 0;
+		xz_bin_number = FluxMap_xz->FindBin(xz_x_n,xz_y_n,0);
+		yz_bin_number = FluxMap_yz->FindBin(yz_x_n,yz_y_n,0);
+
+		if(xz_bin_number != xz_prev_stored_binno) FluxMap_xz->Fill(xz_x_n,xz_y_n);
+		if(yz_bin_number != yz_prev_stored_binno) FluxMap_yz->Fill(yz_x_n,yz_y_n);
+
+		xz_prev_stored_binno = xz_bin_number;
+		yz_prev_stored_binno = yz_bin_number;
 	}
+
+
 	for(int Particle_number = 0; Particle_number < 10000/*entries_aftermagnet*/; ++Particle_number){ 
 
 		Tree_AfterMagnet->GetEntry(Particle_number); 
