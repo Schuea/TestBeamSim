@@ -160,8 +160,8 @@ std::pair<float,float> Circular_path(float *step, TTree * Tree, int Particle_ID1
 	incoming_course[1] = float(momentum);
 	float length = norm(incoming_course);
 	float normalized_course[2];
-	normalized_course[0] = length*incoming_course[0]/abs(length);
-	normalized_course[1] = length*incoming_course[1]/abs(length);
+	normalized_course[0] = incoming_course[0]/length;
+	normalized_course[1] = incoming_course[1]/length;
 
 	float theta = 0.0;
 	theta = acos(scalar_product(z_axis,normalized_course)/(norm(z_axis)*norm(normalized_course)));	
@@ -199,7 +199,7 @@ std::pair<float,float> Circular_path(float *step, TTree * Tree, int Particle_ID1
 	//cout << "v_zn = " << v_zn <<endl; 
 	//cout << "v_xn = " << v_xn <<endl;
 
-	float stepsize = 1/radius; 
+	float stepsize = 0.001/radius; //from mm in m 
 	(*step) += stepsize;
 
 	std::pair<float,float> result(v_zn_transf,v_xn_transf);
