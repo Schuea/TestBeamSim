@@ -135,28 +135,10 @@ class InputCollectionProcessor_MCParticle_collection: public Collection_Processo
 		result = sqrt(tmp);
 		return result;
 	}
-/*
-	float GetFinalParticle_Course(MCParticle*p){
-		//if (p->getDaughters().empty()){
-		//if (p->getParents().empty()){
-			float result[3]={};
-			for (int d=0; d < 3; d++){
-				result[d] = p->getEndpoint()[d] - p->getVertex()[d];
-			}
-			return result;	
-		}
-		else{
-			for (int n=0; n < p->getDaughters().size(); n++){
-				GetFinalParticle_Course(p->getDaughters().at(n));
-			}
-		}
-	}
-*/	
 	virtual void fillInHist(EVENT::MCParticle *p, lcio::LCEvent * evt){
 streamlog_out(DEBUG0)<< "Line " << __LINE__  << " File " << __FILE__ << endl;
 		event_id_= evt->getEventNumber();
 		particle_id_ = p->getPDG();
-		
 		numberOfParents_ = p->getParents().size();
 		numberOfDaughters_ = p->getDaughters().size();
 		streamlog_out(DEBUG0) << "event_id_: " << event_id_ << endl;	
@@ -255,6 +237,7 @@ streamlog_out(DEBUG0)<< "Line " << __LINE__  << " File " << __FILE__ << endl;
 			}
 		}
 		tree_fill();
+		tree_reset();
 	}
 
 	virtual void tree_reset(){
@@ -314,17 +297,17 @@ streamlog_out(DEBUG0)<< "Line " << __LINE__  << " File " << __FILE__ << endl;
 		tree_->Branch("Stopped_Status",&stopped_status_,"Stopped_Status/O");	
 
 		tree_->Branch("Charge",&charge_,"Charge/F");
-		tree_->Branch("Energy",&energy_,"Energy/F");
-		tree_->Branch("Momentumx",&momentumx_,"Momentum/F");
-		tree_->Branch("Momentumy",&momentumy_,"Momentum/F");
-		tree_->Branch("Momentumz",&momentumz_,"Momentum/F");
-		tree_->Branch("Momentum",&momentum_,"Momentum/F");
-		tree_->Branch("Reflectionx",&reflectionx_,"Reflectionx/F");
-		tree_->Branch("Reflectiony",&reflectiony_,"Reflectiony/F");
-		tree_->Branch("Reflectionz",&reflectionz_,"Reflectionz/F");
-		tree_->Branch("Vertexx",&vertexx_,"Vertexx/F");
-		tree_->Branch("Vertexy",&vertexy_,"Vertexy/F");
-		tree_->Branch("Vertexz",&vertexz_,"Vertexz/F");
+		tree_->Branch("Energy",&energy_,"Energy/D");
+		tree_->Branch("Momentumx",&momentumx_,"Momentum/D");
+		tree_->Branch("Momentumy",&momentumy_,"Momentum/D");
+		tree_->Branch("Momentumz",&momentumz_,"Momentum/D");
+		tree_->Branch("Momentum",&momentum_,"Momentum/D");
+		tree_->Branch("Reflectionx",&reflectionx_,"Reflectionx/D");
+		tree_->Branch("Reflectiony",&reflectiony_,"Reflectiony/D");
+		tree_->Branch("Reflectionz",&reflectionz_,"Reflectionz/D");
+		tree_->Branch("Vertexx",&vertexx_,"Vertexx/D");
+		tree_->Branch("Vertexy",&vertexy_,"Vertexy/D");
+		tree_->Branch("Vertexz",&vertexz_,"Vertexz/D");
 
 		tree_->Branch("Angle_initialfinal",&angle_initialfinal_,"Angle_initialfinal/F");	
 		tree_->Branch("Theta",&theta_,"Theta/F");	
