@@ -8,7 +8,7 @@
 
     <define>
     <constant name="world_side" value="1102.5" />
-    <position name="Position_of_LeadShieldingHole" x="100." y="-50" z="0." />
+    <position name="Position_of_LeadShieldingHole" x="100." y="-50." z="0." />
     <position name="Position_of_ConcreteShieldingHole" x="100." y="-75." z="0." />
     </define>
 
