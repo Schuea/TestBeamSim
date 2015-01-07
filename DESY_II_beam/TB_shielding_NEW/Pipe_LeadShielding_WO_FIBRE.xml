@@ -1,0 +1,153 @@
+<lccdd xmlns:compact="http://www.lcsim.org/schemas/compact/1.0"
+       xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+       xs:noNamespaceSchemaLocation="http://www.lcsim.org/schemas/compact/1.0/compact.xsd">
+  
+  <info name="CopperTarget"
+	title="CopperTarget for TB Studies"
+	author="Marcel Stanitzki"
+	url="NONE"
+	status="development"
+	version="$Id: compact.xml,v 1.1 2007/09/17 22:10:42 lima Exp $">
+  </info>
+  
+  <define>
+    
+    <constant name="cm" value="10"/>
+    
+    <!-- world -->
+    <constant name="world_side" value="4613.5*cm" />
+    <constant name="world_x" value="world_side" />
+    <constant name="world_y" value="world_side" />
+    <constant name="world_z" value="world_side" />
+
+    <!-- tracking region -->
+    <constant name="tracking_region_radius" value="150*cm"/>
+    <constant name="tracking_region_zmax" value="2306.75*cm"/>
+
+  </define>
+  <materials>
+    <material name="Aluminium">
+      <D type="density" value="2.702" unit="g/cm3"/>
+      <fraction n="1.0" ref="Al"/>
+    </material>
+
+    <material name="Air">
+      <D value="0.001214" unit="g/cm3"/>
+      <fraction n="0.7494" ref="N"/>
+      <fraction n="0.2369" ref="O"/>
+      <fraction n="0.0129" ref="Ar"/>
+      <fraction n="0.0008" ref="H"/>
+    </material>    
+ 
+    <material name="CaO"> 
+       <D type="density" value="3.35" unit="g/cm3"/> 
+       <composite n="1" ref="C"/> 
+       <composite n="1" ref="O"/> 
+    </material>
+
+    <material name="SiO2"> 
+       <D type="density" value="2.65" unit="g/cm3"/> 
+       <composite n="1" ref="Si"/> 
+       <composite n="2" ref="O"/> 
+    </material>
+
+    <material name="Al2O3"> 
+       <D type="density" value="3.95" unit="g/cm3"/> 
+       <composite n="2" ref="Al"/> 
+       <composite n="3" ref="O"/> 
+    </material>
+
+    <material name="Fe2O3"> 
+       <D type="density" value="5.24" unit="g/cm3"/> 
+       <composite n="2" ref="Fe"/> 
+       <composite n="3" ref="O"/> 
+    </material>
+
+    <material name="heavyConcrete"> 
+       <D type="density" value="3.7" unit="g/cm3"/> 
+       <fraction n="0.65" ref="CaO"/>
+       <fraction n="0.20" ref="SiO2"/>
+       <fraction n="0.10" ref="Al2O3"/>
+       <fraction n="0.05" ref="Fe2O3"/>
+    </material>
+   
+  </materials>
+
+  
+  
+
+  <detectors>
+  <detector id="1" name="Aluminium_Pipe" type="TubeSegment"  >
+	<material name="Aluminium"/>
+	<tubs rmin="3.3*cm" rmax="3.5*cm" zhalf="200*cm" />
+      <position x="0*cm" y="0*cm" z="200.0*cm" />
+   </detector>    
+
+    <detector id="2" name="Aluminium_window" type="TubeSegment"  >
+	<material name="Aluminium"/>
+	<tubs rmin="0*cm" rmax="3.5*cm" zhalf="0.25*cm" />
+      <position x="0*cm" y="0*cm" z="400.25*cm" />
+   </detector>    
+
+    <detector id="3" name="Air" type="TestBeamCalorimeter"  insideTrackingVolume="true">
+      <dimensions x="world_side" y="world_side" />
+      <position z="1328.75*cm" />
+      <layer repeat="1">       
+        <slice material = "Air" thickness = "1856.5*cm" sensitive = "no" />
+      </layer>	
+    </detector>    
+
+ <detector id="4" name="LeadShielding" type="SiTrackerBarrel"  insideTrackingVolume="true">
+        <module name="Lead_Block">
+ 	   <module_envelope length="27.50*cm" width="80*cm" thickness="4534*cm"/>
+            <module_component length="5.0*cm" width="80*cm" thickness="20*cm" material="Lead" sensitive="no" >
+              <position x="-10*cm" y="(-7.5*cm+2.5*cm)" z="2267.0*cm" />
+            </module_component>
+    	    <module_component length="7.5*cm" width="27.5*cm" thickness="20*cm" material="Lead" sensitive="no" >
+              <position x="16.25*cm" y="1.25*cm" z="2267.0*cm" />
+            </module_component>
+             <module_component length="7.5*cm" width="47.5*cm" thickness="20*cm" material="Lead" sensitive="no" >
+              <position x="-26.25*cm" y="1.25*cm" z="2267.0*cm" />
+            </module_component>
+    	    <module_component length="15*cm" width="80*cm" thickness="20*cm" material="Lead" sensitive="no" >
+              <position x="-10*cm" y="12.5*cm" z="2267.0*cm" />
+            </module_component>
+        </module>
+	<module name="Concrete_Block1">
+ 	   <module_envelope length="35.0*cm" width="80*cm" thickness="4574*cm"/>
+            <module_component length="5.0*cm" width="80*cm" thickness="20*cm" material="heavyConcrete" sensitive="no" >
+              <position x="-10*cm" y="(-7.5*cm+2.5*cm)" z="2287.0*cm" />
+            </module_component>
+             <module_component length="10.0*cm" width="27.5*cm" thickness="20*cm" material="heavyConcrete" sensitive="no" >
+              <position x="16.25*cm" y="2.5*cm" z="2287.0*cm" />
+            </module_component>     
+            <module_component length="10.0*cm" width="47.5*cm" thickness="20*cm" material="heavyConcrete" sensitive="no" >
+              <position x="-26.25*cm" y="2.5*cm" z="2287.0*cm" />
+            </module_component>        
+            <module_component length="20.0*cm" width="80*cm" thickness="20*cm" material="heavyConcrete" sensitive="no" >
+              <position x="-10*cm" y="17.5*cm" z="2287.0*cm" />
+            </module_component>     
+        </module>
+        <module name="Concrete_fundament">
+ 	   <module_envelope length="162.5*cm" width="80*cm" thickness="4554*cm"/>
+            <module_component length="162.5*cm" width="80*cm" thickness="40*cm" material="heavyConcrete" sensitive="no" >
+              <position x="-10*cm" y="-88.75*cm" z="2277*cm" />
+            </module_component>
+        </module>
+ 	 <module name="Concrete_SideBlock">
+ 	   <module_envelope length="205*cm" width="40*cm" thickness="4654*cm"/>
+            <module_component length="205*cm" width="40*cm" thickness="80*cm" material="heavyConcrete" sensitive="no" >
+              <position x="-70*cm" y="-67.5*cm" z="2327*cm" />
+            </module_component>
+        </module>
+   </detector>  
+  
+ </detectors>  
+
+  <!-- Sensitive Detector readout segmentation -->
+  <readouts>
+  </readouts>
+
+  <fields>
+  </fields>
+</lccdd>
