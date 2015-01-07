@@ -176,7 +176,7 @@
        <box lunit="mm" name="ConcreteShieldingSideBlock" x="400." y="1975." z="800."/>
         
        <!-- Converter Target -->
-        <box lunit="mm" name="ConverterTarget" x="50." y="50." z="5."/>
+        <box lunit="mm" name="ConverterTarget" x="45." y="60." z="5."/>
 
        <!-- Beam Pipe Window -->
        <tube name="BeamPipeWindow2" rmin="0" rmax="52." z="0.1" deltaphi="360" startphi="0" aunit="deg" lunit="mm"/>
