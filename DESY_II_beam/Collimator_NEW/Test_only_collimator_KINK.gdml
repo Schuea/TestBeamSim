@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!-- 
+  SVT vacuum chamber, based on Maurik's GDML file.
+  @author Sho Uemura <meeg@slac.stanford.edu>
+  @version $Id: svt_chamber.gdml,v 1.4 2013/09/06 23:43:42 meeg Exp $
+-->
+<gdml xmlns:gdml="http://cern.ch/2001/Schemas/GDML" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.lcsim.org/schemas/gdml/1.0/gdml.xsd" >
+
+    <define>
+    <constant name="world_side" value="701.5" />
+    <rotation name="RotatePassthrough" x="-0.032" unit="rad"/>
+    </define>
+
+    <materials>
+      <element Z="1" formula="H" name="H">
+        <atom type="A" unit="g/mol" value="1.00794" />
+      </element>
+      <element Z="6" formula="C" name="C">
+        <atom type="A" unit="g/mol" value="12.0107" />
+      </element>
+      <element Z="7" formula="N" name="N">
+        <atom type="A" unit="g/mol" value="14.0068" />
+      </element>
+      <element Z="8" formula="O" name="O">
+        <atom type="A" unit="g/mol" value="15.9994" />
+      </element>
+      <element Z="13" name="Al" formula="Al">
+        <atom type="A" unit="g/mol" value="26.9815" />
+      </element>
+      <element Z="14" formula="Si" name="Si">
+        <atom type="A" unit="g/mol" value="28.0854" />
+      </element>
+      <element Z="15" formula="P" name="P">
+        <atom type="A" unit="g/mol" value="30.9738" />
+      </element>
+      <element Z="16" formula="S" name="S">
+        <atom type="A" unit="g/mol" value="32.065" />
+      </element>
+      <element Z="18" name="Ar" formula="Ar">
+        <atom type="A" unit="g/mol" value="39.9477" />
+      </element>
+      <element Z="24" formula="Cr" name="Cr">
+        <atom type="A" unit="g/mol" value="51.9961" />
+      </element>
+      <element Z="25" formula="Mn" name="Mn">
+        <atom type="A" unit="g/mol" value="54.9380" />
+      </element>
+      <element Z="26" formula="Fe" name="Fe">
+        <atom type="A" unit="g/mol" value="55.8451" />
+      </element>
+      <element Z="28" formula="Ni" name="Ni">
+        <atom type="A" unit="g/mol" value="58.6934" />
+      </element>
+      <element Z="29" formula="Cu" name="Cu">
+        <atom type="A" unit="g/mol" value="63.546" />
+      </element>
+      <element Z="42" formula="Mo" name="Mo">
+        <atom type="A" unit="g/mol" value="95.95" />
+      </element>
+      <element Z="74" formula="W" name="W">
+        <atom type="A" unit="g/mol" value="183.84" />
+      </element>
+      <element Z="82" formula="Pb" name="Pb">
+        <atom type="A" unit="g/mol" value="207.217" />
+      </element>
+
+      <material name="Air">
+        <D type="density" unit="g/cm3" value="0.0012" />
+        <fraction n="0.754" ref="N" />
+        <fraction n="0.234" ref="O" />
+        <fraction n="0.012" ref="Ar" />
+      </material>
+
+
+    <material name="Aluminium">
+      <D type="density" value="2.702" unit="g/cm3"/>
+      <fraction n="1.0" ref="Al"/>
+    </material>
+
+    <material name="Lead">
+      <D type="density" value="11.342" unit="g/cm3"/>
+      <fraction n="1.0" ref="Pb"/>
+    </material>
+
+    <material name="CaO"> 
+       <D type="density" value="3.35" unit="g/cm3"/> 
+       <composite n="1" ref="C"/> 
+       <composite n="1" ref="O"/> 
+    </material>
+
+    <material name="SiO2"> 
+       <D type="density" value="2.65" unit="g/cm3"/> 
+       <composite n="1" ref="Si"/> 
+       <composite n="2" ref="O"/> 
+    </material>
+
+    <material name="Al2O3"> 
+       <D type="density" value="3.95" unit="g/cm3"/> 
+       <composite n="2" ref="Al"/> 
+       <composite n="3" ref="O"/> 
+    </material>
+
+    <material name="Fe2O3"> 
+       <D type="density" value="5.24" unit="g/cm3"/> 
+       <composite n="2" ref="Fe"/> 
+       <composite n="3" ref="O"/> 
+    </material>
+
+    <material name="heavyConcrete"> 
+       <D type="density" value="3.7" unit="g/cm3"/> 
+       <fraction n="0.65" ref="CaO"/>
+       <fraction n="0.20" ref="SiO2"/>
+       <fraction n="0.10" ref="Al2O3"/>
+       <fraction n="0.05" ref="Fe2O3"/>
+    </material>
+
+    <material name="Radiation_safety_Concrete"> 
+       <D type="density" value="3.7" unit="g/cm3"/> 
+       <fraction n="0.065" ref="CaO"/>
+       <fraction n="0.03" ref="SiO2"/>
+       <fraction n="0.005" ref="Al2O3"/>
+       <fraction n="0.9" ref="Fe2O3"/>
+    </material>
+
+    <material name="Stainless_steel_1.4435">
+    	<D type="density" value="8" unit="g/cm3"/>
+	<fraction n="0.0003" ref="C"/>
+	<fraction n="0.01" ref="Si"/>
+	<fraction n="0.02" ref="Mn"/>
+	<fraction n="0.00045" ref="P"/>
+	<fraction n="0.0003" ref="S"/>
+	<fraction n="0.0011" ref="N"/>
+	<fraction n="0.18" ref="Cr"/>
+	<fraction n="0.03" ref="Mo"/>
+	<fraction n="0.14" ref="Ni"/>
+
+	<fraction n="0.61785" ref="Fe"/>
+   </material>
+
+   <material name="Iron">
+       <D type="density" value="7.874" unit="g/cm3"/>
+      <fraction n="1.0" ref="Fe"/>    
+   </material>
+
+   <material name="Copper">
+       <D type="density" value="8.96" unit="g/cm3"/>
+      <fraction n="1.0" ref="Cu"/>    
+   </material>
+
+   <material name="Kapton">
+       <D type="density" value="1.42" unit="g/cm3"/>
+      <fraction n=".026362" ref="H"/>    
+      <fraction n=".691133" ref="C"/>    
+      <fraction n=".073270" ref="N"/>    
+      <fraction n=".209235" ref="O"/>    
+   </material>
+
+   <material name="Tungsten_S17"> 
+       <D type="density" value="17.0" unit="g/cm3"/> 
+       <fraction n="0.90" ref="W"/>
+       <fraction n="0.05" ref="Cu"/>
+       <fraction n="0.05" ref="Ni"/>
+    </material>
+
+    </materials>
+
+    <solids>
+        <!-- Beam Pipe -->
+       <tube name="BeamPipe" rmin="50." rmax="52." z="272.5" deltaphi="360" startphi="0" aunit="deg" lunit="mm"/>
+
+	<!-- Beam Pipe -->
+       <tube name="BeamPipe_Kink" rmin="50." rmax="52." z="100." deltaphi="360" startphi="0" aunit="deg" lunit="mm"/>
+      
+       <!-- Collimator -->
+       	<!-- Horizontal Collimator -->
+      	<!-- x="250.+10." y="150." z="125."-->
+      	<box lunit="mm" name="HorizontalCollimatorBlock" x="260." y="150." z="125."/>
+      	<box lunit="mm" name="HorizontalCollimatorHole" x="10." y="150." z="125."/>
+	<subtraction name="HorizontalCollimator">
+          <first ref="HorizontalCollimatorBlock"/>
+          <second ref="HorizontalCollimatorHole"/>
+	  <positionref ref="center" />
+        </subtraction> 
+       	<!-- Vertical Collimator -->
+      	<!-- x="150." y="250.+10." z="125."-->
+      	<box lunit="mm" name="VerticalCollimatorBlock" x="150." y="260." z="125."/>
+      	<box lunit="mm" name="VerticalCollimatorHole" x="150." y="10." z="125."/>
+	<subtraction name="VerticalCollimator">
+          <first ref="VerticalCollimatorBlock"/>
+          <second ref="VerticalCollimatorHole"/>
+	  <positionref ref="center" />
+        </subtraction> 
+      
+       
+       <!-- world volume -->
+        <box lunit="mm" name="WorldBox" x="world_side" y="world_side" z="world_side" /> 
+    </solids>
+
+    <structure>
+
+        <volume name="BeamPipe_vol">
+            <materialref ref="Stainless_steel_1.4435"/>
+            <solidref ref="BeamPipe"/>
+        </volume>
+        <volume name="BeamPipe_Kink_vol">
+            <materialref ref="Stainless_steel_1.4435"/>
+            <solidref ref="BeamPipe_Kink"/>
+        </volume>
+        <volume name="HorizontalCollimator_vol">
+            <materialref ref="Tungsten_S17"/>
+            <solidref ref="HorizontalCollimator"/>
+        </volume>
+        <volume name="VerticalCollimator_vol">
+            <materialref ref="Tungsten_S17"/>
+            <solidref ref="VerticalCollimator"/>
+        </volume>
+
+        <volume name="testbeam_volume" > 
+            <materialref ref="Air" /> 
+            <solidref ref="WorldBox" /> 
+
+            <physvol> 
+                <volumeref ref="BeamPipe_vol" /> 
+                <position name="BeamPipe_vol_position" x="0." y="0." z="136.25" />     
+            </physvol>
+            <physvol> 
+                <volumeref ref="BeamPipe_Kink_vol" /> 
+                <position name="BeamPipe_Kink_vol_position" x="0." y="0." z="322.5" />     
+                <rotationref ref="RotatePassthrough" />
+            </physvol>
+            <physvol> 
+                <volumeref ref="HorizontalCollimator_vol" /> 
+                <position name="HorizontalCollimator_vol_position" x="0." y="0." z="435." />     
+                <rotationref ref="RotatePassthrough" />
+            </physvol>
+            <physvol> 
+                <volumeref ref="VerticalCollimator_vol" /> 
+                <position name="VerticalCollimator_vol_position" x="0." y="0." z="639." />     
+                <rotationref ref="RotatePassthrough" />
+            </physvol>
+         </volume> 
+    </structure>
+
+    <setup name="Default" version="1.0">
+        <world ref="testbeam_volume"/>
+    </setup>
+
+</gdml>
