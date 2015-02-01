@@ -171,7 +171,7 @@
 
     <solids>
         <!-- Fibre -->
-       <tube name="Fibre" rmin="0." rmax="0.025" z="100." deltaphi="360" startphi="0" aunit="deg" lunit="mm"/>
+       <tube name="Fibre" rmin="0." rmax="0.025/2" z="100." deltaphi="360" startphi="0" aunit="deg" lunit="mm"/>
 
        
        <!-- world volume -->

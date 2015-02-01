@@ -2,7 +2,7 @@
 <lcdd xmlns:lcdd="http://www.lcsim.org/schemas/lcdd/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="http://www.lcsim.org/schemas/lcdd/1.0/lcdd.xsd">
   <header>
     <detector name="CopperTarget" />
-    <generator name="GeomConverter" version="1.0" file="/afs/desy.de/user/s/schuea/mymarlin/DESY_II_beam/FluxMap/ScintillatorPlate/ScintillatorPlate_MAGNET_0_59T_wo_Collimator.xml" checksum="3447772374" />
+    <generator name="GeomConverter" version="1.0" file="/afs/desy.de/user/s/schuea/mymarlin/DESY_II_beam/FluxMap/ScintillatorPlate/ScintillatorPlate_MAGNET_0_59T_wo_Collimator.xml" checksum="3851178637" />
     <author name="Marcel Stanitzki" />
     <comment>NONE</comment>
   </header>
@@ -51,7 +51,7 @@
       <position name="identity_pos" x="0.0" y="0.0" z="0.0" unit="mm" />
       <constant name="world_side" value="49456.0" />
       <constant name="cm" value="10.0" />
-      <constant name="tracking_region_radius" value="1500.0" />
+      <constant name="tracking_region_radius" value="4000.0" />
       <constant name="world_y" value="49456.0" />
       <constant name="world_z" value="49456.0" />
       <constant name="tracking_region_zmax" value="24728.0" />
@@ -287,9 +287,9 @@
       <box name="world_box" x="world_x" y="world_y" z="world_z" />
       <tube name="tracking_cylinder" deltaphi="6.283185307179586" rmin="0.0" rmax="tracking_region_radius" z="2*tracking_region_zmax" />
       <tube name="Aluminium_window_tube" rmin="0.0" rmax="35.0" z="5.0" deltaphi="6.283185307179586" />
-      <box name="Scintillator_box" x="1100.0" y="806.0" z="0.01" />
-      <box name="Scintillator_layerType0_box" x="1100.0" y="806.0" z="0.01" />
-      <box name="Scintillator_layerType0_slice0_box" x="1100.0" y="806.0" z="0.01" />
+      <box name="Scintillator_box" x="3000.0" y="3000.0" z="0.01" />
+      <box name="Scintillator_layerType0_box" x="3000.0" y="3000.0" z="0.01" />
+      <box name="Scintillator_layerType0_slice0_box" x="3000.0" y="3000.0" z="0.01" />
       <box name="Air1_box" x="49456.0" y="49456.0" z="18565.0" />
       <box name="Air1_layerType0_box" x="49456.0" y="49456.0" z="18565.0" />
       <box name="Air1_layerType0_slice0_box" x="49456.0" y="49456.0" z="18565.0" />

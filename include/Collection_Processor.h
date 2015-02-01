@@ -4,6 +4,7 @@
 #include "marlin/Processor.h"
 #include <EVENT/MCParticle.h>
 #include <EVENT/SimCalorimeterHit.h>
+#include <EVENT/SimTrackerHit.h>
 #include <EVENT/LCGenericObject.h>
 #include <EVENT/LCEvent.h>
 #include <EVENT/LCCollection.h>
@@ -36,6 +37,7 @@ struct TypeNameCollection;
 
 REGISTER_COLLECTION(EVENT::MCParticle);
 REGISTER_COLLECTION(EVENT::SimCalorimeterHit);
+REGISTER_COLLECTION(EVENT::SimTrackerHit);
 REGISTER_COLLECTION(EVENT::LCGenericObject);
 
 
@@ -482,6 +484,128 @@ class InputCollectionProcessor_SimCalorimeterHit_collection: public Collection_P
 //_____________________________
 
 };
+
+class InputCollectionProcessor_SimTrackerHit_collection: public Collection_Processor_Template<EVENT::SimTrackerHit>{
+
+	public:
+	
+	InputCollectionProcessor_SimTrackerHit_collection(TTree* tree,const char* Name,const char* defaultName):Collection_Processor_Template (Name,"Collection name for SimTrackerHits",defaultName),tree_(tree){		
+	//cout << Name << endl;	
+		registerTTree();
+		tree_reset();
+	}
+
+//____________EDIT:
+
+	virtual void fillInHist(EVENT::SimTrackerHit *p, lcio::LCEvent * evt){
+
+		HitPosition_x_ = p->getPosition()[0];
+		//cout << "HitPosition_x_ = " << HitPosition_x_ << endl;	
+		HitPosition_y_ = p->getPosition()[1];
+		//cout << "HitPosition_y_ = " << HitPosition_y_ << endl;	
+		HitPosition_z_ = p->getPosition()[2];
+
+		MCParticle *hitparticle = p->getMCParticle();
+		HitVertex_x_ = hitparticle->getVertex()[0];
+		HitVertex_y_ = hitparticle->getVertex()[1];
+		HitVertex_z_ = hitparticle->getVertex()[2];
+		HitEndpoint_x_ = hitparticle->getEndpoint()[0];
+		HitEndpoint_y_ = hitparticle->getEndpoint()[1];
+		HitEndpoint_z_ = hitparticle->getEndpoint()[2];
+
+		HitMomentum_x_ = hitparticle->getMomentum()[0];
+		HitMomentum_y_ = hitparticle->getMomentum()[1];
+		HitMomentum_z_ = hitparticle->getMomentum()[2];
+
+		HitParticle_id_ = hitparticle->getPDG();
+		HitEnergy_ = hitparticle->getEnergy();
+		HitCharge_ = hitparticle->getCharge();
+
+		//	tree_fill();
+		tree_->Fill();
+		tree_reset();
+	}
+
+	virtual void tree_reset(){
+
+		HitParticle_id_=0;
+		HitCharge_=0;
+		HitEnergy_=0;
+        	HitPosition_x_=0;
+        	HitPosition_y_=0;
+        	HitPosition_z_=0;
+	
+		HitVertex_x_=0;
+        	HitVertex_y_=0;
+        	HitVertex_z_=0;
+
+		HitEndpoint_x_=0;
+        	HitEndpoint_y_=0;
+        	HitEndpoint_z_=0;
+
+		HitMomentum_x_=0;
+        	HitMomentum_y_=0;
+        	HitMomentum_z_=0;
+
+	}
+
+	virtual void tree_fill(){
+		tree_->Fill();
+	}
+
+ 	void registerTTree(){
+
+		tree_->Branch("HitParticle_ID",&HitParticle_id_,"HitParticle_ID/I");
+		tree_->Branch("HitCharge",&HitCharge_,"HitCharge/F");
+		tree_->Branch("HitEnergy",&HitEnergy_,"HitEnergy/F");
+	
+		tree_->Branch("HitPosition_x",&HitPosition_x_,"HitPosition_x/D");
+		tree_->Branch("HitPosition_y",&HitPosition_y_,"HitPosition_y/D");
+		tree_->Branch("HitPosition_z",&HitPosition_z_,"HitPosition_z/D");
+
+		tree_->Branch("HitVertex_x",&HitVertex_x_,"HitVertex_x/D");
+		tree_->Branch("HitVertex_y",&HitVertex_y_,"HitVertex_y/D");
+		tree_->Branch("HitVertex_z",&HitVertex_z_,"HitVertex_z/D");
+
+		tree_->Branch("HitEndpoint_x",&HitEndpoint_x_,"HitEndpoint_x/D");
+		tree_->Branch("HitEndpoint_y",&HitEndpoint_y_,"HitEndpoint_y/D");
+		tree_->Branch("HitEndpoint_z",&HitEndpoint_z_,"HitEndpoint_z/D");
+
+		tree_->Branch("HitMomentum_x",&HitMomentum_x_,"HitMomentum_x/D");
+		tree_->Branch("HitMomentum_y",&HitMomentum_y_,"HitMomentum_y/D");
+		tree_->Branch("HitMomentum_z",&HitMomentum_z_,"HitMomentum_z/D");
+
+
+	}
+
+	private:
+
+	TTree* tree_;
+
+	int HitParticle_id_;
+	float HitCharge_;
+        float HitEnergy_;
+
+	double HitPosition_x_;
+	double HitPosition_y_;
+	double HitPosition_z_;
+
+	double HitVertex_x_;
+	double HitVertex_y_;
+	double HitVertex_z_;
+	
+	double HitEndpoint_x_;
+	double HitEndpoint_y_;
+	double HitEndpoint_z_;
+	
+	double HitMomentum_x_;
+	double HitMomentum_y_;
+	double HitMomentum_z_;
+
+//_____________________________
+
+};
+
 
 class InputCollectionProcessor_LCGenericObject_collection: public Collection_Processor_Template<EVENT::LCGenericObject>{
 

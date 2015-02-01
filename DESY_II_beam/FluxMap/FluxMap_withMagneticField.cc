@@ -298,7 +298,7 @@ void DrawingMacro(string name, string IDs, int Particle_ID1, int Particle_ID2, i
 
 	int WhichCase = -1;
 
-	for(int Particle_number = 0; Particle_number < 10000/*entries_beforemagnet*/; ++Particle_number){ 
+	for(int Particle_number = 0; Particle_number < 100000/*entries_beforemagnet*/; ++Particle_number){ 
 
 		Tree_BeforeMagnet->GetEntry(Particle_number); 
 
@@ -446,10 +446,11 @@ void DrawingMacro(string name, string IDs, int Particle_ID1, int Particle_ID2, i
 			xz_prev_stored_binno = xz_bin_number;
 			yz_prev_stored_binno = yz_bin_number;
 		}
+		if(Particle_number%10000==0) FluxMap_xz->Write("5"); 
 	}
 
 
-	for(int Particle_number = 0; Particle_number < 10000/*entries_aftermagnet*/; ++Particle_number){ 
+	for(int Particle_number = 0; Particle_number < 100000/*entries_aftermagnet*/; ++Particle_number){ 
 
 		Tree_AfterMagnet->GetEntry(Particle_number); 
 		float xz_x_n = 0;
@@ -461,7 +462,7 @@ void DrawingMacro(string name, string IDs, int Particle_ID1, int Particle_ID2, i
 		int yz_prev_stored_binno = 0;
 
 		for(float step_n = 1; step_n <= Total_TB_line_length; step_n+=1){
-			if(Particle_number % 100 == 0 && int(step_n) % 1000 == 0) cout << Particle_number << "," << step_n << endl;
+	//		if(Particle_number % 100 == 0 && int(step_n) % 1000 == 0) cout << Particle_number << "," << step_n << endl;
 
 				try{
 
@@ -493,7 +494,7 @@ void DrawingMacro(string name, string IDs, int Particle_ID1, int Particle_ID2, i
 				yz_prev_stored_binno = yz_bin_number;
 			} catch(...){}
 		}
-
+		if(Particle_number%10000==0) FluxMap_xz->Write("5"); 
 	}
 	fluxmap_xz_Canvas->cd();
 

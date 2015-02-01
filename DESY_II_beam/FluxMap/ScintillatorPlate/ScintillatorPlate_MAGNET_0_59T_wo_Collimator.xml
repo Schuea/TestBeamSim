@@ -21,7 +21,7 @@
     <constant name="world_z" value="world_side" />
 
     <!-- tracking region -->
-    <constant name="tracking_region_radius" value="150*cm"/>
+    <constant name="tracking_region_radius" value="400*cm"/>
     <constant name="tracking_region_zmax" value="2472.8*cm"/>
 
   </define>
@@ -225,7 +225,7 @@
    </detector>    
 
     <detector id="11" name="Scintillator" type="TestBeamCalorimeter" readout="EnterMagnetPositions" insideTrackingVolume="true"  >
-      <dimensions x="110*cm" y="80.6*cm" />
+      <dimensions x="300*cm" y="300*cm" />
       <position z="2367.25*cm" />
       <layer repeat="1">       
         <slice material = "Silicon" thickness = "0.001*cm" sensitive = "yes" />

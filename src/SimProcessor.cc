@@ -54,16 +54,32 @@ void SimProcessor::init() {
 
 	File = new TFile("Sim.root","RECREATE"/*"UPDATE"*/,"TestBeam Simulation");
 	Tree_MCParticle = new TTree("Tree_MCP","TTree for MCParticles");
-	Tree_EnterMagnet = new TTree("Tree_EnterMagnet","TTree for SimCalorimeterHit");
-	Tree_LeaveMagnet = new TTree("Tree_LeaveMagnet","TTree for SimCalorimeterHit");
+	Tree_TrackerPlane1 = new TTree("Tree_TrackerPlane1","TTree for SimTrackerHit");
+	Tree_TrackerPlane2 = new TTree("Tree_TrackerPlane2","TTree for SimTrackerHit");
+	Tree_MagnetField = new TTree("Tree_MagnetField","TTree for SimTrackerHit");
+//	Tree_EnterMagnet = new TTree("Tree_EnterMagnet","TTree for SimCalorimeterHit");
+//	Tree_LeaveMagnet = new TTree("Tree_LeaveMagnet","TTree for SimCalorimeterHit");
+//	Tree_BeforeKink = new TTree("Tree_BeforeKink","TTree for SimCalorimeterHit");
+//	Tree_BeforeCollimator = new TTree("Tree_BeforeCollimator","TTree for SimCalorimeterHit");
+//	Tree_BetweenCollimators = new TTree("Tree_BetweenCollimators","TTree for SimCalorimeterHit");
+//	Tree_BehindCollimators = new TTree("Tree_BehindCollimators","TTree for SimCalorimeterHit");
+//	Tree_BeforeTBCollimator = new TTree("Tree_BeforeTBCollimator","TTree for SimCalorimeterHit");
 
 	registerInputCollectionProcessor(new InputCollectionProcessor_MCParticle_collection(Tree_MCParticle,"InputCollectionName","MCParticle"));
-	registerInputCollectionProcessor(new InputCollectionProcessor_SimCalorimeterHit_collection(Tree_EnterMagnet,"InputCollectionName2","EnterMagnetPositions"));
+	registerInputCollectionProcessor(new InputCollectionProcessor_SimTrackerHit_collection(Tree_TrackerPlane1,"InputCollectionName2","PhantomTrackerHits"));
+	registerInputCollectionProcessor(new InputCollectionProcessor_SimTrackerHit_collection(Tree_TrackerPlane2,"InputCollectionName3","PhantomTrackerHits2"));
+	registerInputCollectionProcessor(new InputCollectionProcessor_SimTrackerHit_collection(Tree_MagnetField,"InputCollectionName4","MagnetFieldHits"));
+/*	registerInputCollectionProcessor(new InputCollectionProcessor_SimCalorimeterHit_collection(Tree_EnterMagnet,"InputCollectionName2","EnterMagnetPositions"));
 	registerInputCollectionProcessor(new InputCollectionProcessor_SimCalorimeterHit_collection(Tree_LeaveMagnet,"InputCollectionName3","LeaveMagnetPositions"));
-//	registerInputCollectionProcessor(new InputCollectionProcessor_LCGenericObject_collection(Tree,"InputCollectionName4","MCParticleEndPointEnergy"));
+	registerInputCollectionProcessor(new InputCollectionProcessor_SimCalorimeterHit_collection(Tree_BeforeKink,"InputCollectionName4","BeforeKinkPositions"));
+	registerInputCollectionProcessor(new InputCollectionProcessor_SimCalorimeterHit_collection(Tree_BeforeCollimator,"InputCollectionName5","BeforeCollimatorPositions"));
+	registerInputCollectionProcessor(new InputCollectionProcessor_SimCalorimeterHit_collection(Tree_BetweenCollimators,"InputCollectionName6","BetweenCollimators"));
+	registerInputCollectionProcessor(new InputCollectionProcessor_SimCalorimeterHit_collection(Tree_BehindCollimators,"InputCollectionName7","BehindCollimators"));
+	registerInputCollectionProcessor(new InputCollectionProcessor_SimCalorimeterHit_collection(Tree_BeforeTBCollimator,"InputCollectionName8","BeforeTBCollimator"));
+//	registerInputCollectionProcessor(new InputCollectionProcessor_LCGenericObject_collection(Tree,"InputCollectionName7","MCParticleEndPointEnergy"));
 
 	registerOutputCollectionProcessor(new OutputCollectionProcessor_MCParticle_collection("MCParticlePhotonSource"));
-
+*/
   	printParameters() ;
     	_iRun = 0 ;
     	_iEvt = 0 ;

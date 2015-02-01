@@ -108,9 +108,14 @@ while(<INPUTFILE>)
 	print STEERINGFILE "</global>","\n";
 	print STEERINGFILE "<processor name=\"Sim_Processor\" type=\"SimProcessor\">","\n";
 	print STEERINGFILE "<parameter name=\"InputCollectionName\" type=\"string\" lcioInType=\"MCParticle\"> MCParticle </parameter>","\n";
-	print STEERINGFILE "<parameter name=\"InputCollectionName2\" type=\"string\" lcioInType=\"SimCalorimeterHit\"> CarbonFiberHits </parameter>","\n";
-	print STEERINGFILE "<parameter name=\"InputCollectionName3\" type=\"string\" lcioInType=\"LCGenericObject\"> MCParticleEndPointEnergy </parameter>","\n";
-	print STEERINGFILE "<parameter name=\"OutputCollectionName\" type=\"string\" lcioOutType=\"MCParticle\"> MCParticlePhotonSource </parameter>","\n";
+	print STEERINGFILE "<parameter name=\"InputCollectionName2\" type=\"string\" lcioInType=\"SimCalorimeterHit\"> EnterMagnetPositions </parameter>","\n";
+	print STEERINGFILE "<parameter name=\"InputCollectionName3\" type=\"string\" lcioInType=\"SimCalorimeterHit\"> LeaveMagnetPositions </parameter>","\n";
+	print STEERINGFILE "<parameter name=\"InputCollectionName4\" type=\"string\" lcioInType=\"SimCalorimeterHit\"> BeforeKinkPositions </parameter>","\n";
+	print STEERINGFILE "<parameter name=\"InputCollectionName5\" type=\"string\" lcioInType=\"SimCalorimeterHit\"> BeforeCollimatorPositions </parameter>","\n";
+	print STEERINGFILE "<parameter name=\"InputCollectionName6\" type=\"string\" lcioInType=\"SimCalorimeterHit\"> BetweenCollimators </parameter>","\n";
+	print STEERINGFILE "<parameter name=\"InputCollectionName7\" type=\"string\" lcioInType=\"SimCalorimeterHit\"> BehindCollimators </parameter>","\n";
+	print STEERINGFILE "<parameter name=\"InputCollectionName8\" type=\"string\" lcioInType=\"SimCalorimeterHit\"> BeforeTBCollimator </parameter>","\n";
+	print STEERINGFILE "<parameter name=\"InputCollectionName9\" type=\"string\" lcioInType=\"LCGenericObject\"> MCParticleEndPointEnergy </parameter>","\n";
 	print STEERINGFILE "</processor>","\n";
 	print STEERINGFILE "</marlin>","\n";
 	close(STEERINGFILE);

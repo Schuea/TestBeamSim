@@ -1,0 +1,51 @@
+<lccdd xmlns:compact="http://www.lcsim.org/schemas/compact/1.0"
+       xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+       xs:noNamespaceSchemaLocation="http://www.lcsim.org/schemas/compact/1.0/compact.xsd">
+    
+    <info name="Lead/Concrete_block">
+        <comment>Simulation of stopping ability of lead and concrete</comment>
+    </info>
+
+    <define>
+    
+        <!-- world -->
+        <constant name="world_side" value="2*22570.*mm" />
+        <constant name="world_x" value="4000.*mm" />
+        <constant name="world_y" value="4000.*mm" />
+        <constant name="world_z" value="world_side" />
+
+        <!-- tracking region -->
+        <constant name="tracking_region_radius" value="3000.*mm"/>
+        <constant name="tracking_region_min" value="5.0*mm"/>
+        <constant name="tracking_region_zmax" value="world_side"/>
+        
+    </define>
+    
+    <materials>
+        <!-- Set the world material to vacuum. -->
+        <material name="WorldMaterial">
+            <D type="density" unit="g/cm3" value="0.001225"/>
+            <fraction n="1.0" ref="Air" />
+        </material>
+        <!-- Set tracking material to vacuum. -->
+        <material name="TrackingMaterial">
+            <D type="density" unit="g/cm3" value="0.0000000000000001"/>
+            <fraction n="1.0" ref="Vacuum" />
+        </material>
+
+    </materials>
+
+    <detectors>       
+    </detectors>
+    
+    <readouts>   
+    </readouts>
+
+    <fields>
+    </fields>
+
+    <includes>
+        <gdmlFile file="Pipe_Air.gdml" />
+    </includes>
+
+</lccdd>

@@ -23,40 +23,45 @@
 
 using namespace std;
 
-void DrawingMacro(string name); 
+void DrawingMacro(string name1, string name2); 
 
 int main(int argc,char *argv[]){
-	if(argc < 2 || argc > 2){
+	if(argc < 3 || argc > 3){
     		//explain how to use program	
-    		cerr << "Type in root filename!" << endl;
-    		cerr << "e.g. ./DrawHistograms file.root" << endl;
+    		cerr << "Type in root filenames!" << endl;
+    		cerr << "e.g. ./DrawHistograms file1.root file2.root" << endl;
     		terminate();
 	}	
-	string filename;
-	filename = argv[1];
+	string filename1, filename2;
+	filename1 = argv[1];
+	filename2 = argv[2];
 
        
-	DrawingMacro(filename);
+	DrawingMacro(filename1,filename2);
 }
 
-void DrawingMacro(string name){
+void DrawingMacro(string name1, string name2){
 	TH1::SetDefaultSumw2();
 
-	TFile * input_rootfile = new TFile(name.c_str(),"READ");
-	cout << "Inputfile size = " << input_rootfile->GetSize() << endl;
-	TTree * T = (TTree*)input_rootfile->Get("Tree");
-	cout << "Accessed TTree.." << endl;
+	TFile * input_rootfile1 = new TFile(name1.c_str(),"READ");
+	cout << "Inputfile1 size = " << input_rootfile1->GetSize() << endl;
+	TTree * T1 = (TTree*)input_rootfile1->Get("Tree_MCP");
+	TFile * input_rootfile2 = new TFile(name2.c_str(),"READ");
+	cout << "Inputfile2 size = " << input_rootfile2->GetSize() << endl;
+	TTree * T2 = (TTree*)input_rootfile2->Get("Tree_MCP");
+
+	cout << "Accessed TTrees.." << endl;
 
 	stringstream output_filename;
-	output_filename << "histograms_" << name;
+	output_filename << "histograms_" << name1;
 	TFile * output_rootfile = new TFile(output_filename.str().c_str(),"RECREATE");
 
-	TH1F * EnergyHisto_DESY_II_beam = new TH1F("E_DESY_II_beam","Energy distribution of electrons in the DESY II beam bunch (here 10^{7} instead of 10^{10} e^{-})",200,6.2,6.4);
+	TH1F * EnergyHisto_DESY_II_beam = new TH1F("E_DESY_II_beam","Energy distribution of electrons in the DESY II beam bunch (here 10^{7} instead of 10^{10} e^{-})",200,6.0,6.4);
 	EnergyHisto_DESY_II_beam->SetLineColor(4);
 	EnergyHisto_DESY_II_beam->GetXaxis()->SetTitle("Energy (GeV)");
 	EnergyHisto_DESY_II_beam->GetXaxis()->CenterTitle();
 
-	TH2F * beam_shape = new TH2F("beam_shape","DESY II beam shape",1000,-0.0005,0.0005,1000,-0.0005,0.0005);
+	TH2F * beam_shape = new TH2F("beam_shape","DESY II beam shape",1000,-4,4,1000,-4,4);
 	beam_shape->GetXaxis()->SetTitle("x (mm)");
 	beam_shape->GetXaxis()->CenterTitle();
 	beam_shape->GetYaxis()->SetTitle("y (mm)");
@@ -66,34 +71,37 @@ void DrawingMacro(string name){
 	TCanvas * Energy_Canvas = new TCanvas("beam_Energy_Canvas");
 
 	Energy_Canvas->cd();
-	T->Draw("Energy >>+ E_DESY_II_beam","Particle_ID==11");	
+	T1->Draw("Energy >>+ E_DESY_II_beam","Particle_ID==11");	
+	T2->Draw("Energy >>+ E_DESY_II_beam","Particle_ID==11");	
 	TF1 *gausfit = new TF1("gausfit","gaus");
 	EnergyHisto_DESY_II_beam->Fit(gausfit,"U");
 
 	string canvasname=Energy_Canvas->GetName();
 	Energy_Canvas->Write();
-	Energy_Canvas->Print((canvasname+".eps").c_str());
-	Energy_Canvas->Print((canvasname+".C").c_str());
+	Energy_Canvas->Print((canvasname+name1+".eps").c_str());
+	Energy_Canvas->Print((canvasname+name1+".C").c_str());
 	Energy_Canvas->Close();
 
 
 	Position_Canvas->cd();
 	TGaxis::SetMaxDigits(2);
-	T->Draw("Reflectiony:Reflectionx >>+ beam_shape","Particle_ID==11","colz");	
+	T1->Draw("Reflectiony:Reflectionx >>+ beam_shape","Particle_ID==11","colz");	
+	T2->Draw("Reflectiony:Reflectionx >>+ beam_shape","Particle_ID==11","colz");	
 	gStyle->SetNumberContours(99);
 	gPad->SetLogz();
 	gROOT->ForceStyle();
 
 	string canvasname2=Position_Canvas->GetName();
 	Position_Canvas->Write();
-	Position_Canvas->Print((canvasname2+".eps").c_str());
-	Position_Canvas->Print((canvasname2+".C").c_str());
+	Position_Canvas->Print((canvasname2+name1+".eps").c_str());
+	Position_Canvas->Print((canvasname2+name1+".C").c_str());
 	Position_Canvas->Close();
 
 	output_rootfile->Write();
-	input_rootfile->Close();
+	input_rootfile1->Close();
+	input_rootfile2->Close();
 
-	delete input_rootfile, output_rootfile;
+	delete input_rootfile1, input_rootfile2, output_rootfile;
 	delete Position_Canvas, Energy_Canvas;
 }
 

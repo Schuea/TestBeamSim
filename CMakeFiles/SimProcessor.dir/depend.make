@@ -74,6 +74,7 @@ CMakeFiles/SimProcessor.dir/src/SimProcessor.cc.o: /nfs/dust/atlas/user/schuea/s
 CMakeFiles/SimProcessor.dir/src/SimProcessor.cc.o: /nfs/dust/atlas/user/schuea/scratch/sid_complete/v01-17-02-sid/lcio/v02-04-01/include/EVENT/LCRunHeader.h
 CMakeFiles/SimProcessor.dir/src/SimProcessor.cc.o: /nfs/dust/atlas/user/schuea/scratch/sid_complete/v01-17-02-sid/lcio/v02-04-01/include/EVENT/MCParticle.h
 CMakeFiles/SimProcessor.dir/src/SimProcessor.cc.o: /nfs/dust/atlas/user/schuea/scratch/sid_complete/v01-17-02-sid/lcio/v02-04-01/include/EVENT/SimCalorimeterHit.h
+CMakeFiles/SimProcessor.dir/src/SimProcessor.cc.o: /nfs/dust/atlas/user/schuea/scratch/sid_complete/v01-17-02-sid/lcio/v02-04-01/include/EVENT/SimTrackerHit.h
 CMakeFiles/SimProcessor.dir/src/SimProcessor.cc.o: /nfs/dust/atlas/user/schuea/scratch/sid_complete/v01-17-02-sid/lcio/v02-04-01/include/Exceptions.h
 CMakeFiles/SimProcessor.dir/src/SimProcessor.cc.o: /nfs/dust/atlas/user/schuea/scratch/sid_complete/v01-17-02-sid/lcio/v02-04-01/include/IMPL/AccessChecked.h
 CMakeFiles/SimProcessor.dir/src/SimProcessor.cc.o: /nfs/dust/atlas/user/schuea/scratch/sid_complete/v01-17-02-sid/lcio/v02-04-01/include/IMPL/LCCollectionVec.h

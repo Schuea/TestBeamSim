@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lcdd xmlns:lcdd="http://www.lcsim.org/schemas/lcdd/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="http://www.lcsim.org/schemas/lcdd/1.0/lcdd.xsd">
+  <header>
+    <detector name="BeamPipe_Air" />
+    <generator name="GeomConverter" version="1.0" file="PipeAir_compact.xml" checksum="2269903139" />
+    <author name="NONE" />
+    <comment>Simulation of primary and secondary particles due to pipe and air</comment>
+  </header>
+  <iddict />
+  <sensitive_detectors />
+  <limits />
+  <regions>
+    <region name="TrackingRegion" store_secondaries="true" kill_tracks="false" cut="10.0" lunit="mm" threshold="1.0" eunit="MeV" />
+  </regions>
+  <display>
+    <vis name="WorldVis" line_style="unbroken" drawing_style="wireframe" show_daughters="true" visible="false">
+      <color R="1.0" G="1.0" B="1.0" alpha="1.0" />
+    </vis>
+    <vis name="TrackingVis" line_style="unbroken" drawing_style="wireframe" show_daughters="true" visible="false">
+      <color R="1.0" G="1.0" B="1.0" alpha="1.0" />
+    </vis>
+  </display>
+  <gdml>
+    <define>
+      <rotation name="identity_rot" x="0.0" y="0.0" z="0.0" unit="radian" />
+      <rotation name="reflect_rot" x="3.141592653589793" y="0.0" z="0.0" unit="radian" />
+      <position name="identity_pos" x="0.0" y="0.0" z="0.0" unit="mm" />
+      <constant name="world_side" value="45140.0" />
+      <constant name="tracking_region_min" value="5.0" />
+      <constant name="tracking_region_radius" value="3000.0" />
+      <constant name="world_y" value="4000.0" />
+      <constant name="world_z" value="45140.0" />
+      <constant name="tracking_region_zmax" value="45140.0" />
+      <constant name="world_x" value="4000.0" />
+    </define>
+    <materials>
+      <element Z="7" formula="N" name="N">
+        <atom type="A" unit="g/mol" value="14.0068" />
+      </element>
+      <element Z="8" formula="O" name="O">
+        <atom type="A" unit="g/mol" value="15.9994" />
+      </element>
+      <element Z="18" formula="Ar" name="Ar">
+        <atom type="A" unit="g/mol" value="39.9477" />
+      </element>
+      <element Z="1" formula="H" name="H">
+        <atom type="A" unit="g/mol" value="1.00794" />
+      </element>
+      <material name="Air">
+        <D type="density" unit="g/cm3" value="0.0012" />
+        <fraction n="0.754" ref="N" />
+        <fraction n="0.234" ref="O" />
+        <fraction n="0.012" ref="Ar" />
+      </material>
+      <material name="WorldMaterial">
+        <D type="density" unit="g/cm3" value="0.001225" />
+        <fraction n="1.0" ref="Air" />
+      </material>
+      <material name="Vacuum">
+        <D type="density" unit="g/cm3" value="0.00000001" />
+        <fraction n="1" ref="H" />
+      </material>
+      <material name="TrackingMaterial">
+        <D type="density" unit="g/cm3" value="0.0000000000000001" />
+        <fraction n="1.0" ref="Vacuum" />
+      </material>
+      <element Z="6" formula="C" name="C">
+        <atom type="A" unit="g/mol" value="12.0107" />
+      </element>
+      <element Z="13" name="Al" formula="Al">
+        <atom type="A" unit="g/mol" value="26.9815" />
+      </element>
+      <element Z="14" formula="Si" name="Si">
+        <atom type="A" unit="g/mol" value="28.0854" />
+      </element>
+      <element Z="15" formula="P" name="P">
+        <atom type="A" unit="g/mol" value="30.9738" />
+      </element>
+      <element Z="16" formula="S" name="S">
+        <atom type="A" unit="g/mol" value="32.065" />
+      </element>
+      <element Z="24" formula="Cr" name="Cr">
+        <atom type="A" unit="g/mol" value="51.9961" />
+      </element>
+      <element Z="25" formula="Mn" name="Mn">
+        <atom type="A" unit="g/mol" value="54.9380" />
+      </element>
+      <element Z="26" formula="Fe" name="Fe">
+        <atom type="A" unit="g/mol" value="55.8451" />
+      </element>
+      <element Z="28" formula="Ni" name="Ni">
+        <atom type="A" unit="g/mol" value="58.6934" />
+      </element>
+      <element Z="29" formula="Cu" name="Cu">
+        <atom type="A" unit="g/mol" value="63.546" />
+      </element>
+      <element Z="42" formula="Mo" name="Mo">
+        <atom type="A" unit="g/mol" value="95.95" />
+      </element>
+      <element Z="74" formula="W" name="W">
+        <atom type="A" unit="g/mol" value="183.84" />
+      </element>
+      <element Z="82" formula="Pb" name="Pb">
+        <atom type="A" unit="g/mol" value="207.217" />
+      </element>
+      <material name="Aluminium">
+        <D type="density" value="2.702" unit="g/cm3" />
+        <fraction n="1.0" ref="Al" />
+      </material>
+      <material name="Lead">
+        <D type="density" value="11.342" unit="g/cm3" />
+        <fraction n="1.0" ref="Pb" />
+      </material>
+      <material name="CaO">
+        <D type="density" value="3.35" unit="g/cm3" />
+        <composite n="1" ref="C" />
+        <composite n="1" ref="O" />
+      </material>
+      <material name="SiO2">
+        <D type="density" value="2.65" unit="g/cm3" />
+        <composite n="1" ref="Si" />
+        <composite n="2" ref="O" />
+      </material>
+      <material name="Al2O3">
+        <D type="density" value="3.95" unit="g/cm3" />
+        <composite n="2" ref="Al" />
+        <composite n="3" ref="O" />
+      </material>
+      <material name="Fe2O3">
+        <D type="density" value="5.24" unit="g/cm3" />
+        <composite n="2" ref="Fe" />
+        <composite n="3" ref="O" />
+      </material>
+      <material name="heavyConcrete">
+        <D type="density" value="3.7" unit="g/cm3" />
+        <fraction n="0.65" ref="CaO" />
+        <fraction n="0.20" ref="SiO2" />
+        <fraction n="0.10" ref="Al2O3" />
+        <fraction n="0.05" ref="Fe2O3" />
+      </material>
+      <material name="Iron">
+        <D type="density" value="7.874" unit="g/cm3" />
+        <fraction n="1.0" ref="Fe" />
+      </material>
+    </materials>
+    <solids>
+      <box name="world_box" x="world_x" y="world_y" z="world_z" />
+      <tube name="tracking_cylinder" deltaphi="6.283185307179586" rmin="0.0" rmax="tracking_region_radius" z="2*tracking_region_zmax" />
+      <tube name="BeamPipe" rmin="33." rmax="35." z="4000." deltaphi="360" startphi="0" aunit="deg" lunit="mm" />
+      <tube name="BeamPipeWindow" rmin="0" rmax="35." z="5.0" deltaphi="360" startphi="0" aunit="deg" lunit="mm" />
+      <box lunit="mm" name="WorldBox" x="4000." y="4000." z="world_side" />
+    </solids>
+    <structure>
+      <volume name="BeamPipe_vol">
+        <materialref ref="Aluminium" />
+        <solidref ref="BeamPipe" />
+      </volume>
+      <volume name="BeamPipeWindow_vol">
+        <materialref ref="Aluminium" />
+        <solidref ref="BeamPipeWindow" />
+      </volume>
+      <volume name="tracking_volume">
+        <materialref ref="TrackingMaterial" />
+        <solidref ref="tracking_cylinder" />
+        <physvol>
+          <volumeref ref="BeamPipe_vol" />
+          <position name="BeamPipe_vol_position" x="0." y="0." z="2000." />
+        </physvol>
+        <physvol>
+          <volumeref ref="BeamPipeWindow_vol" />
+          <position name="BeamPipeWindow_vol_position" x="0." y="0." z="4002.5" />
+        </physvol>
+        <regionref ref="TrackingRegion" />
+        <visref ref="TrackingVis" />
+      </volume>
+      <volume name="world_volume">
+        <materialref ref="WorldMaterial" />
+        <solidref ref="world_box" />
+        <physvol>
+          <volumeref ref="tracking_volume" />
+          <positionref ref="identity_pos" />
+          <rotationref ref="identity_rot" />
+        </physvol>
+        <visref ref="WorldVis" />
+      </volume>
+    </structure>
+    <setup name="Default" version="1.0">
+      <world ref="world_volume" />
+    </setup>
+  </gdml>
+  <fields />
+</lcdd>
+

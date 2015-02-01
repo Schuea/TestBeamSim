@@ -38,9 +38,20 @@ class SimProcessor : public marlin::Processor {
     	int _iEvt;  // Event number
 
 	TFile *File;
+
 	TTree *Tree_MCParticle;
+
+	TTree *Tree_TrackerPlane1;
+	TTree *Tree_TrackerPlane2;
+	TTree *Tree_MagnetField;
+
 	TTree *Tree_EnterMagnet;
 	TTree *Tree_LeaveMagnet;
+	TTree *Tree_BeforeKink;
+	TTree *Tree_BeforeCollimator;
+	TTree *Tree_BetweenCollimators;
+	TTree *Tree_BehindCollimators;
+	TTree *Tree_BeforeTBCollimator;
 
 	std::vector<Collection_Processor_Interface*> input_col_processors;
 	std::vector<OutputCollection_Processor_Interface*> output_col_processors;

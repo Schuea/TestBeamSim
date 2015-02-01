@@ -15,14 +15,14 @@
     <constant name="cm" value="10"/>
     
     <!-- world -->
-    <constant name="world_side" value="0.02*cm" />
+    <constant name="world_side" value="2*cm" />
     <constant name="world_x" value="world_side" />
     <constant name="world_y" value="world_side" />
     <constant name="world_z" value="world_side" />
 
     <!-- tracking region -->
     <constant name="tracking_region_radius" value="150*cm"/>
-    <constant name="tracking_region_zmax" value="0.01*cm"/>
+    <constant name="tracking_region_zmax" value="1*cm"/>
 
   </define>
   <materials>

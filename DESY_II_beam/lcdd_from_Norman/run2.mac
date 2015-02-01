@@ -1,0 +1,14 @@
+
+/lcio/fileExists delete
+
+/vis/scene/create
+/vis/scene/add/trajectories
+/vis/scene/add/hits
+/vis/scene/add/volume
+/vis/open OGLSX
+/vis/viewer/set/viewpointThetaPhi -90 89
+/generator/select gps
+/gps/particle chargedgeantino
+/gps/direction 0 0 1
+/gps/energy 3 GeV
+/run/beamOn 1

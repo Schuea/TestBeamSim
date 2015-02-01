@@ -2,12 +2,91 @@
 <lcdd xmlns:lcdd="http://www.lcsim.org/schemas/lcdd/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="http://www.lcsim.org/schemas/lcdd/1.0/lcdd.xsd">
   <header>
     <detector name="CopperTarget" />
-    <generator name="GeomConverter" version="1.0" file="/afs/desy.de/user/s/schuea/mymarlin/DESY_II_beam/Collimator_TB_area/Pipe_Converter_Magnet_Collimator_CollimatorTBarea.xml" checksum="2284233549" />
+    <generator name="GeomConverter" version="1.0" file="/afs/desy.de/user/s/schuea/mymarlin/DESY_II_beam/Collimator_TB_area/Pipe_Converter_Magnet_Collimator_CollimatorTBarea.xml" checksum="102145276" />
     <author name="Marcel Stanitzki" />
     <comment>NONE</comment>
   </header>
-  <iddict />
-  <sensitive_detectors />
+  <iddict>
+    <idspec name="BeforeCollimatorPositions" length="64">
+      <idfield signed="false" label="system" length="8" start="0" />
+      <idfield signed="true" label="y" length="21" start="8" />
+      <idfield signed="false" label="barrel" length="3" start="29" />
+      <idfield signed="true" label="x" length="21" start="32" />
+      <idfield signed="false" label="layer" length="11" start="53" />
+    </idspec>
+    <idspec name="BeforeTBCollimator" length="64">
+      <idfield signed="false" label="system" length="8" start="0" />
+      <idfield signed="true" label="y" length="21" start="8" />
+      <idfield signed="false" label="barrel" length="3" start="29" />
+      <idfield signed="true" label="x" length="21" start="32" />
+      <idfield signed="false" label="layer" length="11" start="53" />
+    </idspec>
+    <idspec name="EnterMagnetPositions" length="64">
+      <idfield signed="false" label="system" length="8" start="0" />
+      <idfield signed="true" label="y" length="21" start="8" />
+      <idfield signed="false" label="barrel" length="3" start="29" />
+      <idfield signed="true" label="x" length="21" start="32" />
+      <idfield signed="false" label="layer" length="11" start="53" />
+    </idspec>
+    <idspec name="LeaveMagnetPositions" length="64">
+      <idfield signed="false" label="system" length="8" start="0" />
+      <idfield signed="true" label="y" length="21" start="8" />
+      <idfield signed="false" label="barrel" length="3" start="29" />
+      <idfield signed="true" label="x" length="21" start="32" />
+      <idfield signed="false" label="layer" length="11" start="53" />
+    </idspec>
+    <idspec name="BetweenCollimators" length="64">
+      <idfield signed="false" label="system" length="8" start="0" />
+      <idfield signed="true" label="y" length="21" start="8" />
+      <idfield signed="false" label="barrel" length="3" start="29" />
+      <idfield signed="true" label="x" length="21" start="32" />
+      <idfield signed="false" label="layer" length="11" start="53" />
+    </idspec>
+    <idspec name="BeforeKinkPositions" length="64">
+      <idfield signed="false" label="system" length="8" start="0" />
+      <idfield signed="true" label="y" length="21" start="8" />
+      <idfield signed="false" label="barrel" length="3" start="29" />
+      <idfield signed="true" label="x" length="21" start="32" />
+      <idfield signed="false" label="layer" length="11" start="53" />
+    </idspec>
+    <idspec name="BehindCollimators" length="64">
+      <idfield signed="false" label="system" length="8" start="0" />
+      <idfield signed="true" label="y" length="21" start="8" />
+      <idfield signed="false" label="barrel" length="3" start="29" />
+      <idfield signed="true" label="x" length="21" start="32" />
+      <idfield signed="false" label="layer" length="11" start="53" />
+    </idspec>
+  </iddict>
+  <sensitive_detectors>
+    <calorimeter name="Scintillator2" ecut="0.0" eunit="MeV" verbose="0" hits_collection="LeaveMagnetPositions">
+      <idspecref ref="LeaveMagnetPositions" />
+      <grid_xyz grid_size_x="0.1" grid_size_y="0.1" grid_size_z="0.0" />
+    </calorimeter>
+    <calorimeter name="Scintillator3" ecut="0.0" eunit="MeV" verbose="0" hits_collection="BeforeKinkPositions">
+      <idspecref ref="BeforeKinkPositions" />
+      <grid_xyz grid_size_x="0.1" grid_size_y="0.1" grid_size_z="0.0" />
+    </calorimeter>
+    <calorimeter name="Scintillator6" ecut="0.0" eunit="MeV" verbose="0" hits_collection="BehindCollimators">
+      <idspecref ref="BehindCollimators" />
+      <grid_xyz grid_size_x="0.1" grid_size_y="0.1" grid_size_z="0.0" />
+    </calorimeter>
+    <calorimeter name="Scintillator7" ecut="0.0" eunit="MeV" verbose="0" hits_collection="BeforeTBCollimator">
+      <idspecref ref="BeforeTBCollimator" />
+      <grid_xyz grid_size_x="0.1" grid_size_y="0.1" grid_size_z="0.0" />
+    </calorimeter>
+    <calorimeter name="Scintillator4" ecut="0.0" eunit="MeV" verbose="0" hits_collection="BeforeCollimatorPositions">
+      <idspecref ref="BeforeCollimatorPositions" />
+      <grid_xyz grid_size_x="0.1" grid_size_y="0.1" grid_size_z="0.0" />
+    </calorimeter>
+    <calorimeter name="Scintillator5" ecut="0.0" eunit="MeV" verbose="0" hits_collection="BetweenCollimators">
+      <idspecref ref="BetweenCollimators" />
+      <grid_xyz grid_size_x="0.1" grid_size_y="0.1" grid_size_z="0.0" />
+    </calorimeter>
+    <calorimeter name="Scintillator" ecut="0.0" eunit="MeV" verbose="0" hits_collection="EnterMagnetPositions">
+      <idspecref ref="EnterMagnetPositions" />
+      <grid_xyz grid_size_x="0.1" grid_size_y="0.1" grid_size_z="0.0" />
+    </calorimeter>
+  </sensitive_detectors>
   <limits />
   <regions>
     <region name="TrackingRegion" store_secondaries="true" kill_tracks="false" cut="10.0" lunit="mm" threshold="1.0" eunit="MeV" />
@@ -32,19 +111,25 @@
       <constant name="world_z" value="64740.0" />
       <constant name="tracking_region_zmax" value="32370.0" />
       <constant name="world_x" value="64740.0" />
-      <position name="Collimator_HorizontalCollimator_component0_position" x="72.66" y="0.0" z="25160.239999999998" unit="mm" />
+      <position name="Collimator_HorizontalCollimator_component0_position" x="98.25999999999999" y="0.0" z="25160.239999999998" unit="mm" />
       <rotation name="Collimator_HorizontalCollimator_component0_rotation" x="0.0" y="0.032" z="0.0" unit="radian" />
-      <position name="Collimator_HorizontalCollimator_component1_position" x="-62.27" y="0.0" z="25164.56" unit="mm" />
+      <position name="Collimator_HorizontalCollimator_component1_position" x="-36.67" y="0.0" z="25164.56" unit="mm" />
       <rotation name="Collimator_HorizontalCollimator_component1_rotation" x="0.0" y="0.032" z="0.0" unit="radian" />
-      <position name="Collimator_VerticalCollimator_component0_position" x="1.1726" y="67.5" z="25366.300000000003" unit="mm" />
+      <position name="Collimator_VerticalCollimator_component0_position" x="37.326" y="67.5" z="25366.300000000003" unit="mm" />
       <rotation name="Collimator_VerticalCollimator_component0_rotation" x="0.0" y="0.032" z="0.0" unit="radian" />
-      <position name="Collimator_VerticalCollimator_component1_position" x="11.726" y="-67.5" z="25366.300000000003" unit="mm" />
+      <position name="Collimator_VerticalCollimator_component1_position" x="37.326" y="-67.5" z="25366.300000000003" unit="mm" />
       <rotation name="Collimator_VerticalCollimator_component1_rotation" x="0.0" y="0.032" z="0.0" unit="radian" />
       <position name="Air1_position" x="0.0" y="0.0" z="13287.5" unit="mm" />
       <position name="Air1_layerType0_slice0_position" x="0.0" y="0.0" z="0.0" unit="mm" />
       <position name="Air1_layer0_position" x="0.0" y="0.0" z="0.0" unit="mm" />
       <position name="Iron_Pipe_position" x="0.0" y="0.0" z="23586.25" />
       <rotation name="Iron_Pipe_rotation" x="0.0" y="0.0" z="0.0" unit="radian" />
+      <position name="Scintillator2_position" x="0.0" y="0.0" z="24727.5" unit="mm" />
+      <position name="Scintillator2_layerType0_slice0_position" x="0.0" y="0.0" z="0.0" unit="mm" />
+      <position name="Scintillator2_layer0_position" x="0.0" y="0.0" z="0.0" unit="mm" />
+      <position name="Scintillator3_position" x="0.0" y="0.0" z="25000.0" unit="mm" />
+      <position name="Scintillator3_layerType0_slice0_position" x="0.0" y="0.0" z="0.0" unit="mm" />
+      <position name="Scintillator3_layer0_position" x="0.0" y="0.0" z="0.0" unit="mm" />
       <position name="Air3_position" x="0.0" y="0.0" z="23236.225" unit="mm" />
       <position name="Air3_layerType0_slice0_position" x="0.0" y="0.0" z="0.0" unit="mm" />
       <position name="Air3_layer0_position" x="0.0" y="0.0" z="0.0" unit="mm" />
@@ -53,22 +138,37 @@
       <position name="Air2_position" x="0.0" y="0.0" z="23018.75" unit="mm" />
       <position name="Air2_layerType0_slice0_position" x="0.0" y="0.0" z="0.0" unit="mm" />
       <position name="Air2_layer0_position" x="0.0" y="0.0" z="0.0" unit="mm" />
-      <position name="Kapton_Window_position" x="0.0" y="0.0" z="23400.0" />
-      <rotation name="Kapton_Window_rotation" x="0.0" y="0.0" z="0.0" unit="radian" />
+      <position name="Scintillator6_position" x="0.0" y="0.0" z="25429.0" unit="mm" />
+      <position name="Scintillator6_layerType0_slice0_position" x="0.0" y="0.0" z="0.0" unit="mm" />
+      <position name="Scintillator6_layer0_position" x="0.0" y="0.0" z="0.0" unit="mm" />
+      <position name="Scintillator7_position" x="0.0" y="0.0" z="32218.5" unit="mm" />
+      <position name="Scintillator7_layerType0_slice0_position" x="0.0" y="0.0" z="0.0" unit="mm" />
+      <position name="Scintillator7_layer0_position" x="0.0" y="0.0" z="0.0" unit="mm" />
       <position name="Iron_Pipe2_position" x="0.0" y="0.0" z="24847.5" />
       <rotation name="Iron_Pipe2_rotation" x="0.0" y="0.0" z="0.0" unit="radian" />
+      <position name="Kapton_Window_position" x="0.0" y="0.0" z="23400.0" />
+      <rotation name="Kapton_Window_rotation" x="0.0" y="0.0" z="0.0" unit="radian" />
+      <position name="Scintillator4_position" x="0.0" y="0.0" z="25100.0" unit="mm" />
+      <position name="Scintillator4_layerType0_slice0_position" x="0.0" y="0.0" z="0.0" unit="mm" />
+      <position name="Scintillator4_layer0_position" x="0.0" y="0.0" z="0.0" unit="mm" />
       <position name="ConverterTarget_position" x="0.0" y="0.0" z="23070.0" unit="mm" />
       <position name="ConverterTarget_layerType0_slice0_position" x="0.0" y="0.0" z="0.0" unit="mm" />
       <position name="ConverterTarget_layer0_position" x="0.0" y="0.0" z="0.0" unit="mm" />
+      <position name="Scintillator5_position" x="0.0" y="0.0" z="25260.0" unit="mm" />
+      <position name="Scintillator5_layerType0_slice0_position" x="0.0" y="0.0" z="0.0" unit="mm" />
+      <position name="Scintillator5_layer0_position" x="0.0" y="0.0" z="0.0" unit="mm" />
       <position name="Aluminium_window_position" x="0.0" y="0.0" z="4002.5" />
       <rotation name="Aluminium_window_rotation" x="0.0" y="0.0" z="0.0" unit="radian" />
-      <position name="Collimator_TBarea_Collimator_TBarea_component0_position" x="230.95" y="51.25" z="32214.8" unit="mm" />
+      <position name="Scintillator_position" x="0.0" y="0.0" z="23672.5" unit="mm" />
+      <position name="Scintillator_layerType0_slice0_position" x="0.0" y="0.0" z="0.0" unit="mm" />
+      <position name="Scintillator_layer0_position" x="0.0" y="0.0" z="0.0" unit="mm" />
+      <position name="Collimator_TBarea_Collimator_TBarea_component0_position" x="256.55" y="51.25" z="32214.8" unit="mm" />
       <rotation name="Collimator_TBarea_Collimator_TBarea_component0_rotation" x="0.0" y="0.032" z="0.0" unit="radian" />
-      <position name="Collimator_TBarea_Collimator_TBarea_component1_position" x="230.95" y="-51.25" z="32214.8" unit="mm" />
+      <position name="Collimator_TBarea_Collimator_TBarea_component1_position" x="256.55" y="-51.25" z="32214.8" unit="mm" />
       <rotation name="Collimator_TBarea_Collimator_TBarea_component1_rotation" x="0.0" y="0.032" z="0.0" unit="radian" />
-      <position name="Collimator_TBarea_Collimator_TBarea_component2_position" x="282.2" y="0.0" z="32214.8" unit="mm" />
+      <position name="Collimator_TBarea_Collimator_TBarea_component2_position" x="307.8" y="0.0" z="32213.159999999996" unit="mm" />
       <rotation name="Collimator_TBarea_Collimator_TBarea_component2_rotation" x="0.0" y="0.032" z="0.0" unit="radian" />
-      <position name="Collimator_TBarea_Collimator_TBarea_component3_position" x="179.7" y="0.0" z="32214.8" unit="mm" />
+      <position name="Collimator_TBarea_Collimator_TBarea_component3_position" x="205.29999999999998" y="0.0" z="32216.44" unit="mm" />
       <rotation name="Collimator_TBarea_Collimator_TBarea_component3_rotation" x="0.0" y="0.032" z="0.0" unit="radian" />
       <position name="LeadShielding_Lead_Block_component0_position" x="-100.0" y="-50.0" z="22670.0" unit="mm" />
       <position name="LeadShielding_Lead_Block_component1_position" x="162.5" y="12.5" z="22670.0" unit="mm" />
@@ -82,7 +182,7 @@
       <position name="LeadShielding_Concrete_SideBlock_component0_position" x="-700.0" y="-675.0" z="23270.0" unit="mm" />
       <position name="StainlessSteel_Pipe_position" x="0.0" y="0.0" z="23538.125" />
       <rotation name="StainlessSteel_Pipe_rotation" x="0.0" y="0.0" z="0.0" unit="radian" />
-      <position name="StainlessSteel_Pipe4_position" x="119.94" y="0.0" z="28746.8" />
+      <position name="StainlessSteel_Pipe4_position" x="145.54" y="0.0" z="28746.8" />
       <rotation name="StainlessSteel_Pipe4_rotation" x="0.0" y="0.032" z="0.0" />
       <position name="DipoleMagnet_FirstIronLayer_component0_position" x="0.0" y="265.0" z="23676.25" unit="mm" />
       <position name="DipoleMagnet_FirstIronLayer_component1_position" x="0.0" y="-265.0" z="23676.25" unit="mm" />
@@ -108,7 +208,7 @@
       <position name="DipoleMagnet_IronPole_component1_position" x="0.0" y="-117.5" z="24200.0" unit="mm" />
       <position name="StainlessSteel_Pipe2_position" x="0.0" y="0.0" z="24863.75" />
       <rotation name="StainlessSteel_Pipe2_rotation" x="0.0" y="0.0" z="0.0" unit="radian" />
-      <position name="StainlessSteel_Pipe3_position" x="1.6" y="0.0" z="25049.969999999998" />
+      <position name="StainlessSteel_Pipe3_position" x="27.200000000000003" y="0.0" z="25049.969999999998" />
       <rotation name="StainlessSteel_Pipe3_rotation" x="0.0" y="0.032" z="0.0" />
     </define>
     <materials>
@@ -287,6 +387,12 @@
         <D type="density" unit="g/cm3" value="7.874" />
         <composite n="1" ref="Fe" />
       </material>
+      <material name="Silicon">
+        <RL type="X0" unit="cm" value="9.36607" />
+        <NIL type="lambda" unit="cm" value="45.7531" />
+        <D type="density" unit="g/cm3" value="2.33" />
+        <composite n="1" ref="Si" />
+      </material>
       <material name="Kapton">
         <D value="1.43" unit="g/cm3" />
         <composite n="22" ref="C" />
@@ -323,6 +429,12 @@
       <box name="Air1_layerType0_box" x="64740.0" y="64740.0" z="18565.0" />
       <box name="Air1_layerType0_slice0_box" x="64740.0" y="64740.0" z="18565.0" />
       <tube name="Iron_Pipe_tube" rmin="122.5" rmax="127.0" z="172.5" deltaphi="6.283185307179586" />
+      <box name="Scintillator2_box" x="1100.0" y="806.0" z="0.01" />
+      <box name="Scintillator2_layerType0_box" x="1100.0" y="806.0" z="0.01" />
+      <box name="Scintillator2_layerType0_slice0_box" x="1100.0" y="806.0" z="0.01" />
+      <box name="Scintillator3_box" x="3000.0" y="3000.0" z="0.01" />
+      <box name="Scintillator3_layerType0_box" x="3000.0" y="3000.0" z="0.01" />
+      <box name="Scintillator3_layerType0_slice0_box" x="3000.0" y="3000.0" z="0.01" />
       <box name="Air3_box" x="64740.0" y="64740.0" z="327.45" />
       <box name="Air3_layerType0_box" x="64740.0" y="64740.0" z="327.45" />
       <box name="Air3_layerType0_slice0_box" x="64740.0" y="64740.0" z="327.45" />
@@ -330,12 +442,27 @@
       <box name="Air2_box" x="64740.0" y="64740.0" z="97.5" />
       <box name="Air2_layerType0_box" x="64740.0" y="64740.0" z="97.5" />
       <box name="Air2_layerType0_slice0_box" x="64740.0" y="64740.0" z="97.5" />
-      <tube name="Kapton_Window_tube" rmin="0.0" rmax="35.0" z="0.1" deltaphi="6.283185307179586" />
+      <box name="Scintillator6_box" x="3000.0" y="3000.0" z="0.01" />
+      <box name="Scintillator6_layerType0_box" x="3000.0" y="3000.0" z="0.01" />
+      <box name="Scintillator6_layerType0_slice0_box" x="3000.0" y="3000.0" z="0.01" />
+      <box name="Scintillator7_box" x="3000.0" y="3000.0" z="0.01" />
+      <box name="Scintillator7_layerType0_box" x="3000.0" y="3000.0" z="0.01" />
+      <box name="Scintillator7_layerType0_slice0_box" x="3000.0" y="3000.0" z="0.01" />
       <tube name="Iron_Pipe2_tube" rmin="122.5" rmax="127.0" z="240.0" deltaphi="6.283185307179586" />
+      <tube name="Kapton_Window_tube" rmin="0.0" rmax="35.0" z="0.1" deltaphi="6.283185307179586" />
+      <box name="Scintillator4_box" x="3000.0" y="3000.0" z="0.01" />
+      <box name="Scintillator4_layerType0_box" x="3000.0" y="3000.0" z="0.01" />
+      <box name="Scintillator4_layerType0_slice0_box" x="3000.0" y="3000.0" z="0.01" />
       <box name="ConverterTarget_box" x="50.0" y="50.0" z="5.0" />
       <box name="ConverterTarget_layerType0_box" x="50.0" y="50.0" z="5.0" />
       <box name="ConverterTarget_layerType0_slice0_box" x="50.0" y="50.0" z="5.0" />
+      <box name="Scintillator5_box" x="3000.0" y="3000.0" z="0.01" />
+      <box name="Scintillator5_layerType0_box" x="3000.0" y="3000.0" z="0.01" />
+      <box name="Scintillator5_layerType0_slice0_box" x="3000.0" y="3000.0" z="0.01" />
       <tube name="Aluminium_window_tube" rmin="0.0" rmax="35.0" z="5.0" deltaphi="6.283185307179586" />
+      <box name="Scintillator_box" x="1100.0" y="806.0" z="0.01" />
+      <box name="Scintillator_layerType0_box" x="1100.0" y="806.0" z="0.01" />
+      <box name="Scintillator_layerType0_slice0_box" x="1100.0" y="806.0" z="0.01" />
       <box name="Collimator_TBarea_Collimator_TBarea_box" x="600.0" y="110.0" z="64430.0" />
       <box name="Collimator_TBarea_Collimator_TBarea_component0_box" x="200.0" y="97.5" z="300.0" />
       <box name="Collimator_TBarea_Collimator_TBarea_component1_box" x="200.0" y="97.5" z="300.0" />
@@ -461,6 +588,56 @@
         <materialref ref="Iron" />
         <solidref ref="Iron_Pipe_tube" />
       </volume>
+      <volume name="Scintillator2_layerType0_slice0">
+        <materialref ref="Silicon" />
+        <solidref ref="Scintillator2_layerType0_slice0_box" />
+        <sdref ref="Scintillator2" />
+      </volume>
+      <volume name="Scintillator2_layerType0">
+        <materialref ref="Air" />
+        <solidref ref="Scintillator2_layerType0_box" />
+        <physvol>
+          <volumeref ref="Scintillator2_layerType0_slice0" />
+          <positionref ref="Scintillator2_layerType0_slice0_position" />
+          <rotationref ref="identity_rot" />
+          <physvolid field_name="slice" value="0" />
+        </physvol>
+      </volume>
+      <volume name="Scintillator2_envelope">
+        <materialref ref="Air" />
+        <solidref ref="Scintillator2_box" />
+        <physvol>
+          <volumeref ref="Scintillator2_layerType0" />
+          <positionref ref="Scintillator2_layer0_position" />
+          <rotationref ref="identity_rot" />
+          <physvolid field_name="layer" value="0" />
+        </physvol>
+      </volume>
+      <volume name="Scintillator3_layerType0_slice0">
+        <materialref ref="Silicon" />
+        <solidref ref="Scintillator3_layerType0_slice0_box" />
+        <sdref ref="Scintillator3" />
+      </volume>
+      <volume name="Scintillator3_layerType0">
+        <materialref ref="Air" />
+        <solidref ref="Scintillator3_layerType0_box" />
+        <physvol>
+          <volumeref ref="Scintillator3_layerType0_slice0" />
+          <positionref ref="Scintillator3_layerType0_slice0_position" />
+          <rotationref ref="identity_rot" />
+          <physvolid field_name="slice" value="0" />
+        </physvol>
+      </volume>
+      <volume name="Scintillator3_envelope">
+        <materialref ref="Air" />
+        <solidref ref="Scintillator3_box" />
+        <physvol>
+          <volumeref ref="Scintillator3_layerType0" />
+          <positionref ref="Scintillator3_layer0_position" />
+          <rotationref ref="identity_rot" />
+          <physvolid field_name="layer" value="0" />
+        </physvol>
+      </volume>
       <volume name="Air3_layerType0_slice0">
         <materialref ref="Air" />
         <solidref ref="Air3_layerType0_slice0_box" />
@@ -513,13 +690,88 @@
           <physvolid field_name="layer" value="0" />
         </physvol>
       </volume>
-      <volume name="Kapton_Window">
-        <materialref ref="Kapton" />
-        <solidref ref="Kapton_Window_tube" />
+      <volume name="Scintillator6_layerType0_slice0">
+        <materialref ref="Silicon" />
+        <solidref ref="Scintillator6_layerType0_slice0_box" />
+        <sdref ref="Scintillator6" />
+      </volume>
+      <volume name="Scintillator6_layerType0">
+        <materialref ref="Air" />
+        <solidref ref="Scintillator6_layerType0_box" />
+        <physvol>
+          <volumeref ref="Scintillator6_layerType0_slice0" />
+          <positionref ref="Scintillator6_layerType0_slice0_position" />
+          <rotationref ref="identity_rot" />
+          <physvolid field_name="slice" value="0" />
+        </physvol>
+      </volume>
+      <volume name="Scintillator6_envelope">
+        <materialref ref="Air" />
+        <solidref ref="Scintillator6_box" />
+        <physvol>
+          <volumeref ref="Scintillator6_layerType0" />
+          <positionref ref="Scintillator6_layer0_position" />
+          <rotationref ref="identity_rot" />
+          <physvolid field_name="layer" value="0" />
+        </physvol>
+      </volume>
+      <volume name="Scintillator7_layerType0_slice0">
+        <materialref ref="Silicon" />
+        <solidref ref="Scintillator7_layerType0_slice0_box" />
+        <sdref ref="Scintillator7" />
+      </volume>
+      <volume name="Scintillator7_layerType0">
+        <materialref ref="Air" />
+        <solidref ref="Scintillator7_layerType0_box" />
+        <physvol>
+          <volumeref ref="Scintillator7_layerType0_slice0" />
+          <positionref ref="Scintillator7_layerType0_slice0_position" />
+          <rotationref ref="identity_rot" />
+          <physvolid field_name="slice" value="0" />
+        </physvol>
+      </volume>
+      <volume name="Scintillator7_envelope">
+        <materialref ref="Air" />
+        <solidref ref="Scintillator7_box" />
+        <physvol>
+          <volumeref ref="Scintillator7_layerType0" />
+          <positionref ref="Scintillator7_layer0_position" />
+          <rotationref ref="identity_rot" />
+          <physvolid field_name="layer" value="0" />
+        </physvol>
       </volume>
       <volume name="Iron_Pipe2">
         <materialref ref="Iron" />
         <solidref ref="Iron_Pipe2_tube" />
+      </volume>
+      <volume name="Kapton_Window">
+        <materialref ref="Kapton" />
+        <solidref ref="Kapton_Window_tube" />
+      </volume>
+      <volume name="Scintillator4_layerType0_slice0">
+        <materialref ref="Silicon" />
+        <solidref ref="Scintillator4_layerType0_slice0_box" />
+        <sdref ref="Scintillator4" />
+      </volume>
+      <volume name="Scintillator4_layerType0">
+        <materialref ref="Air" />
+        <solidref ref="Scintillator4_layerType0_box" />
+        <physvol>
+          <volumeref ref="Scintillator4_layerType0_slice0" />
+          <positionref ref="Scintillator4_layerType0_slice0_position" />
+          <rotationref ref="identity_rot" />
+          <physvolid field_name="slice" value="0" />
+        </physvol>
+      </volume>
+      <volume name="Scintillator4_envelope">
+        <materialref ref="Air" />
+        <solidref ref="Scintillator4_box" />
+        <physvol>
+          <volumeref ref="Scintillator4_layerType0" />
+          <positionref ref="Scintillator4_layer0_position" />
+          <rotationref ref="identity_rot" />
+          <physvolid field_name="layer" value="0" />
+        </physvol>
       </volume>
       <volume name="ConverterTarget_layerType0_slice0">
         <materialref ref="Copper" />
@@ -545,9 +797,59 @@
           <physvolid field_name="layer" value="0" />
         </physvol>
       </volume>
+      <volume name="Scintillator5_layerType0_slice0">
+        <materialref ref="Silicon" />
+        <solidref ref="Scintillator5_layerType0_slice0_box" />
+        <sdref ref="Scintillator5" />
+      </volume>
+      <volume name="Scintillator5_layerType0">
+        <materialref ref="Air" />
+        <solidref ref="Scintillator5_layerType0_box" />
+        <physvol>
+          <volumeref ref="Scintillator5_layerType0_slice0" />
+          <positionref ref="Scintillator5_layerType0_slice0_position" />
+          <rotationref ref="identity_rot" />
+          <physvolid field_name="slice" value="0" />
+        </physvol>
+      </volume>
+      <volume name="Scintillator5_envelope">
+        <materialref ref="Air" />
+        <solidref ref="Scintillator5_box" />
+        <physvol>
+          <volumeref ref="Scintillator5_layerType0" />
+          <positionref ref="Scintillator5_layer0_position" />
+          <rotationref ref="identity_rot" />
+          <physvolid field_name="layer" value="0" />
+        </physvol>
+      </volume>
       <volume name="Aluminium_window">
         <materialref ref="Aluminium" />
         <solidref ref="Aluminium_window_tube" />
+      </volume>
+      <volume name="Scintillator_layerType0_slice0">
+        <materialref ref="Silicon" />
+        <solidref ref="Scintillator_layerType0_slice0_box" />
+        <sdref ref="Scintillator" />
+      </volume>
+      <volume name="Scintillator_layerType0">
+        <materialref ref="Air" />
+        <solidref ref="Scintillator_layerType0_box" />
+        <physvol>
+          <volumeref ref="Scintillator_layerType0_slice0" />
+          <positionref ref="Scintillator_layerType0_slice0_position" />
+          <rotationref ref="identity_rot" />
+          <physvolid field_name="slice" value="0" />
+        </physvol>
+      </volume>
+      <volume name="Scintillator_envelope">
+        <materialref ref="Air" />
+        <solidref ref="Scintillator_box" />
+        <physvol>
+          <volumeref ref="Scintillator_layerType0" />
+          <positionref ref="Scintillator_layer0_position" />
+          <rotationref ref="identity_rot" />
+          <physvolid field_name="layer" value="0" />
+        </physvol>
       </volume>
       <volume name="Collimator_TBarea_Collimator_TBarea_component0">
         <materialref ref="Lead" />
@@ -943,6 +1245,18 @@
           <physvolid field_name="system" value="3" />
         </physvol>
         <physvol>
+          <volumeref ref="Scintillator2_envelope" />
+          <positionref ref="Scintillator2_position" />
+          <rotationref ref="identity_rot" />
+          <physvolid field_name="system" value="13" />
+        </physvol>
+        <physvol>
+          <volumeref ref="Scintillator3_envelope" />
+          <positionref ref="Scintillator3_position" />
+          <rotationref ref="identity_rot" />
+          <physvolid field_name="system" value="16" />
+        </physvol>
+        <physvol>
           <volumeref ref="Air3_envelope" />
           <positionref ref="Air3_position" />
           <rotationref ref="identity_rot" />
@@ -955,10 +1269,40 @@
           <physvolid field_name="system" value="5" />
         </physvol>
         <physvol>
+          <volumeref ref="Scintillator6_envelope" />
+          <positionref ref="Scintillator6_position" />
+          <rotationref ref="identity_rot" />
+          <physvolid field_name="system" value="21" />
+        </physvol>
+        <physvol>
+          <volumeref ref="Scintillator7_envelope" />
+          <positionref ref="Scintillator7_position" />
+          <rotationref ref="identity_rot" />
+          <physvolid field_name="system" value="23" />
+        </physvol>
+        <physvol>
+          <volumeref ref="Scintillator4_envelope" />
+          <positionref ref="Scintillator4_position" />
+          <rotationref ref="identity_rot" />
+          <physvolid field_name="system" value="18" />
+        </physvol>
+        <physvol>
           <volumeref ref="ConverterTarget_envelope" />
           <positionref ref="ConverterTarget_position" />
           <rotationref ref="identity_rot" />
           <physvolid field_name="system" value="6" />
+        </physvol>
+        <physvol>
+          <volumeref ref="Scintillator5_envelope" />
+          <positionref ref="Scintillator5_position" />
+          <rotationref ref="identity_rot" />
+          <physvolid field_name="system" value="19" />
+        </physvol>
+        <physvol>
+          <volumeref ref="Scintillator_envelope" />
+          <positionref ref="Scintillator_position" />
+          <rotationref ref="identity_rot" />
+          <physvolid field_name="system" value="11" />
         </physvol>
         <regionref ref="TrackingRegion" />
         <visref ref="TrackingVis" />
@@ -984,16 +1328,16 @@
           <physvolid field_name="id" value="1" />
         </physvol>
         <physvol>
+          <volumeref ref="Iron_Pipe2" />
+          <positionref ref="Iron_Pipe2_position" />
+          <rotationref ref="Iron_Pipe2_rotation" />
+          <physvolid field_name="id" value="14" />
+        </physvol>
+        <physvol>
           <volumeref ref="Kapton_Window" />
           <positionref ref="Kapton_Window_position" />
           <rotationref ref="Kapton_Window_rotation" />
           <physvolid field_name="id" value="8" />
-        </physvol>
-        <physvol>
-          <volumeref ref="Iron_Pipe2" />
-          <positionref ref="Iron_Pipe2_position" />
-          <rotationref ref="Iron_Pipe2_rotation" />
-          <physvolid field_name="id" value="12" />
         </physvol>
         <physvol>
           <volumeref ref="Aluminium_window" />
@@ -1011,19 +1355,19 @@
           <volumeref ref="StainlessSteel_Pipe4" />
           <positionref ref="StainlessSteel_Pipe4_position" />
           <rotationref ref="StainlessSteel_Pipe4_rotation" />
-          <physvolid field_name="id" value="16" />
+          <physvolid field_name="id" value="22" />
         </physvol>
         <physvol>
           <volumeref ref="StainlessSteel_Pipe2" />
           <positionref ref="StainlessSteel_Pipe2_position" />
           <rotationref ref="StainlessSteel_Pipe2_rotation" />
-          <physvolid field_name="id" value="13" />
+          <physvolid field_name="id" value="15" />
         </physvol>
         <physvol>
           <volumeref ref="StainlessSteel_Pipe3" />
           <positionref ref="StainlessSteel_Pipe3_position" />
           <rotationref ref="StainlessSteel_Pipe3_rotation" />
-          <physvolid field_name="id" value="14" />
+          <physvolid field_name="id" value="17" />
         </physvol>
         <visref ref="WorldVis" />
       </volume>
@@ -1033,7 +1377,7 @@
     </setup>
   </gdml>
   <fields>
-    <box_dipole name="TestBeamDipole" lunit="mm" funit="tesla" x="0.0" y="0.0" z="24200.0" dx="327.5" dy="185.0" dz="520.0" bx="0.0" by="0.5" bz="0.0" />
+    <box_dipole name="TestBeamDipole" lunit="mm" funit="tesla" x="0.0" y="0.0" z="24200.0" dx="327.5" dy="185.0" dz="520.0" bx="0.0" by="0.44" bz="0.0" />
   </fields>
 </lcdd>
 

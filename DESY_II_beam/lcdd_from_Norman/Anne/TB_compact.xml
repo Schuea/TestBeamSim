@@ -1,0 +1,133 @@
+<lccdd xmlns:compact="http://www.lcsim.org/schemas/compact/1.0"
+       xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+       xs:noNamespaceSchemaLocation="http://www.lcsim.org/schemas/compact/1.0/compact.xsd">
+    
+    <info name="HPS-Phantom-v1">
+        <comment>HPS detector with phantom scoring planes to study field propagation</comment>
+    </info>
+
+    <define>
+    
+        <!-- world -->
+        <constant name="world_side" value="8000.0*cm" />
+        <constant name="world_x" value="10.*m" />
+        <constant name="world_y" value="10.*m" />
+        <constant name="world_z" value="world_side" />
+
+        <!-- tracking region -->
+        <constant name="tracking_region_radius" value="3.*m"/>
+        <constant name="tracking_region_min" value="5.0*cm"/>
+        <constant name="tracking_region_zmax" value="40.*m"/>
+        
+        <!--  dipole magnet and  B-field -->
+        <constant name="dipoleMagnetPositionX" value="2.117*cm"/>
+        <constant name="dipoleMagnetPositionZ" value="45.72*cm"/>
+        <constant name="dipoleMagnetHeight" value="17.78*cm"/>
+        <constant name="dipoleMagnetWidth" value="41.6052*cm"/>
+        <constant name="dipoleMagnetLength" value="108*cm"/>
+        <constant name="constBField" value="-.44"/>
+                      
+        
+           </define>
+    
+    <materials>
+        <!-- Set the world material to vacuum. -->
+        <material name="WorldMaterial">
+            <D type="density" unit="g/cm3" value="0.0000000000000001"/>
+            <fraction n="1.0" ref="Vacuum" />
+        </material>
+        <!-- Set tracking material to vacuum. -->
+        <material name="TrackingMaterial">
+            <D type="density" unit="g/cm3" value="0.0000000000000001"/>
+            <fraction n="1.0" ref="Vacuum" />
+        </material>
+
+    </materials>
+
+    <detectors>       
+        <detector id="1" name="SmallPhantomTracker" type="HPSTracker2" readout="PhantomTrackerHits" >
+            <comment>Phantom plane to register hits</comment>
+            <module name="SmallPhantomPlane">
+                <box x="4.*cm" y="4.*cm" />
+                <module_component thickness="0.000000001*cm" material = "Vacuum" sensitive="true">
+                    <dimensions x="4.*cm" y="4.*cm" /> 
+                </module_component>
+            </module>          
+<!-- before dipole magnet -->
+            <layer id="2">
+                <module_placement name="SmallPhantomPlane" id="0" x="0." y="0." z="23.3*m" rx="0" ry="0" rz="-PI/2"/>
+            </layer>    
+        </detector>
+
+
+
+        <detector id="2" name="PhantomTracker" type="HPSTracker2" readout="PhantomTrackerHits2" >
+            <comment>Phantom plane to register hits</comment>
+            <module name="PhantomPlane">
+                <box x="4.*m" y="4.*m" />
+                <module_component thickness="0.000000001*cm" material = "Vacuum" sensitive="true">
+                    <dimensions x="4.*m" y="4.*m" /> 
+                </module_component>
+            </module>    
+<!-- after shielding wall -->
+            <layer id="3">
+                <module_placement name="PhantomPlane" id="0" x="0." y="0." z="33.*m" rx="0" ry="0" rz="-PI/2"/>
+            </layer>             
+        </detector>
+
+
+
+        <detector id="3" name="MagnetFieldVolume" type="HPSTracker2" readout="PhantomTrackerHits2" >
+            <comment>Volume to set stepping limits</comment>
+            <module name="FieldBox">
+                <box x="250.*mm" y="100.*mm" />
+                <module_component thickness="635*mm" material = "Air" sensitive="false">
+                    <dimensions x="250.*mm" y="100.*m" /> 
+                </module_component>
+            </module>    
+<!-- inside magnet -->
+            <layer id="1">
+                <module_placement name="FieldBox" id="0" x="0." y="0." z="24200." rx="0" ry="0" rz="-PI/2"/>
+            </layer>             
+        </detector>
+
+
+        
+<!--   
+        <detector id="2" name="TrackerFieldDef" type="HPSTracker2" readout="PhantomTrackerHits" >
+            <comment>Boundary planes for magnetic field</comment>
+            <module name="PhantomPlaneFieldDef">
+                <box x="dipoleMagnetWidth" y="dipoleMagnetHeight" />
+                <module_component thickness="0.000000001*cm" material = "Vacuum" sensitive="true">
+                    <dimensions x="dipoleMagnetWidth" y="dipoleMagnetHeight" /> 
+                </module_component>
+            </module>                      
+            <layer id="1">
+                <module_placement name="PhantomPlaneFieldDef" id="0" x="dipoleMagnetPositionX" y="0" z="dipoleMagnetPositionZ-dipoleMagnetLength/2" rx="0" ry="0" rz="-PI/2"/>
+            </layer>
+            <layer id="2">
+                <module_placement name="PhantomPlaneFieldDef" id="0" x="dipoleMagnetPositionX" y="0" z="dipoleMagnetPositionZ+dipoleMagnetLength/2" rx="0" ry="0" rz="-PI/2"/>
+            </layer>
+        </detector>     
+-->     
+    </detectors>
+    
+    <readouts>   
+        <readout name="PhantomTrackerHits">
+            <id>system:6,barrel:3,layer:4,module:12,sensor:1,side:32:-2,strip:12</id> 
+        </readout> 
+        <readout name="PhantomTrackerHits2">
+            <id>system:6,barrel:3,layer:4,module:12,sensor:1,side:32:-2,strip:12</id> 
+        </readout> 
+    </readouts>
+
+    <fields>
+        <field type="BoxDipole" name="AnalyzingDipole" x="0." y="0." z="24200." dx="327.5" dy="185.0" dz="520." bx="0.0" by="constBField" bz="0.0" />
+    </fields>
+
+    <includes>
+        <gdmlFile file="tb2.gdml" />
+    </includes>
+
+
+</lccdd>

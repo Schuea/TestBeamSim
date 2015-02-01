@@ -15,14 +15,14 @@
     <constant name="cm" value="10"/>
     
     <!-- world -->
-    <constant name="world_side" value="4945.6*cm" />
+    <constant name="world_side" value="5086*cm" />
     <constant name="world_x" value="world_side" />
     <constant name="world_y" value="world_side" />
     <constant name="world_z" value="world_side" />
 
     <!-- tracking region -->
-    <constant name="tracking_region_radius" value="150*cm"/>
-    <constant name="tracking_region_zmax" value="2472.8*cm"/>
+    <constant name="tracking_region_radius" value="450*cm"/>
+    <constant name="tracking_region_zmax" value="2543*cm"/>
 
   </define>
   <materials>
@@ -374,7 +374,7 @@
    </detector>    
 
     <detector id="16" name="Scintillator3" type="TestBeamCalorimeter" readout="BeforeKinkPositions" insideTrackingVolume="true"  >
-      <dimensions x="110*cm" y="80.6*cm" />
+      <dimensions x="300*cm" y="300*cm" />
       <position z="2500*cm" />
       <layer repeat="1">       
         <slice material = "Silicon" thickness = "0.001*cm" sensitive = "yes" />
@@ -390,15 +390,22 @@
    </detector>    
 
  <detector id="18" name="Scintillator4" type="TestBeamCalorimeter" readout="BeforeCollimatorPositions" insideTrackingVolume="true"  >
-      <dimensions x="110*cm" y="80.6*cm" />
+      <dimensions x="300*cm" y="300*cm" />
       <position z="2510*cm" />
       <layer repeat="1">       
         <slice material = "Silicon" thickness = "0.001*cm" sensitive = "yes" />
       </layer>	
    </detector>    
 
+ <detector id="19" name="Scintillator5" type="TestBeamCalorimeter" readout="BetweenCollimators" insideTrackingVolume="true"  >
+      <dimensions x="300*cm" y="300*cm" />
+      <position z="2526*cm" /><!-- in gap between horizontal and vertical collimator-->
+      <layer repeat="1">       
+        <slice material = "Silicon" thickness = "0.001*cm" sensitive = "yes" />
+      </layer>	
+   </detector>    
 
-   <detector id="19" name="Collimator" type="SiTrackerBarrel"  insideTrackingVolume="true">
+   <detector id="20" name="Collimator" type="SiTrackerBarrel"  insideTrackingVolume="true">
         <module name="HorizontalCollimator">
  	   <module_envelope length="25.4*cm" width="25.4*cm" thickness="5033*cm"/>
             <module_component length="15*cm" width="12.5*cm" thickness="12.5*cm" material="Tungsten_S17" sensitive="no" >
@@ -444,6 +451,10 @@
       <id>system:8,y:-21,barrel:3,x:32:-21,layer:11</id>
     </readout>
     <readout name="BeforeCollimatorPositions">
+     <segmentation type="GridXYZ" gridSizeX="0.01*cm" gridSizeY="0.01*cm" />
+      <id>system:8,y:-21,barrel:3,x:32:-21,layer:11</id>
+    </readout>
+    <readout name="BetweenCollimators">
      <segmentation type="GridXYZ" gridSizeX="0.01*cm" gridSizeY="0.01*cm" />
       <id>system:8,y:-21,barrel:3,x:32:-21,layer:11</id>
     </readout>

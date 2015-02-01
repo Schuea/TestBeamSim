@@ -1,0 +1,86 @@
+<lccdd xmlns:compact="http://www.lcsim.org/schemas/compact/1.0"
+       xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+       xs:noNamespaceSchemaLocation="http://www.lcsim.org/schemas/compact/1.0/compact.xsd">
+    
+    <info name="Converter_Aluminium_2mm">
+        <comment>Simulation of photon conversion in aluminium plate</comment>
+    </info>
+
+    <define>
+    
+        <!-- world -->
+        <constant name="world_side" value="2*23072.*mm" />
+        <constant name="world_x" value="4000.*mm" />
+        <constant name="world_y" value="4000.*mm" />
+        <constant name="world_z" value="world_side" />
+
+        <!-- tracking region -->
+        <constant name="tracking_region_radius" value="3000.*mm"/>
+        <constant name="tracking_region_min" value="5.0*mm"/>
+        <constant name="tracking_region_zmax" value="world_side"/>
+        
+    </define>
+    
+    <materials>
+        <!-- Set the world material to vacuum. -->
+        <material name="WorldMaterial">
+            <D type="density" unit="g/cm3" value="0.001225"/>
+            <fraction n="1.0" ref="Air" />
+        </material>
+        <!-- Set tracking material to vacuum. -->
+        <material name="TrackingMaterial">
+            <D type="density" unit="g/cm3" value="0.0000000000000001"/>
+            <fraction n="1.0" ref="Vacuum" />
+        </material>
+
+    </materials>
+
+    <detectors>       
+    
+    	<detector id="1" name="PhantomTracker1" type="HPSTracker2" readout="PhantomTrackerHits" >
+            <comment>Phantom plane to register hits</comment>
+            <module name="PhantomPlane1">
+                <box x="45.*mm" y="60.*mm" />
+                <module_component thickness="0.000000001*cm" material = "Vacuum" sensitive="true">
+                    <dimensions x="45.*mm" y="60.*mm" /> 
+                </module_component>
+            </module>          
+	<!-- before converter -->
+            <layer id="2">
+                <module_placement name="PhantomPlane1" id="0" x="0." y="0." z="23066.25*mm" rx="0" ry="0" rz="-PI/2"/>
+            </layer>    
+        </detector>
+
+        <detector id="2" name="PhantomTracker2" type="HPSTracker2" readout="PhantomTrackerHits2" >
+            <comment>Phantom plane to register hits</comment>
+            <module name="PhantomPlane2">
+                <box x="45.*mm" y="60.*mm" />
+                <module_component thickness="0.000000001*cm" material = "Vacuum" sensitive="true">
+                    <dimensions x="45.*mm" y="60.*mm" /> 
+                </module_component>
+            </module>    
+	<!-- behind converter -->
+            <layer id="3">
+                <module_placement name="PhantomPlane2" id="0" x="0." y="0." z="23068.25*mm" rx="0" ry="0" rz="-PI/2"/>
+            </layer>             
+        </detector>
+
+    </detectors>
+    
+    <readouts>   
+ 	<readout name="PhantomTrackerHits">
+            <id>system:6,barrel:3,layer:4,module:12,sensor:1,side:32:-2,strip:12</id> 
+        </readout> 
+        <readout name="PhantomTrackerHits2">
+            <id>system:6,barrel:3,layer:4,module:12,sensor:1,side:32:-2,strip:12</id> 
+        </readout> 
+   </readouts>
+
+    <fields>
+    </fields>
+
+    <includes>
+        <gdmlFile file="Pipe_LeadShielding_Converter.gdml" />
+    </includes>
+
+</lccdd>

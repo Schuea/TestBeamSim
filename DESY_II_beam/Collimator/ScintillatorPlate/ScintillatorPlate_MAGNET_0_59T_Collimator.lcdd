@@ -2,7 +2,7 @@
 <lcdd xmlns:lcdd="http://www.lcsim.org/schemas/lcdd/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="http://www.lcsim.org/schemas/lcdd/1.0/lcdd.xsd">
   <header>
     <detector name="CopperTarget" />
-    <generator name="GeomConverter" version="1.0" file="/afs/desy.de/user/s/schuea/mymarlin/DESY_II_beam/Collimator/ScintillatorPlate/ScintillatorPlate_MAGNET_0_59T_Collimator.xml" checksum="559617331" />
+    <generator name="GeomConverter" version="1.0" file="/afs/desy.de/user/s/schuea/mymarlin/DESY_II_beam/Collimator/ScintillatorPlate/ScintillatorPlate_MAGNET_0_59T_Collimator.xml" checksum="3239254318" />
     <author name="Marcel Stanitzki" />
     <comment>NONE</comment>
   </header>
@@ -22,6 +22,13 @@
       <idfield signed="false" label="layer" length="11" start="53" />
     </idspec>
     <idspec name="LeaveMagnetPositions" length="64">
+      <idfield signed="false" label="system" length="8" start="0" />
+      <idfield signed="true" label="y" length="21" start="8" />
+      <idfield signed="false" label="barrel" length="3" start="29" />
+      <idfield signed="true" label="x" length="21" start="32" />
+      <idfield signed="false" label="layer" length="11" start="53" />
+    </idspec>
+    <idspec name="BetweenCollimators" length="64">
       <idfield signed="false" label="system" length="8" start="0" />
       <idfield signed="true" label="y" length="21" start="8" />
       <idfield signed="false" label="barrel" length="3" start="29" />
@@ -49,6 +56,10 @@
       <idspecref ref="BeforeCollimatorPositions" />
       <grid_xyz grid_size_x="0.1" grid_size_y="0.1" grid_size_z="0.0" />
     </calorimeter>
+    <calorimeter name="Scintillator5" ecut="0.0" eunit="MeV" verbose="0" hits_collection="BetweenCollimators">
+      <idspecref ref="BetweenCollimators" />
+      <grid_xyz grid_size_x="0.1" grid_size_y="0.1" grid_size_z="0.0" />
+    </calorimeter>
     <calorimeter name="Scintillator" ecut="0.0" eunit="MeV" verbose="0" hits_collection="EnterMagnetPositions">
       <idspecref ref="EnterMagnetPositions" />
       <grid_xyz grid_size_x="0.1" grid_size_y="0.1" grid_size_z="0.0" />
@@ -71,13 +82,13 @@
       <rotation name="identity_rot" x="0.0" y="0.0" z="0.0" unit="radian" />
       <rotation name="reflect_rot" x="3.141592653589793" y="0.0" z="0.0" unit="radian" />
       <position name="identity_pos" x="0.0" y="0.0" z="0.0" unit="mm" />
-      <constant name="world_side" value="49456.0" />
+      <constant name="world_side" value="50860.0" />
       <constant name="cm" value="10.0" />
-      <constant name="tracking_region_radius" value="1500.0" />
-      <constant name="world_y" value="49456.0" />
-      <constant name="world_z" value="49456.0" />
-      <constant name="tracking_region_zmax" value="24728.0" />
-      <constant name="world_x" value="49456.0" />
+      <constant name="tracking_region_radius" value="4500.0" />
+      <constant name="world_y" value="50860.0" />
+      <constant name="world_z" value="50860.0" />
+      <constant name="tracking_region_zmax" value="25430.0" />
+      <constant name="world_x" value="50860.0" />
       <position name="Collimator_HorizontalCollimator_component0_position" x="72.66" y="0.0" z="25160.239999999998" unit="mm" />
       <rotation name="Collimator_HorizontalCollimator_component0_rotation" x="0.0" y="0.032" z="0.0" unit="radian" />
       <position name="Collimator_HorizontalCollimator_component1_position" x="-62.27" y="0.0" z="25164.56" unit="mm" />
@@ -117,6 +128,9 @@
       <position name="ConverterTarget_position" x="0.0" y="0.0" z="23070.0" unit="mm" />
       <position name="ConverterTarget_layerType0_slice0_position" x="0.0" y="0.0" z="0.0" unit="mm" />
       <position name="ConverterTarget_layer0_position" x="0.0" y="0.0" z="0.0" unit="mm" />
+      <position name="Scintillator5_position" x="0.0" y="0.0" z="25260.0" unit="mm" />
+      <position name="Scintillator5_layerType0_slice0_position" x="0.0" y="0.0" z="0.0" unit="mm" />
+      <position name="Scintillator5_layer0_position" x="0.0" y="0.0" z="0.0" unit="mm" />
       <position name="Aluminium_window_position" x="0.0" y="0.0" z="4002.5" />
       <rotation name="Aluminium_window_rotation" x="0.0" y="0.0" z="0.0" unit="radian" />
       <position name="Scintillator_position" x="0.0" y="0.0" z="23672.5" unit="mm" />
@@ -373,32 +387,35 @@
       <box name="Collimator_VerticalCollimator_box" x="254.0" y="254.0" z="50740.0" />
       <box name="Collimator_VerticalCollimator_component0_box" x="150.0" y="125.0" z="125.0" />
       <box name="Collimator_VerticalCollimator_component1_box" x="150.0" y="125.0" z="125.0" />
-      <box name="Air1_box" x="49456.0" y="49456.0" z="18565.0" />
-      <box name="Air1_layerType0_box" x="49456.0" y="49456.0" z="18565.0" />
-      <box name="Air1_layerType0_slice0_box" x="49456.0" y="49456.0" z="18565.0" />
+      <box name="Air1_box" x="50860.0" y="50860.0" z="18565.0" />
+      <box name="Air1_layerType0_box" x="50860.0" y="50860.0" z="18565.0" />
+      <box name="Air1_layerType0_slice0_box" x="50860.0" y="50860.0" z="18565.0" />
       <tube name="Iron_Pipe_tube" rmin="122.5" rmax="127.0" z="172.5" deltaphi="6.283185307179586" />
       <box name="Scintillator2_box" x="1100.0" y="806.0" z="0.01" />
       <box name="Scintillator2_layerType0_box" x="1100.0" y="806.0" z="0.01" />
       <box name="Scintillator2_layerType0_slice0_box" x="1100.0" y="806.0" z="0.01" />
-      <box name="Scintillator3_box" x="1100.0" y="806.0" z="0.01" />
-      <box name="Scintillator3_layerType0_box" x="1100.0" y="806.0" z="0.01" />
-      <box name="Scintillator3_layerType0_slice0_box" x="1100.0" y="806.0" z="0.01" />
-      <box name="Air3_box" x="49456.0" y="49456.0" z="327.45" />
-      <box name="Air3_layerType0_box" x="49456.0" y="49456.0" z="327.45" />
-      <box name="Air3_layerType0_slice0_box" x="49456.0" y="49456.0" z="327.45" />
+      <box name="Scintillator3_box" x="3000.0" y="3000.0" z="0.01" />
+      <box name="Scintillator3_layerType0_box" x="3000.0" y="3000.0" z="0.01" />
+      <box name="Scintillator3_layerType0_slice0_box" x="3000.0" y="3000.0" z="0.01" />
+      <box name="Air3_box" x="50860.0" y="50860.0" z="327.45" />
+      <box name="Air3_layerType0_box" x="50860.0" y="50860.0" z="327.45" />
+      <box name="Air3_layerType0_slice0_box" x="50860.0" y="50860.0" z="327.45" />
       <tube name="Aluminium_Pipe_tube" rmin="33.0" rmax="35.0" z="4000.0" deltaphi="6.283185307179586" />
-      <box name="Air2_box" x="49456.0" y="49456.0" z="97.5" />
-      <box name="Air2_layerType0_box" x="49456.0" y="49456.0" z="97.5" />
-      <box name="Air2_layerType0_slice0_box" x="49456.0" y="49456.0" z="97.5" />
+      <box name="Air2_box" x="50860.0" y="50860.0" z="97.5" />
+      <box name="Air2_layerType0_box" x="50860.0" y="50860.0" z="97.5" />
+      <box name="Air2_layerType0_slice0_box" x="50860.0" y="50860.0" z="97.5" />
       <tube name="Aluminium_Pipe2_tube" rmin="33.0" rmax="35.0" z="276.25" deltaphi="6.283185307179586" />
       <tube name="Iron_Pipe2_tube" rmin="122.5" rmax="127.0" z="240.0" deltaphi="6.283185307179586" />
       <tube name="Kapton_Window_tube" rmin="0.0" rmax="35.0" z="0.1" deltaphi="6.283185307179586" />
-      <box name="Scintillator4_box" x="1100.0" y="806.0" z="0.01" />
-      <box name="Scintillator4_layerType0_box" x="1100.0" y="806.0" z="0.01" />
-      <box name="Scintillator4_layerType0_slice0_box" x="1100.0" y="806.0" z="0.01" />
+      <box name="Scintillator4_box" x="3000.0" y="3000.0" z="0.01" />
+      <box name="Scintillator4_layerType0_box" x="3000.0" y="3000.0" z="0.01" />
+      <box name="Scintillator4_layerType0_slice0_box" x="3000.0" y="3000.0" z="0.01" />
       <box name="ConverterTarget_box" x="50.0" y="50.0" z="5.0" />
       <box name="ConverterTarget_layerType0_box" x="50.0" y="50.0" z="5.0" />
       <box name="ConverterTarget_layerType0_slice0_box" x="50.0" y="50.0" z="5.0" />
+      <box name="Scintillator5_box" x="3000.0" y="3000.0" z="0.01" />
+      <box name="Scintillator5_layerType0_box" x="3000.0" y="3000.0" z="0.01" />
+      <box name="Scintillator5_layerType0_slice0_box" x="3000.0" y="3000.0" z="0.01" />
       <tube name="Aluminium_window_tube" rmin="0.0" rmax="35.0" z="5.0" deltaphi="6.283185307179586" />
       <box name="Scintillator_box" x="1100.0" y="806.0" z="0.01" />
       <box name="Scintillator_layerType0_box" x="1100.0" y="806.0" z="0.01" />
@@ -680,6 +697,31 @@
         <physvol>
           <volumeref ref="ConverterTarget_layerType0" />
           <positionref ref="ConverterTarget_layer0_position" />
+          <rotationref ref="identity_rot" />
+          <physvolid field_name="layer" value="0" />
+        </physvol>
+      </volume>
+      <volume name="Scintillator5_layerType0_slice0">
+        <materialref ref="Silicon" />
+        <solidref ref="Scintillator5_layerType0_slice0_box" />
+        <sdref ref="Scintillator5" />
+      </volume>
+      <volume name="Scintillator5_layerType0">
+        <materialref ref="Air" />
+        <solidref ref="Scintillator5_layerType0_box" />
+        <physvol>
+          <volumeref ref="Scintillator5_layerType0_slice0" />
+          <positionref ref="Scintillator5_layerType0_slice0_position" />
+          <rotationref ref="identity_rot" />
+          <physvolid field_name="slice" value="0" />
+        </physvol>
+      </volume>
+      <volume name="Scintillator5_envelope">
+        <materialref ref="Air" />
+        <solidref ref="Scintillator5_box" />
+        <physvol>
+          <volumeref ref="Scintillator5_layerType0" />
+          <positionref ref="Scintillator5_layer0_position" />
           <rotationref ref="identity_rot" />
           <physvolid field_name="layer" value="0" />
         </physvol>
@@ -1093,6 +1135,12 @@
           <positionref ref="ConverterTarget_position" />
           <rotationref ref="identity_rot" />
           <physvolid field_name="system" value="6" />
+        </physvol>
+        <physvol>
+          <volumeref ref="Scintillator5_envelope" />
+          <positionref ref="Scintillator5_position" />
+          <rotationref ref="identity_rot" />
+          <physvolid field_name="system" value="19" />
         </physvol>
         <physvol>
           <volumeref ref="Scintillator_envelope" />

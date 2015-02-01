@@ -13,6 +13,8 @@ EVENT/MCParticle.h
 -
 EVENT/SimCalorimeterHit.h
 -
+EVENT/SimTrackerHit.h
+-
 EVENT/LCGenericObject.h
 -
 EVENT/LCEvent.h
@@ -343,6 +345,12 @@ vector
 -
 
 /nfs/dust/atlas/user/schuea/scratch/sid_complete/v01-17-02-sid/lcio/v02-04-01/include/EVENT/SimCalorimeterHit.h
+EVENT/LCObject.h
+/nfs/dust/atlas/user/schuea/scratch/sid_complete/v01-17-02-sid/lcio/v02-04-01/include/EVENT/EVENT/LCObject.h
+empty_ignore.h
+/nfs/dust/atlas/user/schuea/scratch/sid_complete/v01-17-02-sid/lcio/v02-04-01/include/EVENT/empty_ignore.h
+
+/nfs/dust/atlas/user/schuea/scratch/sid_complete/v01-17-02-sid/lcio/v02-04-01/include/EVENT/SimTrackerHit.h
 EVENT/LCObject.h
 /nfs/dust/atlas/user/schuea/scratch/sid_complete/v01-17-02-sid/lcio/v02-04-01/include/EVENT/EVENT/LCObject.h
 empty_ignore.h

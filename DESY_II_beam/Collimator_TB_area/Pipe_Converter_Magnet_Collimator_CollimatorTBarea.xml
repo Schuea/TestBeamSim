@@ -257,7 +257,15 @@
       <position x="0*cm" y="0*cm" z="2358.625*cm" />
    </detector>    
 
-   <detector id="11" name="DipoleMagnet" type="SiTrackerBarrel"  insideTrackingVolume="true">
+<detector id="11" name="Scintillator" type="TestBeamCalorimeter" readout="EnterMagnetPositions" insideTrackingVolume="true"  >
+      <dimensions x="110*cm" y="80.6*cm" />
+      <position z="2367.25*cm" />
+      <layer repeat="1">       
+        <slice material = "Silicon" thickness = "0.001*cm" sensitive = "yes" />
+      </layer>	
+   </detector>    
+
+   <detector id="12" name="DipoleMagnet" type="SiTrackerBarrel"  insideTrackingVolume="true">
         <module name="FirstIronLayer">
  	   <module_envelope length="80.6*cm" width="110*cm" thickness="4736*cm"/>
             <module_component length="27.6*cm" width="110*cm" thickness="0.75*cm" material="Iron" sensitive="no" >
@@ -344,85 +352,132 @@
         </module>
     </detector>    
 
-    <detector id="12" name="Iron_Pipe2" type="TubeSegment"  >
+    <detector id="13" name="Scintillator2" type="TestBeamCalorimeter" readout="LeaveMagnetPositions" insideTrackingVolume="true"  >
+      <dimensions x="110*cm" y="80.6*cm" />
+      <position z="2472.75*cm" />
+      <layer repeat="1">       
+        <slice material = "Silicon" thickness = "0.001*cm" sensitive = "yes" />
+      </layer>	
+   </detector>    
+
+    <detector id="14" name="Iron_Pipe2" type="TubeSegment"  >
 	<material name="Iron"/>
 	<tubs rmin="12.25*cm" rmax="12.7*cm" zhalf="12.0*cm" />
       <position x="0*cm" y="0*cm" z="2484.75*cm" />
    </detector>  
 
-    <detector id="13" name="StainlessSteel_Pipe2" type="TubeSegment"  >
+    <detector id="15" name="StainlessSteel_Pipe2" type="TubeSegment"  >
 	<material name="Stainless_steel_1.4435"/>
 	<tubs rmin="5.0*cm" rmax="5.2*cm" zhalf="13.625*cm"/> 
       <position x="0*cm" y="0*cm" z="2486.375*cm" /> 
    </detector>    
 
-    <detector id="14" name="StainlessSteel_Pipe3" type="TubeSegment"  >
+    <detector id="16" name="Scintillator3" type="TestBeamCalorimeter" readout="BeforeKinkPositions" insideTrackingVolume="true"  >
+      <dimensions x="300*cm" y="300*cm" />
+      <position z="2500*cm" />
+      <layer repeat="1">       
+        <slice material = "Silicon" thickness = "0.001*cm" sensitive = "yes" />
+      </layer>	
+   </detector>    
+
+    <detector id="17" name="StainlessSteel_Pipe3" type="TubeSegment"  >
 	<material name="Stainless_steel_1.4435"/>
 	<tubs rmin="5.0*cm" rmax="5.2*cm" zhalf="5*cm"/> 
-<!--      <position x="5*cm*sin(32mrad)" y="0*cm" z="2500*cm+5*cm*cos(32mrad)" />   -->
-      <position x="0.16*cm" y="0*cm" z="2504.997*cm" /> 
+<!--      <position x="5*cm*sin(32mrad)+2.56*cm" y="0*cm" z="2500*cm+5*cm*cos(32mrad)" />   -->
+      <position x="0.16*cm + 2.56*cm" y="0*cm" z="2504.997*cm" /> 
       <rotation x="0" y="0.032" z="0" />
    </detector>    
 
+ <detector id="18" name="Scintillator4" type="TestBeamCalorimeter" readout="BeforeCollimatorPositions" insideTrackingVolume="true"  >
+      <dimensions x="300*cm" y="300*cm" />
+      <position z="2510*cm" />
+      <layer repeat="1">       
+        <slice material = "Silicon" thickness = "0.001*cm" sensitive = "yes" />
+      </layer>	
+   </detector>    
 
-   <detector id="15" name="Collimator" type="SiTrackerBarrel"  insideTrackingVolume="true">
+ <detector id="19" name="Scintillator5" type="TestBeamCalorimeter" readout="BetweenCollimators" insideTrackingVolume="true"  >
+      <dimensions x="300*cm" y="300*cm" />
+      <position z="2526*cm" /><!-- in gap between horizontal and vertical collimator-->
+      <layer repeat="1">       
+        <slice material = "Silicon" thickness = "0.001*cm" sensitive = "yes" />
+      </layer>	
+   </detector>    
+
+   <detector id="20" name="Collimator" type="SiTrackerBarrel"  insideTrackingVolume="true">
         <module name="HorizontalCollimator">
  	   <module_envelope length="25.4*cm" width="25.4*cm" thickness="5033*cm"/>
             <module_component length="15*cm" width="12.5*cm" thickness="12.5*cm" material="Tungsten_S17" sensitive="no" >
-<!--              <position x="16.25cm*sin(32mrad) + 6.75cm*cos(32mrad)" y="0*cm" z="2500cm + 16.25cm*cos(32mrad) - 6.75cm*sin(32mrad)" />  -->
-              <position x="7.266*cm" y="0*cm" z="2516.024*cm" />  
+<!--              <position x="16.25cm*sin(32mrad) + 6.75cm*cos(32mrad) + 2.56*cm" y="0*cm" z="2500cm + 16.25cm*cos(32mrad) - 6.75cm*sin(32mrad)" />  -->
+              <position x="7.266*cm + 2.56*cm" y="0*cm" z="2516.024*cm" />  
               <rotation x="0" y="0.032" z="0" />
             </module_component>
     	    <module_component length="15*cm" width="12.5*cm" thickness="12.5*cm" material="Tungsten_S17" sensitive="no" >
-<!--              <position x="16.25cm*sin(32mrad) - 6.75cm*cos(32mrad)" y="0*cm" z="2500cm + 16.25cm*cos(32mrad) + 6.75cm*sin(32mrad)" />  -->
-              <position x="-6.227*cm" y="0*cm" z="2516.456*cm" /> 
+<!--              <position x="16.25cm*sin(32mrad) - 6.75cm*cos(32mrad) + 2.56*cm" y="0*cm" z="2500cm + 16.25cm*cos(32mrad) + 6.75cm*sin(32mrad)" />  -->
+              <position x="-6.227*cm +2.56*cm" y="0*cm" z="2516.456*cm" /> 
               <rotation x="0" y="0.032" z="0" />
             </module_component>
         </module>
         <module name="VerticalCollimator">
  	   <module_envelope length="25.4*cm" width="25.4*cm" thickness="5074*cm"/>
              <module_component length="12.5*cm" width="15*cm" thickness="12.5*cm" material="Tungsten_S17" sensitive="no" >
-<!--              <position x="36.65cm*sin(32mrad)" y="1cm*0.5 + 12.5cm*0.5" z="2500cm + 36.65cm*cos(32mrad)" />  -->
-              <position x="1.1726" y="6.75*cm" z="2536.63*cm" /> 
+<!--              <position x="36.65cm*sin(32mrad) + 2.56*cm" y="1cm*0.5 + 12.5cm*0.5" z="2500cm + 36.65cm*cos(32mrad)" />  -->
+              <position x="1.1726*cm + 2.56*cm" y="6.75*cm" z="2536.63*cm" /> 
               <rotation x="0" y="0.032" z="0" />
             </module_component>
     	    <module_component length="12.5*cm" width="15*cm" thickness="12.5*cm" material="Tungsten_S17" sensitive="no" >
-<!--              <position x="36.65cm*sin(32mrad)" y="-(1cm*0.5 + 12.5cm*0.5)" z="2500cm + 36.65cm*cos(32mrad)" />  -->
-              <position x="1.1726*cm" y="-6.75*cm" z="2536.63*cm" /> 
+<!--              <position x="36.65cm*sin(32mrad) + 2.56*cm" y="-(1cm*0.5 + 12.5cm*0.5)" z="2500cm + 36.65cm*cos(32mrad)" />  -->
+              <position x="1.1726*cm + 2.56*cm" y="-6.75*cm" z="2536.63*cm" /> 
               <rotation x="0" y="0.032" z="0" />
             </module_component>
         </module>
    </detector>    
 
-    <detector id="16" name="StainlessSteel_Pipe4" type="TubeSegment"  >
+  <detector id="21" name="Scintillator6" type="TestBeamCalorimeter" readout="BehindCollimators" insideTrackingVolume="true"  >
+      <dimensions x="300*cm" y="300*cm" />
+      <position z="2542.9*cm" /><!-- in gap between horizontal and vertical collimator-->
+      <layer repeat="1">       
+        <slice material = "Silicon" thickness = "0.001*cm" sensitive = "yes" />
+      </layer>	
+   </detector>    
+
+   <detector id="22" name="StainlessSteel_Pipe4" type="TubeSegment"  >
 	<material name="Stainless_steel_1.4435"/>
 	<tubs rmin="5.0*cm" rmax="5.2*cm" zhalf="663.95*cm/2" />
-<!--      <position x="374.875cm*sin(32mrad)" y="0*cm" z="374.875cm*cos(32mrad) + 2500cm" /> -->
-      <position x="11.994*cm" y="0*cm" z="2874.68*cm" />
+<!--      <position x="374.875cm*sin(32mrad) + 2.56*cm" y="0*cm" z="374.875cm*cos(32mrad) + 2500cm" /> -->
+      <position x="11.994*cm + 2.56*cm" y="0*cm" z="2874.68*cm" />
       <rotation x="0" y="0.032" z="0" />
    </detector>    
 
-  <detector id="17" name="Collimator_TBarea" type="SiTrackerBarrel"  insideTrackingVolume="true">
+  <detector id="23" name="Scintillator7" type="TestBeamCalorimeter" readout="BeforeTBCollimator" insideTrackingVolume="true"  >
+      <dimensions x="300*cm" y="300*cm" />
+      <position z="2500*cm+721.85*cm" /><!-- in gap between horizontal and vertical collimator-->
+      <layer repeat="1">       
+        <slice material = "Silicon" thickness = "0.001*cm" sensitive = "yes" />
+      </layer>	
+   </detector>    
+ 
+ <detector id="24" name="Collimator_TBarea" type="SiTrackerBarrel"  insideTrackingVolume="true">
          <module name="Collimator_TBarea">
 	    <module_envelope length="11*cm" width="60*cm" thickness="6443*cm"/>
 	     <module_component length="20*cm*0.5-0.5*cm*0.5" width="20*cm" thickness="30*cm" material="Lead" sensitive="no" >
-<!--	        <position x="721.85cm*sin(32mrad)" y="((20*cm*0.5-0.5*cm*0.5)*0.5+0.5*cm*0.5)" z="2500cm+721.85cm*cos(32mrad)" />  -->
-	        <position x="23.095*cm" y="5.125*cm" z="3221.48*cm" />
+<!--	        <position x="721.85cm*sin(32mrad) +2.56*cm" y="((20*cm*0.5-0.5*cm*0.5)*0.5+0.5*cm*0.5)" z="2500cm+721.85cm*cos(32mrad)" />  -->
+	        <position x="23.095*cm + 2.56*cm" y="5.125*cm" z="3221.48*cm" />
                 <rotation x="0" y="0.032" z="0" />
 	     </module_component>
 	     <module_component length="20*cm*0.5-0.5*cm*0.5" width="20*cm" thickness="30*cm" material="Lead" sensitive="no" >
-<!--	        <position x="721.85cm*sin(32mrad)" y="-((20*cm*0.5-0.5*cm*0.5)*0.5+0.5*cm*0.5)" z="2500cm+721.85cm*cos(32mrad)" />  -->
-	        <position x="23.095*cm" y="-5.125*cm" z="3221.48*cm" />
+<!--	        <position x="721.85cm*sin(32mrad) + 2.56*cm" y="-((20*cm*0.5-0.5*cm*0.5)*0.5+0.5*cm*0.5)" z="2500cm+721.85cm*cos(32mrad)" />  -->
+	        <position x="23.095*cm + 2.56*cm" y="-5.125*cm" z="3221.48*cm" />
                 <rotation x="0" y="0.032" z="0" />
 	     </module_component>
 	     <module_component length="0.5*cm" width="20*cm*0.5-0.5*cm*0.5" thickness="30*cm" material="Lead" sensitive="no" >
-<!--	        <position x="721.85cm*sin(32mrad)+cos(32mrad)*[(20cm*0.5-0.5cm*0.5)*0.5+0.5cm*0.5]" y="0*cm" z="2500cm+721.85cm*cos(32mrad)" />  -->
-	        <position x="28.22*cm" y="0*cm" z="3221.48*cm" />
+<!--	        <position x="721.85cm*sin(32mrad)+cos(32mrad)*[(20cm*0.5-0.5cm*0.5)*0.5+0.5cm*0.5] + 2.56*cm" y="0*cm" z="2500cm+721.85cm*cos(32mrad) - sin(32mrad)*[(20cm*0.5-0.5cm*0.5)*0.5+0.5cm*0.5]" />  -->
+	        <position x="28.22*cm + 2.56*cm" y="0*cm" z="3221.316*cm" />
                 <rotation x="0" y="0.032" z="0" />
 	     </module_component>
 	     <module_component length="0.5*cm" width="20*cm*0.5-0.5*cm*0.5" thickness="0.75*cm" material="Lead" sensitive="no" >
-<!--	        <position x="721.85cm*sin(32mrad)+cos(32mrad)*[(20cm*0.5-0.5cm*0.5)*0.5+0.5cm*0.5]" y="0*cm" z="2500cm+721.85cm*cos(32mrad)" />  -->
-	        <position x="17.97*cm" y="0*cm" z="3221.48*cm" />
+<!--	        <position x="721.85cm*sin(32mrad)-cos(32mrad)*[(20cm*0.5-0.5cm*0.5)*0.5+0.5cm*0.5] + 2.56*cm" y="0*cm" z="2500cm+721.85cm*cos(32mrad) + sin(32mrad)*[(20cm*0.5-0.5cm*0.5)*0.5+0.5cm*0.5]" />  -->
+	        <position x="17.97*cm + 2.56*cm" y="0*cm" z="3221.644*cm" />
                 <rotation x="0" y="0.032" z="0" />
 	     </module_component>
 	 </module>
@@ -433,7 +488,36 @@
 
   <!-- Sensitive Detector readout segmentation -->
   <readouts>
-  </readouts>
+      <readout name="EnterMagnetPositions">
+     <segmentation type="GridXYZ" gridSizeX="0.01*cm" gridSizeY="0.01*cm" />
+      <id>system:8,y:-21,barrel:3,x:32:-21,layer:11</id>
+    </readout>
+    <readout name="LeaveMagnetPositions">
+     <segmentation type="GridXYZ" gridSizeX="0.01*cm" gridSizeY="0.01*cm" />
+      <id>system:8,y:-21,barrel:3,x:32:-21,layer:11</id>
+    </readout>
+     <readout name="BeforeKinkPositions">
+     <segmentation type="GridXYZ" gridSizeX="0.01*cm" gridSizeY="0.01*cm" />
+      <id>system:8,y:-21,barrel:3,x:32:-21,layer:11</id>
+    </readout>
+    <readout name="BeforeCollimatorPositions">
+     <segmentation type="GridXYZ" gridSizeX="0.01*cm" gridSizeY="0.01*cm" />
+      <id>system:8,y:-21,barrel:3,x:32:-21,layer:11</id>
+    </readout>
+    <readout name="BetweenCollimators">
+     <segmentation type="GridXYZ" gridSizeX="0.01*cm" gridSizeY="0.01*cm" />
+      <id>system:8,y:-21,barrel:3,x:32:-21,layer:11</id>
+    </readout>
+    <readout name="BehindCollimators">
+     <segmentation type="GridXYZ" gridSizeX="0.01*cm" gridSizeY="0.01*cm" />
+      <id>system:8,y:-21,barrel:3,x:32:-21,layer:11</id>
+    </readout>
+    <readout name="BeforeTBCollimator">
+     <segmentation type="GridXYZ" gridSizeX="0.01*cm" gridSizeY="0.01*cm" />
+      <id>system:8,y:-21,barrel:3,x:32:-21,layer:11</id>
+    </readout>
+
+ </readouts>
 
   <fields>
 	 <field type="BoxDipole" name="TestBeamDipole"
@@ -445,7 +529,7 @@
 	             dy="(37*cm*0.5)"
 	             dz="(104*cm*0.5)"
 	             bx="0.0"
-	             by="0.5"
+	             by="0.44"
 	             bz="0.0">     
 	</field>
   </fields>

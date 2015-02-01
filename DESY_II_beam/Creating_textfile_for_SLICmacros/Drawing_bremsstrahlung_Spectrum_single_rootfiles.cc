@@ -5,6 +5,8 @@
 #include "TTree.h"
 #include "TBranch.h"
 #include "TF1.h"
+#include "TFitResult.h"
+#include "TFitResultPtr.h"
 #include "TH1.h"
 #include "TH2.h"
 #include "TStyle.h"
@@ -90,7 +92,7 @@ cout<<__LINE__<< " Function Fill_RebinningArrays called." <<endl;
 	rebinned_Photon_Deflection_Fibre->GetYaxis()->SetTitle("y (mm)");
 	rebinned_Photon_Deflection_Fibre->GetYaxis()->CenterTitle();
 
-	TH2D* EnergyMap_Photon_Deflection_Fibre = new TH2D("EnergyMap_DeflFibre_Photon","Deflection of photons created in fibre and their average energy",/*21*/7,binning_array_x,/*21*/7,binning_array_y);
+	TH2D* EnergyMap_Photon_Deflection_Fibre = new TH2D("EnergyMap_DeflFibre_Photon","Deflection of photons created in fibre and their average energy",21/*7*/,binning_array_x,21/*7*/,binning_array_y);
 	EnergyMap_Photon_Deflection_Fibre->SetStats(kFALSE);
         EnergyMap_Photon_Deflection_Fibre->SetOption("TEXT");
         EnergyMap_Photon_Deflection_Fibre->GetXaxis()->SetTitle("x (mm)");
@@ -99,8 +101,8 @@ cout<<__LINE__<< " Function Fill_RebinningArrays called." <<endl;
         EnergyMap_Photon_Deflection_Fibre->GetYaxis()->CenterTitle();
 
 
-	TCanvas * Spectrum_Canvas = new TCanvas("bremsstrahlungSpectrum");
-
+	TCanvas * Spectrum_Canvas = new TCanvas("bremsstrahlungSpectrum_with_Chi2");
+/*
 //	Spectrum_Canvas->Divide(1,2);
 //	Spectrum_Canvas->cd(1);
 	Spectrum_Canvas->cd();
@@ -110,13 +112,15 @@ cout<<__LINE__<< " Function Fill_RebinningArrays called." <<endl;
 		vectree.at(i)->Draw("Energy >>+ Photon_spectrum","Particle_ID==22 && hasLeftDetector_Status==1","SAME");
 	}
 cout<<__LINE__<< " Energy filled into histogramm from all TTrees." << endl;
-	TF1 *One_over_E = new TF1("Bremsstrahlung","[0]-[1]/x+[2]/(x*x)",0,6);
+	TF1 *One_over_E = new TF1("Bremsstrahlung","[0]-[1]/x+[2]/(x*x)",0,6.3);
 	//TF1 *One_over_E = new TF1("Bremsstrahlung","(0.0025/19.321267)*((4*log([1]/[0]))/3-(4*([1]-[0]))/(3*x)+([1]*[1]-[0]*[0])/(2*x*x))",0,6);
 	//One_over_E->SetParLimits(0,0,0.2);
 	//One_over_E->SetParLimits(1,6.2,6.4);
-	bremsstrahlungSpectrum->Fit(One_over_E,"BR");
-cout<<__LINE__<< " Statboxsize manipulated." << endl;
-
+	TFitResultPtr fitresult = bremsstrahlungSpectrum->Fit(One_over_E,"BRS");
+	cout << "Fit has a Chi2/ndof of " << fitresult->Chi2() << "/" << fitresult->Ndf() << endl;
+	gStyle->SetOptFit(110);
+cout<<__LINE__<< " Fit applied." << endl;
+*/
 /*
 	Spectrum_Canvas->cd(2);
 	gPad->SetLogz();
@@ -128,6 +132,7 @@ cout<<__LINE__<< " Statboxsize manipulated." << endl;
 	}
 cout<<__LINE__<< " y over x plotted in position plot for all TTrees." << endl;
 */
+/*
 	string canvasname=Spectrum_Canvas->GetName();
 	Spectrum_Canvas->Write();
 	Spectrum_Canvas->Print((canvasname+".eps").c_str());
@@ -135,7 +140,7 @@ cout<<__LINE__<< " y over x plotted in position plot for all TTrees." << endl;
 	Spectrum_Canvas->Close();
 cout<<__LINE__<< " Spectrum canvas written, printed and closed." << endl;
 
-
+*/
 
 	TCanvas* Map_Canvas = new TCanvas("PhotonSource_Maps");
 

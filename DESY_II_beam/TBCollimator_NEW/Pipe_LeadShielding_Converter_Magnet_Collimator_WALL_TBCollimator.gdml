@@ -7,12 +7,13 @@
 <gdml xmlns:gdml="http://cern.ch/2001/Schemas/GDML" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.lcsim.org/schemas/gdml/1.0/gdml.xsd" >
 
     <define>
-    <constant name="world_side" value="32400." />
+    <constant name="world_side" value="2*32400." />
     <position name="Position_of_LeadShieldingHole" x="100." y="-50." z="0." />
     <position name="Position_of_ConcreteShieldingHole" x="100." y="-75." z="0." />
     <rotation name="RotatePassthrough" y="-0.032" unit="rad"/>
     <position name="BeamPipe_Connection_HolePosition1" x="-30." y="0." z="0." unit="mm"/>
     <position name="BeamPipe_Connection_HolePosition2" x="5." y="0." z="0." unit="mm"/>
+    <position name="center" x="0." y="0." z="0." unit="mm"/>
     </define>
 
     <materials>
@@ -461,7 +462,7 @@
         </volume>
 
 
-        <volume name="testbeam_volume" > 
+        <volume name="tracking_volume" > 
             <materialref ref="Air" /> 
             <solidref ref="WorldBox" /> 
             <physvol>
@@ -474,19 +475,23 @@
             </physvol>
    	    <physvol> 
                 <volumeref ref="LeadShielding_vol" /> 
-                <position name="LeadShielding_vol_position" x="-100." y="75." z="22670." />      
+                <position name="LeadShielding_vol_position" x="-100." y="50." z="22670." />      
+              <!--  <position name="LeadShielding_vol_position" x="-100." y="75." z="22670." />      -->
             </physvol> 
             <physvol> 
                 <volumeref ref="ConcreteShielding_vol" /> 
-                <position name="ConcreteShielding_vol_position" x="-100." y="112.5" z="22870." />     
+                <position name="ConcreteShielding_vol_position" x="-100." y="87.5" z="22870." />     
+              <!--  <position name="ConcreteShielding_vol_position" x="-100." y="112.5" z="22870." />     -->
             </physvol>
             <physvol> 
                 <volumeref ref="ConcreteShieldingFundament_vol" /> 
-                <position name="ConcreteShieldingFundament_vol_position" x="-100." y="-875." z="22770." />     
+                <position name="ConcreteShieldingFundament_vol_position" x="-100." y="-900." z="22770." />     
+              <!--  <position name="ConcreteShieldingFundament_vol_position" x="-100." y="-875." z="22770." />     -->
             </physvol>
             <physvol> 
                 <volumeref ref="ConcreteShieldingSideBlock_vol" /> 
-                <position name="ConcreteShieldingSideBlock_vol_position" x="-700." y="-700." z="23270." />     
+                <position name="ConcreteShieldingSideBlock_vol_position" x="-700." y="-725." z="23270." />     
+              <!--  <position name="ConcreteShieldingSideBlock_vol_position" x="-700." y="-700." z="23270." />     -->
             </physvol>
     	    <physvol> 
                 <volumeref ref="ConverterTarget_vol" /> 
@@ -601,7 +606,7 @@
     </structure>
 
     <setup name="Default" version="1.0">
-        <world ref="testbeam_volume"/>
+        <world ref="tracking_volume"/>
     </setup>
 
 </gdml>

@@ -29,11 +29,12 @@ int main(){
 	rootchain_LeaveMagnet->Merge("allfiles_scintillator_TB_magnet_B0_59T_LeaveMagnet.root");
 
 	int particle_id = 0;
-	int hit_particle_id = 0;
+	int hit_particle_id_enter = 0;
+	int hit_particle_id_leave = 0;
 
 	rootchain_MCP->SetBranchAddress("Particle_ID",&particle_id);
-	rootchain_EnterMagnet->SetBranchAddress("HitParticle_ID",&hit_particle_id);
-	rootchain_LeaveMagnet->SetBranchAddress("HitParticle_ID",&hit_particle_id);
+	rootchain_EnterMagnet->SetBranchAddress("HitParticle_ID",&hit_particle_id_enter);
+	rootchain_LeaveMagnet->SetBranchAddress("HitParticle_ID",&hit_particle_id_leave);
 
 	TFile * skimfile = new TFile("allfiles_scintillator_TB_magnet_B0_59T_skimmed.root","RECREATE");
 	rootchain_MCP->LoadTree(0);
@@ -50,7 +51,7 @@ int main(){
 
 	for (int k=0; k<rootchain_EnterMagnet->GetEntries(); k++){
 		rootchain_EnterMagnet->GetEntry(k);
-		if (particle_id > 10000000) continue;
+		if (hit_particle_id_enter > 10000000) continue;
 		newtree_EnterMagnet->Fill();
 		if (k%500==0) cout << "Skimming file..." << endl;
 	}
@@ -59,7 +60,7 @@ int main(){
 
 	for (int k=0; k<rootchain_LeaveMagnet->GetEntries(); k++){
 		rootchain_LeaveMagnet->GetEntry(k);
-		if (particle_id > 10000000) continue;
+		if (hit_particle_id_leave > 10000000) continue;
 		newtree_LeaveMagnet->Fill();
 		if (k%500==0) cout << "Skimming file..." << endl;
 	}

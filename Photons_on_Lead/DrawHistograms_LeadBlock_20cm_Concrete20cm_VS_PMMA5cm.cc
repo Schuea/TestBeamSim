@@ -99,7 +99,7 @@ void DrawingMacro(string outputname,string name1,string name2){
 	ProtNeut_Stopped_Canvas->cd();
 	gPad->SetLogy();
 	gStyle->SetOptStat(11);
-	T1->Draw("Reflectionz >>+ Stoppedz_5_ElePhot_Concrete","Particle_ID==11 || Particle_ID==-11 || Particle_ID==22");	
+	T1->Draw("Reflectionz >>+ Stoppedz_5_ElePhot_Concrete","(Particle_ID==11 || Particle_ID==-11 || Particle_ID==22)&& Stopped_Status==1");	
 	gPad->Update();
         TPaveStats *st1_pos = (TPaveStats*)Stoppedz_5GeV_ElePhot_Concrete->FindObject("stats");
         double statboxsize_pos = st1_pos->GetY2NDC() - st1_pos->GetY1NDC();
@@ -110,7 +110,7 @@ void DrawingMacro(string outputname,string name1,string name2){
         st1_pos->SetX1NDC(0.75);
         st1_pos->SetX2NDC(0.75+statboxsize_pos_x);	
 
-	T1->Draw("Reflectionz >>+ Stoppedz_5_ProtNeut_Concrete","Particle_ID==2212 || Particle_ID==2112","SAMES");	
+	T1->Draw("Reflectionz >>+ Stoppedz_5_ProtNeut_Concrete","(Particle_ID==2212 || Particle_ID==2112)&& Stopped_Status==1","SAMES");	
 	gPad->Update();
         TPaveStats *st2_pos = (TPaveStats*)Stoppedz_5GeV_ProtNeut_Concrete->FindObject("stats");
         st2_pos->SetTextColor(2);
@@ -119,7 +119,7 @@ void DrawingMacro(string outputname,string name1,string name2){
         st2_pos->SetX1NDC(st1_pos->GetX1NDC()); //new x start position
         st2_pos->SetX2NDC(st1_pos->GetX2NDC()); //new x end position
 
-	T2->Draw("Reflectionz >>+ Stoppedz_5_ElePhot_PMMA","Particle_ID==11 || Particle_ID==-11 || Particle_ID==22","SAMES");	
+	T2->Draw("Reflectionz >>+ Stoppedz_5_ElePhot_PMMA","(Particle_ID==11 || Particle_ID==-11 || Particle_ID==22)&& Stopped_Status==1","SAMES");	
 	gPad->Update();
         TPaveStats *st3_pos = (TPaveStats*)Stoppedz_5GeV_ElePhot_PMMA->FindObject("stats");
         st3_pos->SetTextColor(6);
@@ -128,7 +128,7 @@ void DrawingMacro(string outputname,string name1,string name2){
         st3_pos->SetX1NDC(st1_pos->GetX1NDC()); //new x start position
         st3_pos->SetX2NDC(st1_pos->GetX2NDC()); //new x end position
 
-	T2->Draw("Reflectionz >>+ Stoppedz_5_ProtNeut_PMMA","Particle_ID==2212 || Particle_ID==2112","SAMES");	
+	T2->Draw("Reflectionz >>+ Stoppedz_5_ProtNeut_PMMA","(Particle_ID==2212 || Particle_ID==2112)&& Stopped_Status==1","SAMES");	
 	gPad->Update();
         TPaveStats *st4_pos = (TPaveStats*)Stoppedz_5GeV_ProtNeut_PMMA->FindObject("stats");
         st4_pos->SetTextColor(3);
