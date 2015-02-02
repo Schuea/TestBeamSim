@@ -70,7 +70,11 @@
       <idspecref ref="PhantomTrackerHits2" />
     </tracker>
   </sensitive_detectors>
-  <limits />
+  <limits>
+  	<limitset name="TestLimitSet">
+		<limit name="step_length_max" particles="*" value="1.0" unit="mm"/>
+	</limitset>
+  </limits>
   <regions>
     <region name="TrackingRegion" store_secondaries="true" kill_tracks="false" cut="10.0" lunit="mm" threshold="1.0" eunit="MeV" />
   </regions>
@@ -288,12 +292,12 @@
       <box name="PhantomPlane4Volume_component0Sensor0Box" x="150.0" y="150.0" z="1.0E-8" />
       <box name="FieldBoxBox" x="100.0" y="250.0" z="710.0" />
       <box name="FieldBoxVolume_component0Box" x="100.0" y="250.0" z="710.0" />
-      <box name="PhantomPlane1Box" x="806.0" y="1100.0" z="1.0E-8" />
-      <box name="PhantomPlane1Volume_component0Box" x="806.0" y="1100.0" z="1.0E-8" />
-      <box name="PhantomPlane1Volume_component0Sensor0Box" x="806.0" y="1100.0" z="1.0E-8" />
-      <box name="PhantomPlane2Box" x="806.0" y="1100.0" z="1.0E-8" />
-      <box name="PhantomPlane2Volume_component0Box" x="806.0" y="1100.0" z="1.0E-8" />
-      <box name="PhantomPlane2Volume_component0Sensor0Box" x="806.0" y="1100.0" z="1.0E-8" />
+      <box name="PhantomPlane1Box" x="900.0" y="1200.0" z="1.0E-8" />
+      <box name="PhantomPlane1Volume_component0Box" x="900.0" y="1200.0" z="1.0E-8" />
+      <box name="PhantomPlane1Volume_component0Sensor0Box" x="900.0" y="1200.0" z="1.0E-8" />
+      <box name="PhantomPlane2Box" x="900.0" y="1200.0" z="1.0E-8" />
+      <box name="PhantomPlane2Volume_component0Box" x="900.0" y="1200.0" z="1.0E-8" />
+      <box name="PhantomPlane2Volume_component0Sensor0Box" x="900.0" y="1200.0" z="1.0E-8" />
       <tube name="BeamPipe" rmin="33." rmax="35." z="4000." deltaphi="360" startphi="0" aunit="deg" lunit="mm" />
       <tube name="BeamPipeWindow" rmin="0" rmax="35." z="5.0" deltaphi="360" startphi="0" aunit="deg" lunit="mm" />
       <box lunit="mm" name="LeadShieldingBox" x="800." y="275." z="200." />
@@ -447,6 +451,7 @@
       <volume name="FieldBoxVolume_component0">
         <materialref ref="Air" />
         <solidref ref="FieldBoxVolume_component0Box" />
+	<limitsetref ref="TestLimitSet"/>
       </volume>
       <volume name="FieldBoxVolume">
         <materialref ref="Vacuum" />
