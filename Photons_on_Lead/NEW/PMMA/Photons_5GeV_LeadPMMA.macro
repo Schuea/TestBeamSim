@@ -1,0 +1,12 @@
+/lcio/PDGFlag true
+/lcio/filename LeadPMMA_5GeV.slcio
+/lcdd/url LeadPMMA.lcdd 
+/run/initialize
+/generator/select gun
+/gun/particle gamma
+/gun/position 0 0 0
+/gun/direction 0. 0. 1
+/gun/energy 5 GeV
+/random/seed
+/run/beamOn 1000000
+
