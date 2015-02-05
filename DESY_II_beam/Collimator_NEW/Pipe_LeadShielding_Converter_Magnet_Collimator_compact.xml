@@ -20,7 +20,7 @@
         <constant name="tracking_region_zmax" value="world_side"/>
         
         <!--  dipole magnet and  B-field -->
-        <constant name="constBField" value="0.59"/>
+        <constant name="constBField" value="-0.44"/>
     </define>
     
     <materials>
@@ -71,7 +71,7 @@
             <comment>Volume to set stepping limits</comment>
             <module name="FieldBox">
                 <box x="250.*mm" y="100.*mm" />
-                <module_component thickness="710.*mm" material = "Air" sensitive="false">
+                <module_component thickness="710.*mm" material = "Vacuum" sensitive="false">
                     <dimensions x="250.*mm" y="100.*m" /> 
                 </module_component>
             </module>    
@@ -84,9 +84,9 @@
     	<detector id="4" name="PhantomTracker3" type="HPSTracker2" readout="PhantomTrackerHits3" >
             <comment>Phantom plane to register hits</comment>
             <module name="PhantomPlane3">
-                <box x="150.*mm" y="150.*mm" />
+                <box x="300.*mm" y="300.*mm" />
                 <module_component thickness="0.000000001*cm" material = "Vacuum" sensitive="true">
-                    <dimensions x="150.*mm" y="150.*mm" /> 
+                    <dimensions x="300.*mm" y="300.*mm" /> 
                 </module_component>
             </module>          
 	<!-- before horizontal collimator -->
@@ -98,9 +98,9 @@
         <detector id="5" name="PhantomTracker4" type="HPSTracker2" readout="PhantomTrackerHits4" >
             <comment>Phantom plane to register hits</comment>
             <module name="PhantomPlane4">
-                <box x="150.*mm" y="150.*mm" />
+                <box x="300.*mm" y="300.*mm" />
                 <module_component thickness="0.000000001*cm" material = "Vacuum" sensitive="true">
-                    <dimensions x="150.*mm" y="150.*mm" /> 
+                    <dimensions x="300.*mm" y="300.*mm" /> 
                 </module_component>
             </module>    
 	<!-- before vertical collimator -->

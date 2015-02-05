@@ -485,6 +485,15 @@ class InputCollectionProcessor_SimCalorimeterHit_collection: public Collection_P
 
 };
 
+class myMCParticle: public MCParticle{
+	private:
+		int unique_id_;
+	public:
+		myMCParticle() : MCParticle(){}
+		void setUniqueID(int id){unique_id_ = id;}
+		int getUniqueID(){return unique_id_;}
+};
+
 class InputCollectionProcessor_SimTrackerHit_collection: public Collection_Processor_Template<EVENT::SimTrackerHit>{
 
 	public:
@@ -498,6 +507,8 @@ class InputCollectionProcessor_SimTrackerHit_collection: public Collection_Proce
 //____________EDIT:
 
 	virtual void fillInHist(EVENT::SimTrackerHit *p, lcio::LCEvent * evt){
+		event_id_= evt->getEventNumber();
+		run_id_= evt->getRunNumber();
 
 		HitPosition_x_ = p->getPosition()[0];
 		//cout << "HitPosition_x_ = " << HitPosition_x_ << endl;	
@@ -505,7 +516,10 @@ class InputCollectionProcessor_SimTrackerHit_collection: public Collection_Proce
 		//cout << "HitPosition_y_ = " << HitPosition_y_ << endl;	
 		HitPosition_z_ = p->getPosition()[2];
 
-		MCParticle *hitparticle = p->getMCParticle();
+		myMCParticle *hitparticle = p->getMCParticle();
+
+		LCIO_id_ = p->id();//hitparticle->id();
+
 		HitVertex_x_ = hitparticle->getVertex()[0];
 		HitVertex_y_ = hitparticle->getVertex()[1];
 		HitVertex_z_ = hitparticle->getVertex()[2];
@@ -528,6 +542,10 @@ class InputCollectionProcessor_SimTrackerHit_collection: public Collection_Proce
 
 	virtual void tree_reset(){
 
+		event_id_=0;
+		run_id_=0;
+
+		LCIO_id_=0;
 		HitParticle_id_=0;
 		HitCharge_=0;
 		HitEnergy_=0;
@@ -554,6 +572,9 @@ class InputCollectionProcessor_SimTrackerHit_collection: public Collection_Proce
 	}
 
  	void registerTTree(){
+		tree_->Branch("Event_ID",&event_id_,"Event_ID/I");
+		tree_->Branch("Run_ID",&run_id_,"Run_ID/I");
+		tree_->Branch("LCIO_ID",&LCIO_id_,"LCIO_ID/I");
 
 		tree_->Branch("HitParticle_ID",&HitParticle_id_,"HitParticle_ID/I");
 		tree_->Branch("HitCharge",&HitCharge_,"HitCharge/F");
@@ -581,6 +602,11 @@ class InputCollectionProcessor_SimTrackerHit_collection: public Collection_Proce
 	private:
 
 	TTree* tree_;
+
+	int event_id_;
+	int run_id_;
+
+	int LCIO_id_;
 
 	int HitParticle_id_;
 	float HitCharge_;

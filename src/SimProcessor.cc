@@ -56,6 +56,8 @@ void SimProcessor::init() {
 	Tree_MCParticle = new TTree("Tree_MCP","TTree for MCParticles");
 	Tree_TrackerPlane1 = new TTree("Tree_TrackerPlane1","TTree for SimTrackerHit");
 	Tree_TrackerPlane2 = new TTree("Tree_TrackerPlane2","TTree for SimTrackerHit");
+	Tree_TrackerPlane3 = new TTree("Tree_TrackerPlane3","TTree for SimTrackerHit");
+	Tree_TrackerPlane4 = new TTree("Tree_TrackerPlane4","TTree for SimTrackerHit");
 	Tree_MagnetField = new TTree("Tree_MagnetField","TTree for SimTrackerHit");
 //	Tree_EnterMagnet = new TTree("Tree_EnterMagnet","TTree for SimCalorimeterHit");
 //	Tree_LeaveMagnet = new TTree("Tree_LeaveMagnet","TTree for SimCalorimeterHit");
@@ -69,6 +71,8 @@ void SimProcessor::init() {
 	registerInputCollectionProcessor(new InputCollectionProcessor_SimTrackerHit_collection(Tree_TrackerPlane1,"InputCollectionName2","PhantomTrackerHits"));
 	registerInputCollectionProcessor(new InputCollectionProcessor_SimTrackerHit_collection(Tree_TrackerPlane2,"InputCollectionName3","PhantomTrackerHits2"));
 	registerInputCollectionProcessor(new InputCollectionProcessor_SimTrackerHit_collection(Tree_MagnetField,"InputCollectionName4","MagnetFieldHits"));
+	registerInputCollectionProcessor(new InputCollectionProcessor_SimTrackerHit_collection(Tree_TrackerPlane3,"InputCollectionName5","PhantomTrackerHits3"));
+	registerInputCollectionProcessor(new InputCollectionProcessor_SimTrackerHit_collection(Tree_TrackerPlane4,"InputCollectionName6","PhantomTrackerHits4"));
 /*	registerInputCollectionProcessor(new InputCollectionProcessor_SimCalorimeterHit_collection(Tree_EnterMagnet,"InputCollectionName2","EnterMagnetPositions"));
 	registerInputCollectionProcessor(new InputCollectionProcessor_SimCalorimeterHit_collection(Tree_LeaveMagnet,"InputCollectionName3","LeaveMagnetPositions"));
 	registerInputCollectionProcessor(new InputCollectionProcessor_SimCalorimeterHit_collection(Tree_BeforeKink,"InputCollectionName4","BeforeKinkPositions"));

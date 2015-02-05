@@ -20,7 +20,7 @@
         <constant name="tracking_region_zmax" value="world_side"/>
         
         <!--  dipole magnet and  B-field -->
-        <constant name="constBField" value="0.59"/>
+        <constant name="constBField" value="-0.44"/>
     </define>
     
     <materials>
@@ -42,9 +42,9 @@
     	<detector id="1" name="PhantomTracker1" type="HPSTracker2" readout="PhantomTrackerHits" >
             <comment>Phantom plane to register hits</comment>
             <module name="PhantomPlane1">
-                <box x="100.*mm" y="100.*mm" />
+                <box x="1200.*mm" y="900.*mm" />
                 <module_component thickness="0.000000001*cm" material = "Vacuum" sensitive="true">
-                    <dimensions x="100.*mm" y="100.*mm" /> 
+                    <dimensions x="1200.*mm" y="900.*mm" /> 
                 </module_component>
             </module>          
 	<!-- before magnet -->
@@ -56,9 +56,9 @@
         <detector id="2" name="PhantomTracker2" type="HPSTracker2" readout="PhantomTrackerHits2" >
             <comment>Phantom plane to register hits</comment>
             <module name="PhantomPlane2">
-                <box x="100.*mm" y="100.*mm" />
+                <box x="1200.*mm" y="900.*mm" />
                 <module_component thickness="0.000000001*cm" material = "Vacuum" sensitive="true">
-                    <dimensions x="100.*mm" y="100.*mm" /> 
+                    <dimensions x="1200.*mm" y="900.*mm" /> 
                 </module_component>
             </module>    
 	<!-- behind magnet -->

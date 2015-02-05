@@ -43,6 +43,8 @@ class SimProcessor : public marlin::Processor {
 
 	TTree *Tree_TrackerPlane1;
 	TTree *Tree_TrackerPlane2;
+	TTree *Tree_TrackerPlane3;
+	TTree *Tree_TrackerPlane4;
 	TTree *Tree_MagnetField;
 
 	TTree *Tree_EnterMagnet;
