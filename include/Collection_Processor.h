@@ -485,15 +485,6 @@ class InputCollectionProcessor_SimCalorimeterHit_collection: public Collection_P
 
 };
 
-class myMCParticle: public MCParticle{
-	private:
-		int unique_id_;
-	public:
-		myMCParticle() : MCParticle(){}
-		void setUniqueID(int id){unique_id_ = id;}
-		int getUniqueID(){return unique_id_;}
-};
-
 class InputCollectionProcessor_SimTrackerHit_collection: public Collection_Processor_Template<EVENT::SimTrackerHit>{
 
 	public:
@@ -516,7 +507,7 @@ class InputCollectionProcessor_SimTrackerHit_collection: public Collection_Proce
 		//cout << "HitPosition_y_ = " << HitPosition_y_ << endl;	
 		HitPosition_z_ = p->getPosition()[2];
 
-		myMCParticle *hitparticle = p->getMCParticle();
+		MCParticle *hitparticle = p->getMCParticle();
 
 		LCIO_id_ = p->id();//hitparticle->id();
 
