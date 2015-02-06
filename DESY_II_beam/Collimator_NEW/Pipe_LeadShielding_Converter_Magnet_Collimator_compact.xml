@@ -20,7 +20,7 @@
         <constant name="tracking_region_zmax" value="world_side"/>
         
         <!--  dipole magnet and  B-field -->
-        <constant name="constBField" value="-0.44"/>
+        <constant name="constBField" value="0.59"/>
     </define>
     
     <materials>
@@ -43,12 +43,12 @@
             <comment>Phantom plane to register hits</comment>
             <module name="PhantomPlane1">
                 <box x="1100.*mm" y="806.*mm" />
-                <module_component thickness="0.000000001*cm" material = "Vacuum" sensitive="true">
+                <module_component thickness="0.000000001*cm" material="Vacuum" sensitive="true">
                     <dimensions x="1100.*mm" y="806.*mm" /> 
                 </module_component>
             </module>          
 	<!-- before magnet -->
-            <layer id="2">
+            <layer id="1">
                 <module_placement name="PhantomPlane1" id="0" x="0." y="0." z="23672.5*mm" rx="0" ry="0" rz="-PI/2"/>
             </layer>    
         </detector>
@@ -57,12 +57,12 @@
             <comment>Phantom plane to register hits</comment>
             <module name="PhantomPlane2">
                 <box x="1100.*mm" y="806.*mm" />
-                <module_component thickness="0.000000001*cm" material = "Vacuum" sensitive="true">
+                <module_component thickness="0.000000001*cm" material="Vacuum" sensitive="true">
                     <dimensions x="1100.*mm" y="806.*mm" /> 
                 </module_component>
             </module>    
 	<!-- behind magnet -->
-            <layer id="3">
+            <layer id="2">
                 <module_placement name="PhantomPlane2" id="0" x="0." y="0." z="24727.5*mm" rx="0" ry="0" rz="-PI/2"/>
             </layer>             
         </detector>
@@ -71,7 +71,7 @@
             <comment>Volume to set stepping limits</comment>
             <module name="FieldBox">
                 <box x="250.*mm" y="100.*mm" />
-                <module_component thickness="710.*mm" material = "Vacuum" sensitive="false">
+                <module_component thickness="710.*mm" material="Vacuum" sensitive="false">
                     <dimensions x="250.*mm" y="100.*m" /> 
                 </module_component>
             </module>    
@@ -85,27 +85,55 @@
             <comment>Phantom plane to register hits</comment>
             <module name="PhantomPlane3">
                 <box x="300.*mm" y="300.*mm" />
-                <module_component thickness="0.000000001*cm" material = "Vacuum" sensitive="true">
+                <module_component thickness="0.000000001*cm" material="Vacuum" sensitive="true">
                     <dimensions x="300.*mm" y="300.*mm" /> 
                 </module_component>
             </module>          
 	<!-- before horizontal collimator -->
             <layer id="4">
-                <module_placement name="PhantomPlane3" id="0" x="0." y="0." z="25098.0*mm" rx="0" ry="0" rz="-PI/2"/>
+                <module_placement name="PhantomPlane3" id="0" x="40." y="0." z="25098.0*mm" rx="0" ry="0" rz="-PI/2"/>
             </layer>    
         </detector>
-
+ 
         <detector id="5" name="PhantomTracker4" type="HPSTracker2" readout="PhantomTrackerHits4" >
             <comment>Phantom plane to register hits</comment>
             <module name="PhantomPlane4">
                 <box x="300.*mm" y="300.*mm" />
-                <module_component thickness="0.000000001*cm" material = "Vacuum" sensitive="true">
+                <module_component thickness="0.000000001*cm" material="Vacuum" sensitive="true">
+                    <dimensions x="300.*mm" y="300.*mm" /> 
+                </module_component>
+            </module>    
+	<!-- behind horizontal collimator -->
+            <layer id="5">
+                <module_placement name="PhantomPlane4" id="0" x="40." y="0." z="25226.0*mm" rx="0" ry="0" rz="-PI/2"/>
+            </layer>             
+        </detector>
+
+        <detector id="6" name="PhantomTracker5" type="HPSTracker2" readout="PhantomTrackerHits5" >
+            <comment>Phantom plane to register hits</comment>
+            <module name="PhantomPlane5">
+                <box x="300.*mm" y="300.*mm" />
+                <module_component thickness="0.000000001*cm" material="Vacuum" sensitive="true">
                     <dimensions x="300.*mm" y="300.*mm" /> 
                 </module_component>
             </module>    
 	<!-- before vertical collimator -->
-            <layer id="5">
-                <module_placement name="PhantomPlane4" id="0" x="0." y="0." z="25302.0*mm" rx="0" ry="0" rz="-PI/2"/>
+            <layer id="6">
+                <module_placement name="PhantomPlane5" id="0" x="46." y="0." z="25302.0*mm" rx="0" ry="0" rz="-PI/2"/>
+            </layer>             
+       </detector>
+ 
+        <detector id="7" name="PhantomTracker6" type="HPSTracker2" readout="PhantomTrackerHits6" >
+            <comment>Phantom plane to register hits</comment>
+            <module name="PhantomPlane6">
+                <box x="300.*mm" y="300.*mm" />
+                <module_component thickness="0.000000001*cm" material="Vacuum" sensitive="true">
+                    <dimensions x="300.*mm" y="300.*mm" /> 
+                </module_component>
+            </module>    
+	<!-- behind vertical collimator -->
+            <layer id="7">
+                <module_placement name="PhantomPlane6" id="0" x="46." y="0." z="25429.5*mm" rx="0" ry="0" rz="-PI/2"/>
             </layer>             
         </detector>
 
@@ -126,6 +154,12 @@
             <id>system:6,barrel:3,layer:4,module:12,sensor:1,side:32:-2,strip:12</id> 
         </readout> 
         <readout name="PhantomTrackerHits4">
+            <id>system:6,barrel:3,layer:4,module:12,sensor:1,side:32:-2,strip:12</id> 
+        </readout> 
+        <readout name="PhantomTrackerHits5">
+            <id>system:6,barrel:3,layer:4,module:12,sensor:1,side:32:-2,strip:12</id> 
+        </readout> 
+        <readout name="PhantomTrackerHits6">
             <id>system:6,barrel:3,layer:4,module:12,sensor:1,side:32:-2,strip:12</id> 
         </readout> 
    </readouts>
