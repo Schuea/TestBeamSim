@@ -1,0 +1,965 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lcdd xmlns:lcdd="http://www.lcsim.org/schemas/lcdd/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="http://www.lcsim.org/schemas/lcdd/1.0/lcdd.xsd">
+  <header>
+    <detector name="TB line upt to horizontal and vertical collimators" />
+    <generator name="GeomConverter" version="1.0" file="Pipe_LeadShielding_Converter_Magnet_Collimator_WALL_TBCollimator_compact.xml" checksum="76243725" />
+    <author name="NONE" />
+    <comment>Simulation of test beam line up to collimators</comment>
+  </header>
+  <iddict>
+    <idspec name="PhantomTrackerHits2" length="46">
+      <idfield signed="false" label="system" length="6" start="0" />
+      <idfield signed="false" label="barrel" length="3" start="6" />
+      <idfield signed="false" label="layer" length="4" start="9" />
+      <idfield signed="false" label="module" length="12" start="13" />
+      <idfield signed="false" label="sensor" length="1" start="25" />
+      <idfield signed="true" label="side" length="2" start="32" />
+      <idfield signed="false" label="strip" length="12" start="34" />
+    </idspec>
+    <idspec name="PhantomTrackerHits3" length="46">
+      <idfield signed="false" label="system" length="6" start="0" />
+      <idfield signed="false" label="barrel" length="3" start="6" />
+      <idfield signed="false" label="layer" length="4" start="9" />
+      <idfield signed="false" label="module" length="12" start="13" />
+      <idfield signed="false" label="sensor" length="1" start="25" />
+      <idfield signed="true" label="side" length="2" start="32" />
+      <idfield signed="false" label="strip" length="12" start="34" />
+    </idspec>
+    <idspec name="PhantomTrackerHits4" length="46">
+      <idfield signed="false" label="system" length="6" start="0" />
+      <idfield signed="false" label="barrel" length="3" start="6" />
+      <idfield signed="false" label="layer" length="4" start="9" />
+      <idfield signed="false" label="module" length="12" start="13" />
+      <idfield signed="false" label="sensor" length="1" start="25" />
+      <idfield signed="true" label="side" length="2" start="32" />
+      <idfield signed="false" label="strip" length="12" start="34" />
+    </idspec>
+    <idspec name="MagnetFieldHits" length="46">
+      <idfield signed="false" label="system" length="6" start="0" />
+      <idfield signed="false" label="barrel" length="3" start="6" />
+      <idfield signed="false" label="layer" length="4" start="9" />
+      <idfield signed="false" label="module" length="12" start="13" />
+      <idfield signed="false" label="sensor" length="1" start="25" />
+      <idfield signed="true" label="side" length="2" start="32" />
+      <idfield signed="false" label="strip" length="12" start="34" />
+    </idspec>
+    <idspec name="PhantomTrackerHits5" length="46">
+      <idfield signed="false" label="system" length="6" start="0" />
+      <idfield signed="false" label="barrel" length="3" start="6" />
+      <idfield signed="false" label="layer" length="4" start="9" />
+      <idfield signed="false" label="module" length="12" start="13" />
+      <idfield signed="false" label="sensor" length="1" start="25" />
+      <idfield signed="true" label="side" length="2" start="32" />
+      <idfield signed="false" label="strip" length="12" start="34" />
+    </idspec>
+    <idspec name="PhantomTrackerHits" length="46">
+      <idfield signed="false" label="system" length="6" start="0" />
+      <idfield signed="false" label="barrel" length="3" start="6" />
+      <idfield signed="false" label="layer" length="4" start="9" />
+      <idfield signed="false" label="module" length="12" start="13" />
+      <idfield signed="false" label="sensor" length="1" start="25" />
+      <idfield signed="true" label="side" length="2" start="32" />
+      <idfield signed="false" label="strip" length="12" start="34" />
+    </idspec>
+    <idspec name="PhantomTrackerHits6" length="46">
+      <idfield signed="false" label="system" length="6" start="0" />
+      <idfield signed="false" label="barrel" length="3" start="6" />
+      <idfield signed="false" label="layer" length="4" start="9" />
+      <idfield signed="false" label="module" length="12" start="13" />
+      <idfield signed="false" label="sensor" length="1" start="25" />
+      <idfield signed="true" label="side" length="2" start="32" />
+      <idfield signed="false" label="strip" length="12" start="34" />
+    </idspec>
+  </iddict>
+  <sensitive_detectors>
+    <tracker name="PhantomTracker3" ecut="0.0" eunit="MeV" verbose="0" hits_collection="PhantomTrackerHits3">
+      <idspecref ref="PhantomTrackerHits3" />
+    </tracker>
+    <tracker name="PhantomTracker4" ecut="0.0" eunit="MeV" verbose="0" hits_collection="PhantomTrackerHits4">
+      <idspecref ref="PhantomTrackerHits4" />
+    </tracker>
+    <tracker name="PhantomTracker5" ecut="0.0" eunit="MeV" verbose="0" hits_collection="PhantomTrackerHits5">
+      <idspecref ref="PhantomTrackerHits5" />
+    </tracker>
+    <tracker name="PhantomTracker6" ecut="0.0" eunit="MeV" verbose="0" hits_collection="PhantomTrackerHits6">
+      <idspecref ref="PhantomTrackerHits6" />
+    </tracker>
+    <tracker name="MagnetFieldVolume" ecut="0.0" eunit="MeV" verbose="0" hits_collection="MagnetFieldHits">
+      <idspecref ref="MagnetFieldHits" />
+    </tracker>
+    <tracker name="PhantomTracker1" ecut="0.0" eunit="MeV" verbose="0" hits_collection="PhantomTrackerHits">
+      <idspecref ref="PhantomTrackerHits" />
+    </tracker>
+    <tracker name="PhantomTracker2" ecut="0.0" eunit="MeV" verbose="0" hits_collection="PhantomTrackerHits2">
+      <idspecref ref="PhantomTrackerHits2" />
+    </tracker>
+  </sensitive_detectors>
+  <limits>
+  	<limitset name="TestLimitSet">
+		<limit name="step_length_max" particles="*" value="1.0" unit="mm"/>
+	</limitset>
+  </limits>
+  <regions>
+    <region name="TrackingRegion" store_secondaries="true" kill_tracks="false" cut="10.0" lunit="mm" threshold="1.0" eunit="MeV" />
+  </regions>
+  <display>
+    <vis name="WorldVis" line_style="unbroken" drawing_style="wireframe" show_daughters="true" visible="false">
+      <color R="1.0" G="1.0" B="1.0" alpha="1.0" />
+    </vis>
+    <vis name="TrackingVis" line_style="unbroken" drawing_style="wireframe" show_daughters="true" visible="false">
+      <color R="1.0" G="1.0" B="1.0" alpha="1.0" />
+    </vis>
+  </display>
+  <gdml>
+    <define>
+      <rotation name="identity_rot" x="0.0" y="0.0" z="0.0" unit="radian" />
+      <rotation name="reflect_rot" x="3.141592653589793" y="0.0" z="0.0" unit="radian" />
+      <position name="identity_pos" x="0.0" y="0.0" z="0.0" unit="mm" />
+      <constant name="world_side" value="32370.0" />
+      <constant name="constBField" value="0.59" />
+      <constant name="tracking_region_min" value="5.0" />
+      <constant name="tracking_region_radius" value="3000.0" />
+      <constant name="world_y" value="4500.0" />
+      <constant name="world_z" value="32370.0" />
+      <constant name="tracking_region_zmax" value="32370.0" />
+      <constant name="world_x" value="4500.0" />
+      <position name="PhantomPlane3Volume_component0_position" x="0.0" y="0.0" z="0.0" unit="mm" />
+      <rotation name="PhantomPlane3Volume_component0_rotation" x="0.0" y="0.0" z="0.0" unit="radian" />
+      <position name="PhantomPlane3Volume_component0Sensor0Position" x="0.0" y="0.0" z="0.0" unit="mm" />
+      <rotation name="PhantomPlane3Volume_component0Sensor0Rotation" x="0.0" y="0.0" z="0.0" unit="radian" />
+      <position name="PhantomTracker3_PhantomPlane3_layer4_module0_position" x="40.0" y="0.0" z="25226.0" unit="mm" />
+      <rotation name="PhantomTracker3_PhantomPlane3_layer4_module0_rotation" x="0.0" y="0.0" z="-1.5707963267948966" unit="radian" />
+      <position name="PhantomPlane4Volume_component0_position" x="0.0" y="0.0" z="0.0" unit="mm" />
+      <rotation name="PhantomPlane4Volume_component0_rotation" x="0.0" y="0.0" z="0.0" unit="radian" />
+      <position name="PhantomPlane4Volume_component0Sensor0Position" x="0.0" y="0.0" z="0.0" unit="mm" />
+      <rotation name="PhantomPlane4Volume_component0Sensor0Rotation" x="0.0" y="0.0" z="0.0" unit="radian" />
+      <position name="PhantomTracker4_PhantomPlane4_layer5_module0_position" x="46.0" y="0.0" z="25429.0" unit="mm" />
+      <rotation name="PhantomTracker4_PhantomPlane4_layer5_module0_rotation" x="0.0" y="0.0" z="-1.5707963267948966" unit="radian" />
+      <position name="PhantomPlane5Volume_component0_position" x="0.0" y="0.0" z="0.0" unit="mm" />
+      <rotation name="PhantomPlane5Volume_component0_rotation" x="0.0" y="0.0" z="0.0" unit="radian" />
+      <position name="PhantomPlane5Volume_component0Sensor0Position" x="0.0" y="0.0" z="0.0" unit="mm" />
+      <rotation name="PhantomPlane5Volume_component0Sensor0Rotation" x="0.0" y="0.0" z="0.0" unit="radian" />
+      <position name="PhantomTracker5_PhantomPlane5_layer6_module0_position" x="265.0" y="0.0" z="32062.0" unit="mm" />
+      <rotation name="PhantomTracker5_PhantomPlane5_layer6_module0_rotation" x="0.0" y="0.0" z="-1.5707963267948966" unit="radian" />
+      <position name="PhantomPlane6Volume_component0_position" x="0.0" y="0.0" z="0.0" unit="mm" />
+      <rotation name="PhantomPlane6Volume_component0_rotation" x="0.0" y="0.0" z="0.0" unit="radian" />
+      <position name="PhantomPlane6Volume_component0Sensor0Position" x="0.0" y="0.0" z="0.0" unit="mm" />
+      <rotation name="PhantomPlane6Volume_component0Sensor0Rotation" x="0.0" y="0.0" z="0.0" unit="radian" />
+      <position name="PhantomTracker6_PhantomPlane6_layer7_module0_position" x="265.0" y="0.0" z="32366.0" unit="mm" />
+      <rotation name="PhantomTracker6_PhantomPlane6_layer7_module0_rotation" x="0.0" y="0.0" z="-1.5707963267948966" unit="radian" />
+      <position name="FieldBoxVolume_component0_position" x="0.0" y="0.0" z="0.0" unit="mm" />
+      <rotation name="FieldBoxVolume_component0_rotation" x="0.0" y="0.0" z="0.0" unit="radian" />
+      <position name="MagnetFieldVolume_FieldBox_layer1_module0_position" x="0.0" y="0.0" z="24200.0" unit="mm" />
+      <rotation name="MagnetFieldVolume_FieldBox_layer1_module0_rotation" x="0.0" y="0.0" z="-1.5707963267948966" unit="radian" />
+      <position name="PhantomPlane1Volume_component0_position" x="0.0" y="0.0" z="0.0" unit="mm" />
+      <rotation name="PhantomPlane1Volume_component0_rotation" x="0.0" y="0.0" z="0.0" unit="radian" />
+      <position name="PhantomPlane1Volume_component0Sensor0Position" x="0.0" y="0.0" z="0.0" unit="mm" />
+      <rotation name="PhantomPlane1Volume_component0Sensor0Rotation" x="0.0" y="0.0" z="0.0" unit="radian" />
+      <position name="PhantomTracker1_PhantomPlane1_layer2_module0_position" x="0.0" y="0.0" z="23672.5" unit="mm" />
+      <rotation name="PhantomTracker1_PhantomPlane1_layer2_module0_rotation" x="0.0" y="0.0" z="-1.5707963267948966" unit="radian" />
+      <position name="PhantomPlane2Volume_component0_position" x="0.0" y="0.0" z="0.0" unit="mm" />
+      <rotation name="PhantomPlane2Volume_component0_rotation" x="0.0" y="0.0" z="0.0" unit="radian" />
+      <position name="PhantomPlane2Volume_component0Sensor0Position" x="0.0" y="0.0" z="0.0" unit="mm" />
+      <rotation name="PhantomPlane2Volume_component0Sensor0Rotation" x="0.0" y="0.0" z="0.0" unit="radian" />
+      <position name="PhantomTracker2_PhantomPlane2_layer3_module0_position" x="0.0" y="0.0" z="24727.5" unit="mm" />
+      <rotation name="PhantomTracker2_PhantomPlane2_layer3_module0_rotation" x="0.0" y="0.0" z="-1.5707963267948966" unit="radian" />
+      <position name="Position_of_LeadShieldingHole" x="100." y="-50." z="0." />
+      <position name="Position_of_ConcreteShieldingHole" x="100." y="-75." z="0." />
+      <rotation name="RotatePassthrough" y="-0.032" unit="rad" />
+      <position name="BeamPipe_Connection_HolePosition1" x="-30." y="0." z="0." unit="mm" />
+      <position name="BeamPipe_Connection_HolePosition2" x="5." y="0." z="0." unit="mm" />
+      <position name="center" x="0." y="0." z="0." unit="mm" />
+    </define>
+    <materials>
+      <element Z="7" formula="N" name="N">
+        <atom type="A" unit="g/mol" value="14.0068" />
+      </element>
+      <element Z="8" formula="O" name="O">
+        <atom type="A" unit="g/mol" value="15.9994" />
+      </element>
+      <element Z="18" formula="Ar" name="Ar">
+        <atom type="A" unit="g/mol" value="39.9477" />
+      </element>
+      <element Z="1" formula="H" name="H">
+        <atom type="A" unit="g/mol" value="1.00794" />
+      </element>
+      <material name="Air">
+        <D type="density" unit="g/cm3" value="0.0012" />
+        <fraction n="0.754" ref="N" />
+        <fraction n="0.234" ref="O" />
+        <fraction n="0.012" ref="Ar" />
+      </material>
+      <material name="WorldMaterial">
+        <D type="density" unit="g/cm3" value="0.001225" />
+        <fraction n="1.0" ref="Air" />
+      </material>
+      <material name="Vacuum">
+        <D type="density" unit="g/cm3" value="0.00000001" />
+        <fraction n="1" ref="H" />
+      </material>
+      <material name="TrackingMaterial">
+        <D type="density" unit="g/cm3" value="0.0000000000000001" />
+        <fraction n="1.0" ref="Vacuum" />
+      </material>
+      <element Z="6" formula="C" name="C">
+        <atom type="A" unit="g/mol" value="12.0107" />
+      </element>
+      <element Z="13" name="Al" formula="Al">
+        <atom type="A" unit="g/mol" value="26.9815" />
+      </element>
+      <element Z="14" formula="Si" name="Si">
+        <atom type="A" unit="g/mol" value="28.0854" />
+      </element>
+      <element Z="15" formula="P" name="P">
+        <atom type="A" unit="g/mol" value="30.9738" />
+      </element>
+      <element Z="16" formula="S" name="S">
+        <atom type="A" unit="g/mol" value="32.065" />
+      </element>
+      <element Z="24" formula="Cr" name="Cr">
+        <atom type="A" unit="g/mol" value="51.9961" />
+      </element>
+      <element Z="25" formula="Mn" name="Mn">
+        <atom type="A" unit="g/mol" value="54.9380" />
+      </element>
+      <element Z="26" formula="Fe" name="Fe">
+        <atom type="A" unit="g/mol" value="55.8451" />
+      </element>
+      <element Z="28" formula="Ni" name="Ni">
+        <atom type="A" unit="g/mol" value="58.6934" />
+      </element>
+      <element Z="29" formula="Cu" name="Cu">
+        <atom type="A" unit="g/mol" value="63.546" />
+      </element>
+      <element Z="42" formula="Mo" name="Mo">
+        <atom type="A" unit="g/mol" value="95.95" />
+      </element>
+      <element Z="74" formula="W" name="W">
+        <atom type="A" unit="g/mol" value="183.84" />
+      </element>
+      <element Z="82" formula="Pb" name="Pb">
+        <atom type="A" unit="g/mol" value="207.217" />
+      </element>
+      <material name="Aluminium">
+        <D type="density" value="2.702" unit="g/cm3" />
+        <fraction n="1.0" ref="Al" />
+      </material>
+      <material name="Lead">
+        <D type="density" value="11.342" unit="g/cm3" />
+        <fraction n="1.0" ref="Pb" />
+      </material>
+      <material name="CaO">
+        <D type="density" value="3.35" unit="g/cm3" />
+        <composite n="1" ref="C" />
+        <composite n="1" ref="O" />
+      </material>
+      <material name="SiO2">
+        <D type="density" value="2.65" unit="g/cm3" />
+        <composite n="1" ref="Si" />
+        <composite n="2" ref="O" />
+      </material>
+      <material name="Al2O3">
+        <D type="density" value="3.95" unit="g/cm3" />
+        <composite n="2" ref="Al" />
+        <composite n="3" ref="O" />
+      </material>
+      <material name="Fe2O3">
+        <D type="density" value="5.24" unit="g/cm3" />
+        <composite n="2" ref="Fe" />
+        <composite n="3" ref="O" />
+      </material>
+      <material name="heavyConcrete">
+        <D type="density" value="3.7" unit="g/cm3" />
+        <fraction n="0.65" ref="CaO" />
+        <fraction n="0.20" ref="SiO2" />
+        <fraction n="0.10" ref="Al2O3" />
+        <fraction n="0.05" ref="Fe2O3" />
+      </material>
+      <material name="Radiation_safety_Concrete">
+        <D type="density" value="3.7" unit="g/cm3" />
+        <fraction n="0.065" ref="CaO" />
+        <fraction n="0.03" ref="SiO2" />
+        <fraction n="0.005" ref="Al2O3" />
+        <fraction n="0.9" ref="Fe2O3" />
+      </material>
+      <material name="Stainless_steel_1.4435">
+        <D type="density" value="8" unit="g/cm3" />
+        <fraction n="0.0003" ref="C" />
+        <fraction n="0.01" ref="Si" />
+        <fraction n="0.02" ref="Mn" />
+        <fraction n="0.00045" ref="P" />
+        <fraction n="0.0003" ref="S" />
+        <fraction n="0.0011" ref="N" />
+        <fraction n="0.18" ref="Cr" />
+        <fraction n="0.03" ref="Mo" />
+        <fraction n="0.14" ref="Ni" />
+        <fraction n="0.61785" ref="Fe" />
+      </material>
+      <material name="Iron">
+        <D type="density" value="7.874" unit="g/cm3" />
+        <fraction n="1.0" ref="Fe" />
+      </material>
+      <material name="Copper">
+        <D type="density" value="8.96" unit="g/cm3" />
+        <fraction n="1.0" ref="Cu" />
+      </material>
+      <material name="Kapton">
+        <D type="density" value="1.42" unit="g/cm3" />
+        <fraction n=".026362" ref="H" />
+        <fraction n=".691133" ref="C" />
+        <fraction n=".073270" ref="N" />
+        <fraction n=".209235" ref="O" />
+      </material>
+      <material name="Tungsten_S17">
+        <D type="density" value="17.0" unit="g/cm3" />
+        <fraction n="0.90" ref="W" />
+        <fraction n="0.05" ref="Cu" />
+        <fraction n="0.05" ref="Ni" />
+      </material>
+    </materials>
+    <solids>
+      <box name="world_box" x="world_x" y="world_y" z="world_z" />
+      <tube name="tracking_cylinder" deltaphi="6.283185307179586" rmin="0.0" rmax="tracking_region_radius" z="2*tracking_region_zmax" />
+      <box name="PhantomPlane3Box" x="300.0" y="300.0" z="1.0E-8" />
+      <box name="PhantomPlane3Volume_component0Box" x="300.0" y="300.0" z="1.0E-8" />
+      <box name="PhantomPlane3Volume_component0Sensor0Box" x="300.0" y="300.0" z="1.0E-8" />
+      <box name="PhantomPlane4Box" x="300.0" y="300.0" z="1.0E-8" />
+      <box name="PhantomPlane4Volume_component0Box" x="300.0" y="300.0" z="1.0E-8" />
+      <box name="PhantomPlane4Volume_component0Sensor0Box" x="300.0" y="300.0" z="1.0E-8" />
+      <box name="PhantomPlane5Box" x="300.0" y="300.0" z="1.0E-8" />
+      <box name="PhantomPlane5Volume_component0Box" x="300.0" y="300.0" z="1.0E-8" />
+      <box name="PhantomPlane5Volume_component0Sensor0Box" x="300.0" y="300.0" z="1.0E-8" />
+      <box name="PhantomPlane6Box" x="300.0" y="300.0" z="1.0E-8" />
+      <box name="PhantomPlane6Volume_component0Box" x="300.0" y="300.0" z="1.0E-8" />
+      <box name="PhantomPlane6Volume_component0Sensor0Box" x="300.0" y="300.0" z="1.0E-8" />
+      <box name="FieldBoxBox" x="100.0" y="250.0" z="710.0" />
+      <box name="FieldBoxVolume_component0Box" x="100.0" y="250.0" z="710.0" />
+      <box name="PhantomPlane1Box" x="806.0" y="1100.0" z="1.0E-8" />
+      <box name="PhantomPlane1Volume_component0Box" x="806.0" y="1100.0" z="1.0E-8" />
+      <box name="PhantomPlane1Volume_component0Sensor0Box" x="806.0" y="1100.0" z="1.0E-8" />
+      <box name="PhantomPlane2Box" x="806.0" y="1100.0" z="1.0E-8" />
+      <box name="PhantomPlane2Volume_component0Box" x="806.0" y="1100.0" z="1.0E-8" />
+      <box name="PhantomPlane2Volume_component0Sensor0Box" x="806.0" y="1100.0" z="1.0E-8" />
+      <tube name="BeamPipe" rmin="33." rmax="35." z="4000." deltaphi="360" startphi="0" aunit="deg" lunit="mm" />
+      <tube name="BeamPipeWindow" rmin="0" rmax="35." z="5.0" deltaphi="360" startphi="0" aunit="deg" lunit="mm" />
+      <box lunit="mm" name="LeadShieldingBox" x="800." y="275." z="200." />
+      <box lunit="mm" name="LeadShieldingHole" x="50." y="75." z="200." />
+      <subtraction name="LeadShieldingWall">
+        <first ref="LeadShieldingBox" />
+        <second ref="LeadShieldingHole" />
+        <positionref ref="Position_of_LeadShieldingHole" />
+      </subtraction>
+      <box lunit="mm" name="ConcreteShieldingBox" x="800." y="350." z="200." />
+      <box lunit="mm" name="ConcreteShieldingHole" x="50." y="100." z="200." />
+      <subtraction name="ConcreteShieldingWall">
+        <first ref="ConcreteShieldingBox" />
+        <second ref="ConcreteShieldingHole" />
+        <positionref ref="Position_of_ConcreteShieldingHole" />
+      </subtraction>
+      <box lunit="mm" name="ConcreteShieldingFundament" x="800." y="1625." z="400." />
+      <box lunit="mm" name="ConcreteShieldingSideBlock" x="400." y="1975." z="800." />
+      <box lunit="mm" name="ConverterTarget" x="45." y="60." z="5." />
+      <tube name="BeamPipeWindow2" rmin="0" rmax="52." z="0.1" deltaphi="360" startphi="0" aunit="deg" lunit="mm" />
+      <tube name="BeamPipe2" rmin="50." rmax="52." z="276.25" deltaphi="360" startphi="0" aunit="deg" lunit="mm" />
+      <tube name="IronPipe" rmin="122.5" rmax="127." z="172.5" deltaphi="360" startphi="0" aunit="deg" lunit="mm" />
+      <box lunit="mm" name="FirstIronLayerWall" x="1100." y="806." z="7.5" />
+      <tube name="FirstIronLayerHole" rmin="0." rmax="52." z="7.5" deltaphi="360" startphi="0" aunit="deg" lunit="mm" />
+      <subtraction name="FirstIronLayer">
+        <first ref="FirstIronLayerWall" />
+        <second ref="FirstIronLayerHole" />
+        <positionref ref="center" />
+      </subtraction>
+      <box lunit="mm" name="IronBox" x="1100." y="806." z="1040." />
+      <box lunit="mm" name="IronBoxHole" x="655." y="370." z="1040." />
+      <subtraction name="IronSurrounding">
+        <first ref="IronBox" />
+        <second ref="IronBoxHole" />
+        <positionref ref="center" />
+      </subtraction>
+      <box lunit="mm" name="UpperCopperBlock" x="655." y="120." z="1040." />
+      <box lunit="mm" name="UpperCopperBlockHole" x="250." y="120." z="635." />
+      <subtraction name="UpperMagnetCoil">
+        <first ref="UpperCopperBlock" />
+        <second ref="UpperCopperBlockHole" />
+        <positionref ref="center" />
+      </subtraction>
+      <box lunit="mm" name="LowerCopperBlock" x="655." y="120." z="1040." />
+      <box lunit="mm" name="LowerCopperBlockHole" x="250." y="120." z="635." />
+      <subtraction name="LowerMagnetCoil">
+        <first ref="LowerCopperBlock" />
+        <second ref="LowerCopperBlockHole" />
+        <positionref ref="center" />
+      </subtraction>
+      <box lunit="mm" name="IronBlock" x="250." y="370." z="635." />
+      <box lunit="mm" name="IronBlockHole" x="250." y="100." z="635." />
+      <subtraction name="IronPole">
+        <first ref="IronBlock" />
+        <second ref="IronBlockHole" />
+        <positionref ref="center" />
+      </subtraction>
+      <box lunit="mm" name="LastIronLayerWall" x="1100." y="806." z="7.5" />
+      <tube name="LastIronLayerHole" rmin="0." rmax="52." z="7.5" deltaphi="360" startphi="0" aunit="deg" lunit="mm" />
+      <subtraction name="LastIronLayer">
+        <first ref="LastIronLayerWall" />
+        <second ref="LastIronLayerHole" />
+        <positionref ref="center" />
+      </subtraction>
+      <tube name="IronPipe2" rmin="122.5" rmax="127." z="240." deltaphi="360" startphi="0" aunit="deg" lunit="mm" />
+      <tube name="BeamPipe3" rmin="50." rmax="52." z="222.5" deltaphi="360" startphi="0" aunit="deg" lunit="mm" />
+      <tube name="BeamPipe_Lid" rmin="0." rmax="92." z="2." deltaphi="360" startphi="0" aunit="deg" lunit="mm" />
+      <tube name="BeamPipe_Hole" rmin="0." rmax="52." z="2." deltaphi="360" startphi="0" aunit="deg" lunit="mm" />
+      <subtraction name="BeamPipe_ConnectionLid">
+        <first ref="BeamPipe_Lid" />
+        <second ref="BeamPipe_Hole" />
+        <positionref ref="BeamPipe_Connection_HolePosition1" />
+      </subtraction>
+      <tube name="BeamPipe_ConnectionPipe" rmin="90." rmax="92." z="46." deltaphi="360" startphi="0" aunit="deg" lunit="mm" />
+      <tube name="BeamPipe_Lid2" rmin="0." rmax="92." z="2." deltaphi="360" startphi="0" aunit="deg" lunit="mm" />
+      <tube name="BeamPipe_Hole2" rmin="0." rmax="52." z="2." deltaphi="360" startphi="0" aunit="deg" lunit="mm" />
+      <subtraction name="BeamPipe_ConnectionLid2">
+        <first ref="BeamPipe_Lid2" />
+        <second ref="BeamPipe_Hole2" />
+        <positionref ref="BeamPipe_Connection_HolePosition2" />
+      </subtraction>
+      <tube name="BeamPipe_Kink" rmin="50." rmax="52." z="100." deltaphi="360" startphi="0" aunit="deg" lunit="mm" />
+      <box lunit="mm" name="HorizontalCollimatorBlock" x="260." y="150." z="125." />
+      <box lunit="mm" name="HorizontalCollimatorHole" x="10." y="150." z="125." />
+      <subtraction name="HorizontalCollimator">
+        <first ref="HorizontalCollimatorBlock" />
+        <second ref="HorizontalCollimatorHole" />
+        <positionref ref="center" />
+      </subtraction>
+      <tube name="BeamPipe_Kink2" rmin="50." rmax="52." z="79." deltaphi="360" startphi="0" aunit="deg" lunit="mm" />
+      <box lunit="mm" name="VerticalCollimatorBlock" x="150." y="260." z="125." />
+      <box lunit="mm" name="VerticalCollimatorHole" x="150." y="10." z="125." />
+      <subtraction name="VerticalCollimator">
+        <first ref="VerticalCollimatorBlock" />
+        <second ref="VerticalCollimatorHole" />
+        <positionref ref="center" />
+      </subtraction>
+      <tube name="BeamPipe_Kink3" rmin="50." rmax="52." z="6400." deltaphi="360" startphi="0" aunit="deg" lunit="mm" />
+      <tube name="BeamPipeWindow3" rmin="0" rmax="52." z="0.1" deltaphi="360" startphi="0" aunit="deg" lunit="mm" />
+      <box lunit="mm" name="ConcreteWallBlock" x="3000." y="3000." z="5000." />
+      <tube name="ConcreteWallHole" rmin="0." rmax="52." z="5000." deltaphi="360" startphi="0" aunit="deg" lunit="mm" />
+      <subtraction name="ConcreteWall">
+        <first ref="ConcreteWallBlock" />
+        <second ref="ConcreteWallHole" />
+        <positionref ref="center" />
+      </subtraction>
+      <box lunit="mm" name="TBCollimatorBlock" x="200." y="200." z="300." />
+      <box lunit="mm" name="TBCollimatorHole" x="5." y="5." z="300." />
+      <subtraction name="TBCollimator">
+        <first ref="TBCollimatorBlock" />
+        <second ref="TBCollimatorHole" />
+        <positionref ref="center" />
+      </subtraction>
+      <box lunit="mm" name="WorldBox" x="4500." y="4500." z="world_side" />
+    </solids>
+    <structure>
+      <volume name="PhantomPlane3Volume_component0Sensor0">
+        <materialref ref="Vacuum" />
+        <solidref ref="PhantomPlane3Volume_component0Sensor0Box" />
+        <sdref ref="PhantomTracker3" />
+      </volume>
+      <volume name="PhantomPlane3Volume_component0">
+        <materialref ref="Vacuum" />
+        <solidref ref="PhantomPlane3Volume_component0Box" />
+        <physvol>
+          <volumeref ref="PhantomPlane3Volume_component0Sensor0" />
+          <positionref ref="PhantomPlane3Volume_component0Sensor0Position" />
+          <rotationref ref="PhantomPlane3Volume_component0Sensor0Rotation" />
+          <physvolid field_name="sensor" value="0" />
+        </physvol>
+      </volume>
+      <volume name="PhantomPlane3Volume">
+        <materialref ref="Vacuum" />
+        <solidref ref="PhantomPlane3Box" />
+        <physvol>
+          <volumeref ref="PhantomPlane3Volume_component0" />
+          <positionref ref="PhantomPlane3Volume_component0_position" />
+          <rotationref ref="PhantomPlane3Volume_component0_rotation" />
+          <physvolid field_name="component" value="0" />
+        </physvol>
+      </volume>
+      <volume name="PhantomPlane4Volume_component0Sensor0">
+        <materialref ref="Vacuum" />
+        <solidref ref="PhantomPlane4Volume_component0Sensor0Box" />
+        <sdref ref="PhantomTracker4" />
+      </volume>
+      <volume name="PhantomPlane4Volume_component0">
+        <materialref ref="Vacuum" />
+        <solidref ref="PhantomPlane4Volume_component0Box" />
+        <physvol>
+          <volumeref ref="PhantomPlane4Volume_component0Sensor0" />
+          <positionref ref="PhantomPlane4Volume_component0Sensor0Position" />
+          <rotationref ref="PhantomPlane4Volume_component0Sensor0Rotation" />
+          <physvolid field_name="sensor" value="0" />
+        </physvol>
+      </volume>
+      <volume name="PhantomPlane4Volume">
+        <materialref ref="Vacuum" />
+        <solidref ref="PhantomPlane4Box" />
+        <physvol>
+          <volumeref ref="PhantomPlane4Volume_component0" />
+          <positionref ref="PhantomPlane4Volume_component0_position" />
+          <rotationref ref="PhantomPlane4Volume_component0_rotation" />
+          <physvolid field_name="component" value="0" />
+        </physvol>
+      </volume>
+      <volume name="PhantomPlane5Volume_component0Sensor0">
+        <materialref ref="Vacuum" />
+        <solidref ref="PhantomPlane5Volume_component0Sensor0Box" />
+        <sdref ref="PhantomTracker5" />
+      </volume>
+      <volume name="PhantomPlane5Volume_component0">
+        <materialref ref="Vacuum" />
+        <solidref ref="PhantomPlane5Volume_component0Box" />
+        <physvol>
+          <volumeref ref="PhantomPlane5Volume_component0Sensor0" />
+          <positionref ref="PhantomPlane5Volume_component0Sensor0Position" />
+          <rotationref ref="PhantomPlane5Volume_component0Sensor0Rotation" />
+          <physvolid field_name="sensor" value="0" />
+        </physvol>
+      </volume>
+      <volume name="PhantomPlane5Volume">
+        <materialref ref="Vacuum" />
+        <solidref ref="PhantomPlane5Box" />
+        <physvol>
+          <volumeref ref="PhantomPlane5Volume_component0" />
+          <positionref ref="PhantomPlane5Volume_component0_position" />
+          <rotationref ref="PhantomPlane5Volume_component0_rotation" />
+          <physvolid field_name="component" value="0" />
+        </physvol>
+      </volume>
+      <volume name="PhantomPlane6Volume_component0Sensor0">
+        <materialref ref="Vacuum" />
+        <solidref ref="PhantomPlane6Volume_component0Sensor0Box" />
+        <sdref ref="PhantomTracker6" />
+      </volume>
+      <volume name="PhantomPlane6Volume_component0">
+        <materialref ref="Vacuum" />
+        <solidref ref="PhantomPlane6Volume_component0Box" />
+        <physvol>
+          <volumeref ref="PhantomPlane6Volume_component0Sensor0" />
+          <positionref ref="PhantomPlane6Volume_component0Sensor0Position" />
+          <rotationref ref="PhantomPlane6Volume_component0Sensor0Rotation" />
+          <physvolid field_name="sensor" value="0" />
+        </physvol>
+      </volume>
+      <volume name="PhantomPlane6Volume">
+        <materialref ref="Vacuum" />
+        <solidref ref="PhantomPlane6Box" />
+        <physvol>
+          <volumeref ref="PhantomPlane6Volume_component0" />
+          <positionref ref="PhantomPlane6Volume_component0_position" />
+          <rotationref ref="PhantomPlane6Volume_component0_rotation" />
+          <physvolid field_name="component" value="0" />
+        </physvol>
+      </volume>
+      <volume name="FieldBoxVolume_component0">
+        <materialref ref="Vacuum" />
+        <solidref ref="FieldBoxVolume_component0Box" />
+	<limitsetref ref="TestLimitSet"/>
+      </volume>
+      <volume name="FieldBoxVolume">
+        <materialref ref="Vacuum" />
+        <solidref ref="FieldBoxBox" />
+        <physvol>
+          <volumeref ref="FieldBoxVolume_component0" />
+          <positionref ref="FieldBoxVolume_component0_position" />
+          <rotationref ref="FieldBoxVolume_component0_rotation" />
+          <physvolid field_name="component" value="0" />
+        </physvol>
+      </volume>
+      <volume name="PhantomPlane1Volume_component0Sensor0">
+        <materialref ref="Vacuum" />
+        <solidref ref="PhantomPlane1Volume_component0Sensor0Box" />
+        <sdref ref="PhantomTracker1" />
+      </volume>
+      <volume name="PhantomPlane1Volume_component0">
+        <materialref ref="Vacuum" />
+        <solidref ref="PhantomPlane1Volume_component0Box" />
+        <physvol>
+          <volumeref ref="PhantomPlane1Volume_component0Sensor0" />
+          <positionref ref="PhantomPlane1Volume_component0Sensor0Position" />
+          <rotationref ref="PhantomPlane1Volume_component0Sensor0Rotation" />
+          <physvolid field_name="sensor" value="0" />
+        </physvol>
+      </volume>
+      <volume name="PhantomPlane1Volume">
+        <materialref ref="Vacuum" />
+        <solidref ref="PhantomPlane1Box" />
+        <physvol>
+          <volumeref ref="PhantomPlane1Volume_component0" />
+          <positionref ref="PhantomPlane1Volume_component0_position" />
+          <rotationref ref="PhantomPlane1Volume_component0_rotation" />
+          <physvolid field_name="component" value="0" />
+        </physvol>
+      </volume>
+      <volume name="PhantomPlane2Volume_component0Sensor0">
+        <materialref ref="Vacuum" />
+        <solidref ref="PhantomPlane2Volume_component0Sensor0Box" />
+        <sdref ref="PhantomTracker2" />
+      </volume>
+      <volume name="PhantomPlane2Volume_component0">
+        <materialref ref="Vacuum" />
+        <solidref ref="PhantomPlane2Volume_component0Box" />
+        <physvol>
+          <volumeref ref="PhantomPlane2Volume_component0Sensor0" />
+          <positionref ref="PhantomPlane2Volume_component0Sensor0Position" />
+          <rotationref ref="PhantomPlane2Volume_component0Sensor0Rotation" />
+          <physvolid field_name="sensor" value="0" />
+        </physvol>
+      </volume>
+      <volume name="PhantomPlane2Volume">
+        <materialref ref="Vacuum" />
+        <solidref ref="PhantomPlane2Box" />
+        <physvol>
+          <volumeref ref="PhantomPlane2Volume_component0" />
+          <positionref ref="PhantomPlane2Volume_component0_position" />
+          <rotationref ref="PhantomPlane2Volume_component0_rotation" />
+          <physvolid field_name="component" value="0" />
+        </physvol>
+      </volume>
+      <volume name="BeamPipe_vol">
+        <materialref ref="Aluminium" />
+        <solidref ref="BeamPipe" />
+      </volume>
+      <volume name="BeamPipeWindow_vol">
+        <materialref ref="Aluminium" />
+        <solidref ref="BeamPipeWindow" />
+      </volume>
+      <volume name="LeadShielding_vol">
+        <materialref ref="Lead" />
+        <solidref ref="LeadShieldingWall" />
+      </volume>
+      <volume name="ConcreteShielding_vol">
+        <materialref ref="heavyConcrete" />
+        <solidref ref="ConcreteShieldingWall" />
+      </volume>
+      <volume name="ConcreteShieldingFundament_vol">
+        <materialref ref="heavyConcrete" />
+        <solidref ref="ConcreteShieldingFundament" />
+      </volume>
+      <volume name="ConcreteShieldingSideBlock_vol">
+        <materialref ref="heavyConcrete" />
+        <solidref ref="ConcreteShieldingSideBlock" />
+      </volume>
+      <volume name="ConverterTarget_vol">
+        <materialref ref="Copper" />
+        <solidref ref="ConverterTarget" />
+      </volume>
+      <volume name="BeamPipeWindow2_vol">
+        <materialref ref="Kapton" />
+        <solidref ref="BeamPipeWindow2" />
+      </volume>
+      <volume name="BeamPipe2_vol">
+        <materialref ref="Stainless_steel_1.4435" />
+        <solidref ref="BeamPipe2" />
+      </volume>
+      <volume name="IronPipe_vol">
+        <materialref ref="Iron" />
+        <solidref ref="IronPipe" />
+      </volume>
+      <volume name="FirstIronLayer_vol">
+        <materialref ref="Iron" />
+        <solidref ref="FirstIronLayer" />
+      </volume>
+      <volume name="IronSurrounding_vol">
+        <materialref ref="Iron" />
+        <solidref ref="IronSurrounding" />
+      </volume>
+      <volume name="UpperMagnetCoil_vol">
+        <materialref ref="Copper" />
+        <solidref ref="UpperMagnetCoil" />
+      </volume>
+      <volume name="LowerMagnetCoil_vol">
+        <materialref ref="Copper" />
+        <solidref ref="LowerMagnetCoil" />
+      </volume>
+      <volume name="IronPole_vol">
+        <materialref ref="Iron" />
+        <solidref ref="IronPole" />
+      </volume>
+      <volume name="LastIronLayer_vol">
+        <materialref ref="Iron" />
+        <solidref ref="LastIronLayer" />
+      </volume>
+      <volume name="IronPipe2_vol">
+        <materialref ref="Iron" />
+        <solidref ref="IronPipe2" />
+      </volume>
+      <volume name="BeamPipe3_vol">
+        <materialref ref="Stainless_steel_1.4435" />
+        <solidref ref="BeamPipe3" />
+      </volume>
+      <volume name="BeamPipe_ConnectionLid_vol">
+        <materialref ref="Stainless_steel_1.4435" />
+        <solidref ref="BeamPipe_ConnectionLid" />
+      </volume>
+      <volume name="BeamPipe_ConnectionPipe_vol">
+        <materialref ref="Stainless_steel_1.4435" />
+        <solidref ref="BeamPipe_ConnectionPipe" />
+      </volume>
+      <volume name="BeamPipe_ConnectionLid2_vol">
+        <materialref ref="Stainless_steel_1.4435" />
+        <solidref ref="BeamPipe_ConnectionLid2" />
+      </volume>
+      <volume name="BeamPipe_Kink_vol">
+        <materialref ref="Stainless_steel_1.4435" />
+        <solidref ref="BeamPipe_Kink" />
+      </volume>
+      <volume name="BeamPipe_Kink2_vol">
+        <materialref ref="Stainless_steel_1.4435" />
+        <solidref ref="BeamPipe_Kink2" />
+      </volume>
+      <volume name="HorizontalCollimator_vol">
+        <materialref ref="Tungsten_S17" />
+        <solidref ref="HorizontalCollimator" />
+      </volume>
+      <volume name="VerticalCollimator_vol">
+        <materialref ref="Tungsten_S17" />
+        <solidref ref="VerticalCollimator" />
+      </volume>
+      <volume name="BeamPipe_Kink3_vol">
+        <materialref ref="Stainless_steel_1.4435" />
+        <solidref ref="BeamPipe_Kink3" />
+      </volume>
+      <volume name="BeamPipeWindow3_vol">
+        <materialref ref="Kapton" />
+        <solidref ref="BeamPipeWindow3" />
+      </volume>
+      <volume name="ConcreteWall_vol">
+        <materialref ref="Radiation_safety_Concrete" />
+        <solidref ref="ConcreteWall" />
+      </volume>
+      <volume name="TBCollimator_vol">
+        <materialref ref="Lead" />
+        <solidref ref="TBCollimator" />
+      </volume>
+      <volume name="tracking_volume">
+        <materialref ref="TrackingMaterial" />
+        <solidref ref="tracking_cylinder" />
+        <physvol>
+          <volumeref ref="PhantomPlane3Volume" />
+          <positionref ref="PhantomTracker3_PhantomPlane3_layer4_module0_position" />
+          <rotationref ref="PhantomTracker3_PhantomPlane3_layer4_module0_rotation" />
+          <physvolid field_name="system" value="4" />
+          <physvolid field_name="barrel" value="0" />
+          <physvolid field_name="layer" value="4" />
+          <physvolid field_name="module" value="0" />
+        </physvol>
+        <physvol>
+          <volumeref ref="PhantomPlane4Volume" />
+          <positionref ref="PhantomTracker4_PhantomPlane4_layer5_module0_position" />
+          <rotationref ref="PhantomTracker4_PhantomPlane4_layer5_module0_rotation" />
+          <physvolid field_name="system" value="5" />
+          <physvolid field_name="barrel" value="0" />
+          <physvolid field_name="layer" value="5" />
+          <physvolid field_name="module" value="0" />
+        </physvol>
+        <physvol>
+          <volumeref ref="PhantomPlane5Volume" />
+          <positionref ref="PhantomTracker5_PhantomPlane5_layer6_module0_position" />
+          <rotationref ref="PhantomTracker5_PhantomPlane5_layer6_module0_rotation" />
+          <physvolid field_name="system" value="6" />
+          <physvolid field_name="barrel" value="0" />
+          <physvolid field_name="layer" value="6" />
+          <physvolid field_name="module" value="0" />
+        </physvol>
+        <physvol>
+          <volumeref ref="PhantomPlane6Volume" />
+          <positionref ref="PhantomTracker6_PhantomPlane6_layer7_module0_position" />
+          <rotationref ref="PhantomTracker6_PhantomPlane6_layer7_module0_rotation" />
+          <physvolid field_name="system" value="7" />
+          <physvolid field_name="barrel" value="0" />
+          <physvolid field_name="layer" value="7" />
+          <physvolid field_name="module" value="0" />
+        </physvol>
+        <physvol>
+          <volumeref ref="FieldBoxVolume" />
+          <positionref ref="MagnetFieldVolume_FieldBox_layer1_module0_position" />
+          <rotationref ref="MagnetFieldVolume_FieldBox_layer1_module0_rotation" />
+          <physvolid field_name="system" value="3" />
+          <physvolid field_name="barrel" value="0" />
+          <physvolid field_name="layer" value="1" />
+          <physvolid field_name="module" value="0" />
+        </physvol>
+        <physvol>
+          <volumeref ref="PhantomPlane1Volume" />
+          <positionref ref="PhantomTracker1_PhantomPlane1_layer2_module0_position" />
+          <rotationref ref="PhantomTracker1_PhantomPlane1_layer2_module0_rotation" />
+          <physvolid field_name="system" value="1" />
+          <physvolid field_name="barrel" value="0" />
+          <physvolid field_name="layer" value="2" />
+          <physvolid field_name="module" value="0" />
+        </physvol>
+        <physvol>
+          <volumeref ref="PhantomPlane2Volume" />
+          <positionref ref="PhantomTracker2_PhantomPlane2_layer3_module0_position" />
+          <rotationref ref="PhantomTracker2_PhantomPlane2_layer3_module0_rotation" />
+          <physvolid field_name="system" value="2" />
+          <physvolid field_name="barrel" value="0" />
+          <physvolid field_name="layer" value="3" />
+          <physvolid field_name="module" value="0" />
+        </physvol>
+        <physvol>
+          <volumeref ref="BeamPipe_vol" />
+          <position name="BeamPipe_vol_position" x="0." y="0." z="2000." />
+        </physvol>
+        <physvol>
+          <volumeref ref="BeamPipeWindow_vol" />
+          <position name="BeamPipeWindow_vol_position" x="0." y="0." z="4002.5" />
+        </physvol>
+        <physvol>
+          <volumeref ref="LeadShielding_vol" />
+          <position name="LeadShielding_vol_position" x="-100." y="50." z="22670." />
+          <!--  <position name="LeadShielding_vol_position" x="-100." y="75." z="22670." />      -->
+        </physvol>
+        <physvol>
+          <volumeref ref="ConcreteShielding_vol" />
+          <position name="ConcreteShielding_vol_position" x="-100." y="87.5" z="22870." />
+          <!--  <position name="ConcreteShielding_vol_position" x="-100." y="112.5" z="22870." />     -->
+        </physvol>
+        <physvol>
+          <volumeref ref="ConcreteShieldingFundament_vol" />
+          <position name="ConcreteShieldingFundament_vol_position" x="-100." y="-900." z="22770." />
+          <!--  <position name="ConcreteShieldingFundament_vol_position" x="-100." y="-875." z="22770." />     -->
+        </physvol>
+        <physvol>
+          <volumeref ref="ConcreteShieldingSideBlock_vol" />
+          <position name="ConcreteShieldingSideBlock_vol_position" x="-700." y="-725." z="23270." />
+          <!--  <position name="ConcreteShieldingSideBlock_vol_position" x="-700." y="-700." z="23270." />     -->
+        </physvol>
+        <physvol>
+          <volumeref ref="ConverterTarget_vol" />
+          <position name="ConverterTarget_vol_position" x="0." y="0." z="23068.75" />
+        </physvol>
+        <physvol>
+          <volumeref ref="BeamPipeWindow2_vol" />
+          <position name="BeamPipeWindow2_vol_position" x="0." y="0." z="23396.25" />
+        </physvol>
+        <physvol>
+          <volumeref ref="BeamPipe2_vol" />
+          <position name="BeamPipe2_vol_position" x="0." y="0." z="23534.375" />
+        </physvol>
+        <physvol>
+          <volumeref ref="IronPipe_vol" />
+          <position name="IronPipe_vol_position" x="0." y="0." z="23586.25" />
+        </physvol>
+        <physvol>
+          <volumeref ref="FirstIronLayer_vol" />
+          <position name="FirstIronLayer_vol_position" x="0." y="0." z="23676.25" />
+        </physvol>
+        <physvol>
+          <volumeref ref="IronSurrounding_vol" />
+          <position name="IronSurrounding_vol_position" x="0." y="0." z="24200." />
+        </physvol>
+        <physvol>
+          <volumeref ref="UpperMagnetCoil_vol" />
+          <position name="UpperMagnetCoil_vol_position" x="0." y="125." z="24200." />
+        </physvol>
+        <physvol>
+          <volumeref ref="LowerMagnetCoil_vol" />
+          <position name="LowerMagnetCoil_vol_position" x="0." y="-125." z="24200." />
+        </physvol>
+        <physvol>
+          <volumeref ref="IronPole_vol" />
+          <position name="IronPole_vol_position" x="0." y="0." z="24200." />
+        </physvol>
+        <physvol>
+          <volumeref ref="LastIronLayer_vol" />
+          <position name="LastIronLayer_vol_position" x="0." y="0." z="24723.75" />
+        </physvol>
+        <physvol>
+          <volumeref ref="IronPipe2_vol" />
+          <position name="IronPipe2_vol_position" x="0." y="0." z="24847.5" />
+        </physvol>
+        <physvol>
+          <volumeref ref="BeamPipe3_vol" />
+          <position name="BeamPipe3_vol_position" x="0." y="0." z="24838.75" />
+        </physvol>
+        <physvol>
+          <volumeref ref="BeamPipe_ConnectionLid_vol" />
+          <position name="BeamPipe_ConnectionLid__vol_position" x="30." y="0." z="24951." />
+        </physvol>
+        <physvol>
+          <volumeref ref="BeamPipe_ConnectionPipe_vol" />
+          <position name="BeamPipe_ConnectionPipe__vol_position" x="30." y="0." z="24975." />
+        </physvol>
+        <physvol>
+          <volumeref ref="BeamPipe_ConnectionLid2_vol" />
+          <position name="BeamPipe_ConnectionLid2__vol_position" x="30." y="0." z="24999." />
+        </physvol>
+        <physvol>
+          <volumeref ref="BeamPipe_Kink_vol" />
+          <!--position name="BeamPipe_Kink_vol_position" x="-sin(-0.032)*posi+25.6" y="0." z="cos(-0.032)*posi" /-->
+          <!--posi=322.5 -->
+          <position name="BeamPipe_Kink_vol_position" x="35.92" y="0." z="25049.84" />
+          <rotationref ref="RotatePassthrough" />
+        </physvol>
+        <physvol>
+          <volumeref ref="HorizontalCollimator_vol" />
+          <!--posi=435. -->
+          <position name="HorizontalCollimator_vol_position" x="39.52" y="0." z="25162.28" />
+          <rotationref ref="RotatePassthrough" />
+        </physvol>
+        <physvol>
+          <volumeref ref="BeamPipe_Kink2_vol" />
+          <!--posi=537. -->
+          <position name="BeamPipe_Kink2_vol_position" x="42.78" y="0." z="25264.23" />
+          <rotationref ref="RotatePassthrough" />
+        </physvol>
+        <physvol>
+          <volumeref ref="VerticalCollimator_vol" />
+          <!--posi=639. -->
+          <position name="VerticalCollimator_vol_position" x="46.05" y="0." z="25366.17" />
+          <rotationref ref="RotatePassthrough" />
+        </physvol>
+        <physvol>
+          <volumeref ref="BeamPipe_Kink3_vol" />
+          <!--posi=3901.5 -->
+          <position name="BeamPipe_Kink3_vol_position" x="150.43" y="0." z="28627.00" />
+          <rotationref ref="RotatePassthrough" />
+        </physvol>
+        <physvol>
+          <volumeref ref="BeamPipeWindow3_vol" />
+          <!--posi=7101.55 -->
+          <position name="BeamPipeWindow3_vol_position" x="252.81" y="0." z="31825.41" />
+          <rotationref ref="RotatePassthrough" />
+        </physvol>
+        <physvol>
+          <volumeref ref="ConcreteWall_vol" />
+          <!--posi=4300. -->
+          <position name="ConcreteWall_vol_position" x="163.18" y="0." z="29025.30" />
+          <rotationref ref="RotatePassthrough" />
+        </physvol>
+        <physvol>
+          <volumeref ref="TBCollimator_vol" />
+          <!--posi=7491. -->
+          <position name="TBCollimator_vol_position" x="265.27" y="0." z="32214.67" />
+          <rotationref ref="RotatePassthrough" />
+        </physvol>
+        <regionref ref="TrackingRegion" />
+        <visref ref="TrackingVis" />
+      </volume>
+      <volume name="world_volume">
+        <materialref ref="WorldMaterial" />
+        <solidref ref="world_box" />
+        <physvol>
+          <volumeref ref="tracking_volume" />
+          <positionref ref="identity_pos" />
+          <rotationref ref="identity_rot" />
+        </physvol>
+        <visref ref="WorldVis" />
+      </volume>
+    </structure>
+    <setup name="Default" version="1.0">
+      <world ref="world_volume" />
+    </setup>
+  </gdml>
+  <fields>
+    <box_dipole name="TBDipole" lunit="mm" funit="tesla" x="0.0" y="0.0" z="24200.0" dx="100.0" dy="50.0" dz="355.0" bx="0.0" by="0.59" bz="0.0" />
+  </fields>
+</lcdd>
+
